@@ -72,7 +72,7 @@ informative:
     title: W3C Propagation format for distributed context Baggage
     target: https://www.w3.org/TR/baggage/#examples-of-http-headers
     date: 2021-11-23
-    
+
 --- abstract
 
 This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), that enables distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification.
@@ -147,10 +147,10 @@ Let's assume an edit-config operation between the orchestrator and the controlle
 | Element |   | Element |  -------------------------->  |           |
  ---------     ---------                                -------------
 
-        Figure 2: An implementation example where the NETCONF 
-        protocol is used between the Orchestrator and the Controller 
-        and also between the Controller and the Network Elements. 
-        Every component exports M.E.L.T information to the collector 
+        Figure 2: An implementation example where the NETCONF
+        protocol is used between the Orchestrator and the Controller
+        and also between the Controller and the Network Elements.
+        Every component exports M.E.L.T information to the collector
         using the OTLP protocol.
 ~~~
 
@@ -194,12 +194,12 @@ Note to be removed in the future: Some initial ideas are under discussion in the
 |   YG DS |   |   YG DS |         pull or push          |           |
  ---------     ---------                                -------------
 
-        Figure 3: An implementation example where the NETCONF 
-        protocol is used between the Orchestrator and the Controller 
-        and also between the Controller and the Network Elements.  
-        M.E.L.T. information is stored in local Yang Datastores and 
-        accessed by the collector using "pull" mechanisms using the 
-        NETCONF (NC), RESTCONF (RC) or gNMI protocols. A "push" 
+        Figure 3: An implementation example where the NETCONF
+        protocol is used between the Orchestrator and the Controller
+        and also between the Controller and the Network Elements.
+        M.E.L.T. information is stored in local Yang Datastores and
+        accessed by the collector using "pull" mechanisms using the
+        NETCONF (NC), RESTCONF (RC) or gNMI protocols. A "push"
         strategy is also possible via YANG-Push or gNMI.
 ~~~
 
@@ -291,7 +291,7 @@ If the server rejects the RPC because of the trace context extension value, the 
       error-type:     protocol
       error-severity: error
 
-Additionally, the error-info tag SHOULD contain a 
+Additionally, the error-info tag SHOULD contain a
 otlp-trace-context-error-info structure with relevant details about
 the error.  This structure is defined in the module
 ietf-netconf-otlp-context.yang.  Example of a badly formated trace
@@ -428,10 +428,18 @@ and
 
 # Acknowledgments
 
-TBD 
+TBD
 
 --- back
+
 # Changes (to be deleted by RFC Editor)
+
+## From version 03 to draft-netconf-trace-ctx-extension-latest-00
+- Adopted by NETCONF WG
+- Moved repository to NETCONF WG
+- Changed build system to use martinthomson's excellent framework
+- Ran make fix-lint to remove white space at EOL etc.
+- Added this change note. No other content changes.
 
 ## From version 02 to 03
 - Changed IANA section to IESG per IANA email
@@ -462,7 +470,7 @@ We studied Pros/Cons of each option and decided to propose XML attributes:
 
 XML Attributes Pro:
 
-- Literal alignment with W3C specification 
+- Literal alignment with W3C specification
 
 - Same encoding for RESTCONF and NETCONF enabling code reuse
 
