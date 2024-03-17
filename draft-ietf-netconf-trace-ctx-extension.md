@@ -434,9 +434,6 @@ TBD
 
 # Changes (to be deleted by RFC Editor)
 
-## From version 00 to 01
-- Fixed incorrectly named document. Updated submission date. No other content changes.
-
 ## From version 03 to draft-ietf-netconf-trace-ctx-extension-latest-00
 - Adopted by NETCONF WG
 - Moved repository to NETCONF WG
