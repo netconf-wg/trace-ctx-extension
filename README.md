@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "NETCONF Extension to support Trace Context propagation".
 
-* [Editor's Copy](https://janlindblad.github.io/trace-ctx-extension/#go.draft-netconf-trace-ctx-extension.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-netconf-trace-ctx-extension)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-netconf-trace-ctx-extension)
-* [Compare Editor's Copy to Individual Draft](https://janlindblad.github.io/trace-ctx-extension/#go.draft-netconf-trace-ctx-extension.diff)
+* [Editor's Copy](https://janlindblad.github.io/trace-ctx-extension/#go.draft-ietf-netconf-trace-ctx-extension.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-extension)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-netconf-trace-ctx-extension)
+* [Compare Editor's Copy to Individual Draft](https://janlindblad.github.io/trace-ctx-extension/#go.draft-ietf-netconf-trace-ctx-extension.diff)
 
 
 ## Contributing

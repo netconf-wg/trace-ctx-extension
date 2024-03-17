@@ -4,7 +4,7 @@ abbrev: nc_trace
 category: std
 date: 2024-01-11
 
-docname: draft-netconf-trace-ctx-extension-latest
+docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
@@ -434,7 +434,7 @@ TBD
 
 # Changes (to be deleted by RFC Editor)
 
-## From version 03 to draft-netconf-trace-ctx-extension-latest-00
+## From version 03 to draft-ietf-netconf-trace-ctx-extension-latest-00
 - Adopted by NETCONF WG
 - Moved repository to NETCONF WG
 - Changed build system to use martinthomson's excellent framework

@@ -17,7 +17,7 @@
 /versioned/
 Gemfile.lock
 archive.json
-draft-netconf-trace-ctx-extension.xml
+draft-ietf-netconf-trace-ctx-extension.xml
 package-lock.json
 report.xml
 !requirements.txt
