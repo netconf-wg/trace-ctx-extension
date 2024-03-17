@@ -94,12 +94,11 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Changes (to be deleted by RFC Editor)
-     A.1.  From version 00 to 01
-     A.2.  From version 03 to
+     A.1.  From version 03 to
            draft-ietf-netconf-trace-ctx-extension-latest-00
-     A.3.  From version 02 to 03
-     A.4.  From version 01 to 02
-     A.5.  From version 00 to 01
+     A.2.  From version 02 to 03
+     A.3.  From version 01 to 02
+     A.4.  From version 00 to 01
    Appendix B.  TO DO List (to be deleted by RFC Editor)
    Appendix C.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
@@ -759,12 +758,7 @@ Table of Contents
 
 Appendix A.  Changes (to be deleted by RFC Editor)
 
-A.1.  From version 00 to 01
-
-   *  Fixed incorrectly named document.  Updated submission date.  No
-      other content changes.
-
-A.2.  From version 03 to draft-ietf-netconf-trace-ctx-extension-
+A.1.  From version 03 to draft-ietf-netconf-trace-ctx-extension-
       latest-00
 
    *  Adopted by NETCONF WG
@@ -777,7 +771,7 @@ A.2.  From version 03 to draft-ietf-netconf-trace-ctx-extension-
 
    *  Added this change note.  No other content changes.
 
-A.3.  From version 02 to 03
+A.2.  From version 02 to 03
 
    *  Changed IANA section to IESG per IANA email
 
@@ -787,7 +781,7 @@ A.3.  From version 02 to 03
 
    *  Created a dedicated section for the YANG modules
 
-A.4.  From version 01 to 02
+A.3.  From version 01 to 02
 
    *  Added Error Handling intial section
 
@@ -796,7 +790,7 @@ A.4.  From version 01 to 02
 
    *  Added 'YANG Module Names' to IANA Considerations
 
-A.5.  From version 00 to 01
+A.4.  From version 00 to 01
 
    *  Added new section: Implementation example 2: YANG DataStore
 
