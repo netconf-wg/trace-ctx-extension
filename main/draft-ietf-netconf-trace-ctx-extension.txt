@@ -2,7 +2,7 @@
 
 
 
-NETCONF                                                      R. Gagliano
+Network Configuration                                        R. Gagliano
 Internet-Draft                                             Cisco Systems
 Intended status: Standards Track                              K. Larsson
 Expires: 14 July 2024                                Deutsche Telekom AG
@@ -25,18 +25,19 @@ About This Document
 
    This note is to be removed before publishing as an RFC.
 
-   The latest revision of this draft can be found at TBD.  Status
-   information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-
-   extension/.
+   The latest revision of this draft can be found at
+   https://janlindblad.github.io/trace-ctx-extension/draft-ietf-netconf-
+   trace-ctx-extension.html.  Status information for this document may
+   be found at https://datatracker.ietf.org/doc/draft-ietf-netconf-
+   trace-ctx-extension/.
 
-   Discussion of this document takes place on the NETCONF Working Group
-   mailing list (mailto:netconf@ietf.org), which is archived at
-   https://mailarchive.ietf.org/arch/browse/netmod/.  Subscribe at
-   https://www.ietf.org/mailman/listinfo/netconf/.
+   Discussion of this document takes place on the Network Configuration
+   Working Group mailing list (mailto:netconf@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/netconf/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/netconf/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/TBD.
+   https://github.com/janlindblad/trace-ctx-extension.
 
 Status of This Memo
 
