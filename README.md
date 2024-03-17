@@ -1,11 +1,11 @@
 # NETCONF Extension to support Trace Context propagation
 
-This is the working area for the individual Internet-Draft, "NETCONF Extension to support Trace Context propagation".
+This is the working area for the IETF [NETCONF Working Group](https://datatracker.ietf.org/wg/netconf/documents/) Internet-Draft, "NETCONF Extension to support Trace Context propagation".
 
 * [Editor's Copy](https://janlindblad.github.io/trace-ctx-extension/#go.draft-ietf-netconf-trace-ctx-extension.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-extension)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-netconf-trace-ctx-extension)
-* [Compare Editor's Copy to Individual Draft](https://janlindblad.github.io/trace-ctx-extension/#go.draft-ietf-netconf-trace-ctx-extension.diff)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-netconf-trace-ctx-extension)
+* [Compare Editor's Copy to Working Group Draft](https://janlindblad.github.io/trace-ctx-extension/#go.draft-ietf-netconf-trace-ctx-extension.diff)
 
 
 ## Contributing
