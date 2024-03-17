@@ -9,19 +9,19 @@ ipr: trust200902
 submissiontype: IETF
 consensus: true
 v: 3
-area: Operations and Management
-workgroup: NETCONF
+area: "Operations and Management"
+workgroup: "Network Configuration"
 keyword:
  - telemetry
  - distributed systems
  - opentelemetry
 venue:
-  group: NETCONF
-  type: Working Group
-  mail: netconf@ietf.org
-  arch: https://mailarchive.ietf.org/arch/browse/netmod/
-  github: TBD
-  latest: TBD
+  group: "Network Configuration"
+  type: "Working Group"
+  mail: "netconf@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/netconf/"
+  github: "janlindblad/trace-ctx-extension"
+  latest: "https://janlindblad.github.io/trace-ctx-extension/draft-ietf-netconf-trace-ctx-extension.html"
 
 stand_alone: yes
 smart_quotes: no
