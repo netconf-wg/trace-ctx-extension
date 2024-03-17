@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: nc_trace
 category: std
-date: 2024-01-11
+date: 2024-03-17
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
@@ -433,6 +433,9 @@ TBD
 --- back
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 00 to 01
+- Fixed incorrectly named document. Updated submission date. No other content changes.
 
 ## From version 03 to draft-ietf-netconf-trace-ctx-extension-latest-00
 - Adopted by NETCONF WG
