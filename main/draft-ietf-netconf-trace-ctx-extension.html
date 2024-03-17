@@ -11,28 +11,28 @@
 <meta content="
        This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), that enables distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification. 
     " name="description">
-<meta content="xml2rfc 3.19.0" name="generator">
+<meta content="xml2rfc 3.20.0" name="generator">
 <meta content="telemetry" name="keyword">
 <meta content="distributed systems" name="keyword">
 <meta content="opentelemetry" name="keyword">
-<meta content="draft-netconf-trace-ctx-extension-latest" name="ietf.draft">
+<meta content="draft-ietf-netconf-trace-ctx-extension-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.19.0
-    Python 3.11.6
+  xml2rfc 3.20.0
+    Python 3.11.8
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 4.1.0
+    platformdirs 4.2.0
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
     setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.12
+    wcwidth 0.2.13
 -->
-<link href="draft-netconf-trace-ctx-extension.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-ietf-netconf-trace-ctx-extension.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1043,7 +1043,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">NETCONF</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-netconf-trace-ctx-extension-latest</dd>
+<dd class="internet-draft">draft-ietf-netconf-trace-ctx-extension-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2024-01-11" class="published">11 January 2024</time>
@@ -1081,7 +1081,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
         The latest revision of this draft can be found at <span><a href="TBD">TBD</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-netconf-trace-ctx-extension/">https://datatracker.ietf.org/doc/draft-netconf-trace-ctx-extension/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-extension/">https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-extension/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
         NETCONF Working Group mailing list (<span><a href="mailto:netconf@ietf.org">mailto:netconf@ietf.org</a></span>),
@@ -1215,7 +1215,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-changes-to-be-deleted-by-rf" class="internal xref">Changes (to be deleted by RFC Editor)</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-from-version-03-to-draft-ne" class="internal xref">From version 03 to draft-netconf-trace-ctx-extension-latest-00</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-from-version-03-to-draft-ie" class="internal xref">From version 03 to draft-ietf-netconf-trace-ctx-extension-latest-00</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
                 <p id="section-toc.1-1.8.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-from-version-02-to-03" class="internal xref">From version 02 to 03</a></p>
@@ -1825,7 +1825,7 @@ module ietf-netconf-otlp-context-tracestate-version-1.0 {
 <dl class="references">
 <dt id="I-D.ietf-netconf-transaction-id">[I-D.ietf-netconf-transaction-id]</dt>
         <dd>
-<span class="refAuthor">Lindblad, J.</span>, <span class="refTitle">"Transaction ID Mechanism for NETCONF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-transaction-id-02</span>, <time datetime="2023-10-10" class="refDate">10 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-02">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Lindblad, J.</span>, <span class="refTitle">"Transaction ID Mechanism for NETCONF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-transaction-id-03</span>, <time datetime="2024-03-01" class="refDate">1 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-03">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OpenTelemetry">[OpenTelemetry]</dt>
         <dd>
@@ -1852,10 +1852,10 @@ module ietf-netconf-otlp-context-tracestate-version-1.0 {
       <h2 id="name-changes-to-be-deleted-by-rf">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-changes-to-be-deleted-by-rf" class="section-name selfRef">Changes (to be deleted by RFC Editor)</a>
       </h2>
-<div id="from-version-03-to-draft-netconf-trace-ctx-extension-latest-00">
+<div id="from-version-03-to-draft-ietf-netconf-trace-ctx-extension-latest-00">
 <section id="appendix-A.1">
-        <h3 id="name-from-version-03-to-draft-ne">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-from-version-03-to-draft-ne" class="section-name selfRef">From version 03 to draft-netconf-trace-ctx-extension-latest-00</a>
+        <h3 id="name-from-version-03-to-draft-ie">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-from-version-03-to-draft-ie" class="section-name selfRef">From version 03 to draft-ietf-netconf-trace-ctx-extension-latest-00</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-A.1-1.1">

@@ -12,7 +12,7 @@ Expires: 14 July 2024                                Deutsche Telekom AG
 
 
          NETCONF Extension to support Trace Context propagation
-                draft-netconf-trace-ctx-extension-latest
+             draft-ietf-netconf-trace-ctx-extension-latest
 
 Abstract
 
@@ -27,7 +27,8 @@ About This Document
 
    The latest revision of this draft can be found at TBD.  Status
    information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-netconf-trace-ctx-extension/.
+   https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-
+   extension/.
 
    Discussion of this document takes place on the NETCONF Working Group
    mailing list (mailto:netconf@ietf.org), which is archived at
@@ -93,7 +94,7 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Changes (to be deleted by RFC Editor)
      A.1.  From version 03 to
-           draft-netconf-trace-ctx-extension-latest-00
+           draft-ietf-netconf-trace-ctx-extension-latest-00
      A.2.  From version 02 to 03
      A.3.  From version 01 to 02
      A.4.  From version 00 to 01
@@ -733,9 +734,9 @@ Table of Contents
    [I-D.ietf-netconf-transaction-id]
               Lindblad, J., "Transaction ID Mechanism for NETCONF", Work
               in Progress, Internet-Draft, draft-ietf-netconf-
-              transaction-id-02, 10 October 2023,
+              transaction-id-03, 1 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              transaction-id-02>.
+              transaction-id-03>.
 
    [OpenTelemetry]
               "OpenTelemetry Cloud Native Computing Foundation project",
@@ -756,7 +757,8 @@ Table of Contents
 
 Appendix A.  Changes (to be deleted by RFC Editor)
 
-A.1.  From version 03 to draft-netconf-trace-ctx-extension-latest-00
+A.1.  From version 03 to draft-ietf-netconf-trace-ctx-extension-
+      latest-00
 
    *  Adopted by NETCONF WG
 
