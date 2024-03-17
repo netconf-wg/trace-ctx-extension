@@ -434,7 +434,7 @@ TBD
 
 # Changes (to be deleted by RFC Editor)
 
-## From version 03 to draft-ietf-netconf-trace-ctx-extension-latest-00
+## From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 - Adopted by NETCONF WG
 - Moved repository to NETCONF WG
 - Changed build system to use martinthomson's excellent framework
