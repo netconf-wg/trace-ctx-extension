@@ -5,6 +5,7 @@ category: std
 date: 2024-03-17
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
+obsoletes: draft-netconf-trace-ctx-extension-00
 ipr: trust200902
 submissiontype: IETF
 consensus: true
