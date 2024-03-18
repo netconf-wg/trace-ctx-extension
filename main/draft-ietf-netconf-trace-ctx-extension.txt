@@ -4,10 +4,10 @@
 
 Network Configuration                                        R. Gagliano
 Internet-Draft                                             Cisco Systems
-Intended status: Standards Track                              K. Larsson
-Expires: 18 September 2024                           Deutsche Telekom AG
-                                                             J. Lindblad
-                                                           Cisco Systems
+Obsoletes: draft-netconf-trace-ctx-extension-00               K. Larsson
+           (if approved)                             Deutsche Telekom AG
+Intended status: Standards Track                             J. Lindblad
+Expires: 18 September 2024                                 Cisco Systems
                                                            17 March 2024
 
 
