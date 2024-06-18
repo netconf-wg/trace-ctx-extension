@@ -22,7 +22,7 @@ venue:
   mail: "netconf@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/netconf/"
   github: https://github.com/netconf-wg/trace-ctx-extension
-  latest: https://github.com/netconf-wg/trace-ctx-extension/blob/gh-pages/main/draft-ietf-netconf-trace-ctx-extension.html
+  latest: https://github.com/netconf-wg/trace-ctx-extension/blob/gh-pages/main/draft-ietf-netconf-trace-ctx-extension.txt
 
 stand_alone: yes
 smart_quotes: no
@@ -448,6 +448,12 @@ The authors would like to acknowledge the valuable implementation feedback from 
 
 # Changes (to be deleted by RFC Editor)
 
+## From version 00 to 01
+- Added Security considerations
+- Added Acknowledgements
+- Added several Normative references
+- Updated link to latest document on github
+
 ## From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 - Adopted by NETCONF WG
 - Moved repository to NETCONF WG
@@ -470,11 +476,6 @@ The authors would like to acknowledge the valuable implementation feedback from 
 - Added new section: Implementation example 2: YANG DataStore
 - Added new use case: Billing and auditing
 - Added in introduction and in "Provisioning root cause analysis" the idea that the different transaction-ids defined in {{I-D.ietf-netconf-transaction-id}} could be added as part of the tracing information to be exported to the collectors, showing how the two documents are complementary.
-
-# TO DO List (to be deleted by RFC Editor)
-
-- Security Considerations
-- The W3C is working on a draft document to introduce the concept of "baggage" {{W3C-Baggage}} that we expect part of a future draft for NETCONF and RESTCONF
 
 # XML Attributes vs RPCs input augmentations discussion (to be deleted by RFC Editor)
 
