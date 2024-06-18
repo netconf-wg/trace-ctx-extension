@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: nc_trace
 category: std
-date: 2024-03-17
+date: 2024-06-18
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 obsoletes: draft-netconf-trace-ctx-extension-00
@@ -21,8 +21,8 @@ venue:
   type: "Working Group"
   mail: "netconf@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/netconf/"
-  github: "janlindblad/trace-ctx-extension"
-  latest: "https://janlindblad.github.io/trace-ctx-extension/draft-ietf-netconf-trace-ctx-extension.html"
+  github: https://github.com/netconf-wg/trace-ctx-extension
+  latest: https://github.com/netconf-wg/trace-ctx-extension/blob/gh-pages/main/draft-ietf-netconf-trace-ctx-extension.html
 
 stand_alone: yes
 smart_quotes: no
@@ -50,8 +50,13 @@ author:
 
 normative:
   RFC2119:
-  RFC8174:
+  RFC6241:
+  RFC6242:
   RFC3688:
+  RFC8040:
+  RFC8174:
+  RFC8341:
+  RFC8446:
   RFC8525:
 
   W3C-Trace-Context:
@@ -371,7 +376,15 @@ sourcecode-name="ietf-netconf-otlp-context-tracestate-version-1.0@2023-03-13.yan
 
 # Security Considerations
 
-TODO Security
+The YANG modules specified in this document are used to flag capabilities define and define an error information structure that is designed to be accessed via network management protocols such as NETCONF [RFC6241] or RESTCONF [RFC8040]. 
+
+As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.
+
+The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.
+
+The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242]. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC 8446].
+
+The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.
 
 # IANA Considerations
 
@@ -429,7 +442,7 @@ and
 
 # Acknowledgments
 
-TBD
+The authors would like to acknowledge the valuable implementation feedback from Christian Rennerskog and Per Andersson.  Many thanks to Raul Rivas Felix, Alexander Stoklasa, Luca Relandini and Erwin Vrolijk for their help with the demos regarding integrations.  The help and support from Jean Quilbeuf and Benoît Claise has also been invaluable to this work.
 
 --- back
 
