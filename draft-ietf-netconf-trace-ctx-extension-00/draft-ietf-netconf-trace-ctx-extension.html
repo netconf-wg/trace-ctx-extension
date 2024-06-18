@@ -11,24 +11,24 @@
 <meta content="
        This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), that enables distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification. 
     " name="description">
-<meta content="xml2rfc 3.20.0" name="generator">
+<meta content="xml2rfc 3.21.0" name="generator">
 <meta content="telemetry" name="keyword">
 <meta content="distributed systems" name="keyword">
 <meta content="opentelemetry" name="keyword">
 <meta content="draft-ietf-netconf-trace-ctx-extension-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.0
-    Python 3.11.8
+  xml2rfc 3.21.0
+    Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 4.2.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
-    setuptools 68.2.2
+    setuptools 69.5.1
     six 1.16.0
     wcwidth 0.2.13
 -->
@@ -1029,11 +1029,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">nc_trace</td>
-<td class="right">January 2024</td>
+<td class="right">March 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Gagliano, et al.</td>
-<td class="center">Expires 14 July 2024</td>
+<td class="center">Expires 18 September 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1041,17 +1041,20 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">NETCONF</dd>
+<dd class="workgroup">Network Configuration</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-ietf-netconf-trace-ctx-extension-latest</dd>
+<dt class="label-obsoletes">Obsoletes:</dt>
+<dd class="obsoletes">
+<a href="https://www.rfc-editor.org/rfc/rfcdraft-netconf-trace-ctx-extension-00" class="eref">draft-netconf-trace-ctx-extension-00</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-11" class="published">11 January 2024</time>
+<time datetime="2024-03-17" class="published">17 March 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-14">14 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-09-18">18 September 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1080,15 +1083,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="TBD">TBD</a></span>.
+        The latest revision of this draft can be found at <span><a href="https://janlindblad.github.io/trace-ctx-extension/draft-ietf-netconf-trace-ctx-extension.html">https://janlindblad.github.io/trace-ctx-extension/draft-ietf-netconf-trace-ctx-extension.html</a></span>.
         Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-extension/">https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-extension/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
-        NETCONF Working Group mailing list (<span><a href="mailto:netconf@ietf.org">mailto:netconf@ietf.org</a></span>),
-        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/netmod/">https://mailarchive.ietf.org/arch/browse/netmod/</a></span>.
+        Network Configuration Working Group mailing list (<span><a href="mailto:netconf@ietf.org">mailto:netconf@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/netconf/">https://mailarchive.ietf.org/arch/browse/netconf/</a></span>.
         Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/netconf/">https://www.ietf.org/mailman/listinfo/netconf/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/TBD">https://github.com/TBD</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        <span><a href="https://github.com/janlindblad/trace-ctx-extension">https://github.com/janlindblad/trace-ctx-extension</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1109,7 +1112,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1215,7 +1218,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-changes-to-be-deleted-by-rf" class="internal xref">Changes (to be deleted by RFC Editor)</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-from-version-03-to-draft-ie" class="internal xref">From version 03 to draft-ietf-netconf-trace-ctx-extension-latest-00</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-from-version-03-to-draft-ie" class="internal xref">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
                 <p id="section-toc.1-1.8.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-from-version-02-to-03" class="internal xref">From version 02 to 03</a></p>
@@ -1852,10 +1855,10 @@ module ietf-netconf-otlp-context-tracestate-version-1.0 {
       <h2 id="name-changes-to-be-deleted-by-rf">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-changes-to-be-deleted-by-rf" class="section-name selfRef">Changes (to be deleted by RFC Editor)</a>
       </h2>
-<div id="from-version-03-to-draft-ietf-netconf-trace-ctx-extension-latest-00">
+<div id="from-version-03-to-draft-ietf-netconf-trace-ctx-extension-00">
 <section id="appendix-A.1">
         <h3 id="name-from-version-03-to-draft-ie">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-from-version-03-to-draft-ie" class="section-name selfRef">From version 03 to draft-ietf-netconf-trace-ctx-extension-latest-00</a>
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-from-version-03-to-draft-ie" class="section-name selfRef">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-A.1-1.1">
