@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: nc_trace
 category: std
-date: 2024-06-18
+date: 2024-06-27
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 obsoletes: draft-netconf-trace-ctx-extension-00
@@ -21,8 +21,8 @@ venue:
   type: "Working Group"
   mail: "netconf@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/netconf/"
-  github: https://github.com/netconf-wg/trace-ctx-extension
-  latest: https://github.com/netconf-wg/trace-ctx-extension/blob/gh-pages/main/draft-ietf-netconf-trace-ctx-extension.txt
+  github: netconf-wg/trace-ctx-extension
+  latest: https://datatracker.ietf.org/doc/draft-ietf-netconf-trace-ctx-extension/
 
 stand_alone: yes
 smart_quotes: no
@@ -96,69 +96,63 @@ It is worth noting that the trace context is not meant to have any relationship 
 
 A trace context also differs from {{I-D.ietf-netconf-transaction-id}} in several ways as the trace operation may involve any operation (including for example validate, lock, unlock, etc.) Additionally, a trace context scope may include the full application stack (orchestrator, controller, devices, etc) rather than a single NETCONF server, which is the scope for the transaction-id. The trace context is also complemetary to {{I-D.ietf-netconf-transaction-id}} as a given trace-id can be associated with the different transaction-ids as part of the information exported to the collector.
 
-The following enhancement of the reference SDN Architecture from RFC 8309 shows the impact of distributed traces for a network operator.
+The following enhancement of the reference SDN Architecture from {{?RFC8309}} shows the impact of distributed traces for a network operator.
 
 ~~~ art
-                 ------------------                    -------------
+                +------------------+                   +-----------+
                 |   Orchestrator   |                   |           |
                 |                  |     ------------> |           |
                 .------------------.                   |           |
                .          :         .                  |           |
               .           :          .                 | Collector |
-   ------------     ------------     ------------      | (Metrics, |
+  +------------+   +------------+   +------------+     | (Metrics, |
   |            |   |            |   |            |     |  Events,  |
   | Controller |   | Controller |   | Controller | --> |  Logs,    |
   |            |   |            |   |            |     |  Traces)  |
-   ------------     ------------     ------------      |           |
+  +------------+   +------------+   +------------+     |           |
       :              .       .               :         |           |
       :             .         .              :         |           |
       :            .           .             :         |           |
- ---------     ---------   ---------     ---------     |           |
-| Network |   | Network | | Network |   | Network |    |           |
-| Element |   | Element | | Element |   | Element | -> |           |
- ---------     ---------   ---------     ---------     -------------
-
-    Figure 1: A Sample SDN Architecture from RFC8309 augmented
-      to include the export of metrics, events, logs and traces
-      from the different components to a common collector.
+ +---------+  +---------+  +---------+  +---------+    |           |
+ | Network |  | Network |  | Network |  | Network |    |           |
+ | Element |  | Element |  | Element |  | Element | -> |           |
+ +---------+  +---------+  +---------+  +---------+    +-----------+
 ~~~
+{: title="A Sample SDN Architecture from RFC8309 augmented to include the export of metrics, events, logs and traces from the different components to a common collector." #rfc8309-sample-arch}
 
 The network automation, management and control architectures are distributed in nature.  In order to "manage the managers", operators would like to use the same techniques as any other distributed systems in their IT environment.  Solutions for analysing Metrics, Events, Logs and Traces (M.E.L.T) are key for the successful monitoring and troubleshooting of such applications.  Initiatives such as the OpenTelemetry {{OpenTelemetry}} enable rich ecosystems of tools that NETCONF-based applications would want to participate in.
 
 With the implementation of this trace context propagation extension to NETCONF, backend systems behind the M.E.L.T collector will be able to correlate information from different systems but related to a common context.
 
+This document does not cover the somewhat related functionality specified in {{W3C-Baggage}}.  Mapping of the Baggage functionality into YANG may be specified in a future document.
+
 ## Implementation example 1: OpenTelemetry
 
-We will describe an example to show the value of trace context propagation in the NETCONF protocol.  In Figure 2, we show a deployment based on Figure 1 with a single controller and two network elements.  In this example, the NETCONF protocol is running between the Orchestrator and the Controller.  NETCONF is also used between the Controller and the Network Elements.
+We will describe an example to show the value of trace context propagation in the NETCONF protocol.  In the OTLP Sample Architecture [](#otlp-sample-arch)  below, we show a deployment based on the RFC8309 sample architecture [](#rfc8309-sample-arch) above, with a single controller and two network elements.  In this example, the NETCONF protocol is running between the Orchestrator and the Controller.  NETCONF is also used between the Controller and the Network Elements.
 
 Let's assume an edit-config operation between the orchestrator and the controller that results (either synchronously or asynchronously) in corresponding edit-config operations from the Controller towards the two network elements.  All trace operations are related and will create M.E.L.T data.
 
 ~~~ art
-             ------------------                         -------------
+            +------------------+                        +-----------+
             |   Orchestrator   |    OTLP protocol       |           |
             |                  |  ------------------->  |           |
-            .------------------.                        |           |
+            .------------------+                        |           |
            .  NETCONF                                   |           |
           .   edit-config (trace-id "1", parent-id "A") | Collector |
- ------------                                           | (Metrics, |
++------------+                                          | (Metrics, |
 |            |                                          |  Events,  |
 | Controller |   ------------------------------------>  |  Logs,    |
 |            |                 OTLP protocol            |  Traces)  |
- ------------                                           |           |
++------------+                                          |           |
    :      .  NETCONF                                    |           |
    :        . edit-config (trace-id "1", parent-id "B") |           |
    :          .                                         |           |
- ---------     ---------                                |           |
++---------+   +---------+                               |           |
 | Network |   | Network |       OTLP protocol           |           |
 | Element |   | Element |  -------------------------->  |           |
- ---------     ---------                                -------------
-
-        Figure 2: An implementation example where the NETCONF
-        protocol is used between the Orchestrator and the Controller
-        and also between the Controller and the Network Elements.
-        Every component exports M.E.L.T information to the collector
-        using the OTLP protocol.
++---------+   +---------+                               +-----------+
 ~~~
+{: title="An implementation example where the NETCONF protocol is used between the Orchestrator and the Controller and also between the Controller and the Network Elements.  Every component exports M.E.L.T information to the collector using the OTLP protocol." #otlp-sample-arch}
 
 Each of the components in this example (Orchestrator, Controller and Network Elements) is exporting M.E.L.T information to the collector using the OpenTelemetry Protocol (OTLP).
 
@@ -172,42 +166,33 @@ With this additional metadata exchanged between the components and exposed to th
 
 OpenTelemetry implements the "push" model for data streaming where information is sent to the back-end as soon as produced and is not required to be stored in the system. In certain cases, a "pull" model may be envisioned, for example for performing forensic analysis while not all OTLP traces are available in the back-end systems.
 
-An implementation of a "pull" mechanism for M.E.L.T. information in general and for traces in particular, could consist of storing traces in a yang datastore (particularly the operational datastore.) Implementations should consider the use of circular buffers to avoid resources exhaustion. External systems could access traces (and particularly past traces) via NETCONF, RESTCONF, gNMI or other polling mechanisms. Finally, storing traces in a YANG datastore enables the use of YANG-Push {{?RFC8641}} or gNMI Telemetry as an additional "push" mechanisms.
+An implementation of a "pull" mechanism for M.E.L.T. information in general and for traces in particular, could consist of storing traces in a YANG datastore (particularly the operational datastore.) Implementations should consider the use of circular buffers to avoid resource exhaustion. External systems could access traces (and particularly past traces) via NETCONF, RESTCONF, gNMI or other polling mechanisms. Finally, storing traces in a YANG datastore enables the use of YANG-Push {{?RFC8641}} or gNMI Telemetry as additional "push" mechanisms.
 
 This document does not specify the YANG module in which traces could be stored inside the different components. That said, storing the context information described in this document as part of the recorded traces would allow back-end systems to correlate the information from different components as in the OpenTelemetry implementation.
 
-Note to be removed in the future: Some initial ideas are under discussion in the IETF for defining a standard YANG data model for traces. For example see: I-D.quilbeuf-opsawg-configuration-tracing which focusses only on configuration change root cause analysis use case (see the use case desciption below). These ideas are complementary to this draft.
-
 ~~~ art
-             ------------------                         -------------
+            +------------------+                        +-----------+
             | Orchestrator     |                        |           |
             |                  |    NC/RC/gNMI or YP    |           |
             |   YANG DataStore | <------------------->  |           |
-            .------------------.     pull or push       |           |
+            .------------------+     pull or push       |           |
            .  NETCONF                                   |           |
           .   edit-config (trace-id "1", parent-id "A") | Collector |
- ----------------                                       | (Metrics, |
++----------------+                                      | (Metrics, |
 |                |           NC/RC/gNMI or YP           |  Events,  |
 | Controller     |   -------------------------------->  |  Logs,    |
 |  YANG DataStore|             pull or push             |  Traces)  |
- ----------------                                       |           |
++----------------+                                      |           |
    :      .  NETCONF                                    |           |
    :        . edit-config (trace-id "1", parent-id "B") |           |
    :          .                                         |           |
- ---------     ---------                                |           |
++---------+   +---------+                               |           |
 | Network |   | Network |        NC/RC/gNMI or YP       |           |
 | Element |   | Element |  -------------------------->  |           |
-|   YG DS |   |   YG DS |         pull or push          |           |
- ---------     ---------                                -------------
-
-        Figure 3: An implementation example where the NETCONF
-        protocol is used between the Orchestrator and the Controller
-        and also between the Controller and the Network Elements.
-        M.E.L.T. information is stored in local Yang Datastores and
-        accessed by the collector using "pull" mechanisms using the
-        NETCONF (NC), RESTCONF (RC) or gNMI protocols. A "push"
-        strategy is also possible via YANG-Push or gNMI.
+| YANG DS |   | YANG DS |         pull or push          |           |
++---------+   +---------+                               +-----------+
 ~~~
+{: title="An implementation example where the NETCONF protocol is used between the Orchestrator and the Controller and also between the Controller and the Network Elements.  M.E.L.T. information is stored in local YANG Datastores and accessed by the collector using \"pull\" mechanisms using the NETCONF (NC), RESTCONF (RC) or gNMI protocols. A \"push\" strategy is also possible via YANG-Push or gNMI." #melt-example}
 
 ## Use Cases
 
@@ -219,7 +204,7 @@ With the support for trace context propagation as described in this document for
 
 ### System performance profiling
 
-When operating a distributed system such as the one shown in Figure 2, operators are expected to benchmark Key Performance Indicators (KPIs) for the most common tasks.  For example, what is the typical delay when provisioning a VPN service across different controllers and devices.
+When operating a distributed system such as the one shown in [](#otlp-sample-arch), operators are expected to benchmark Key Performance Indicators (KPIs) for the most common tasks.  For example, what is the typical delay when provisioning a VPN service across different controllers and devices.
 
 Thanks to Application Performance Management (APM) systems, from these KPIs, an operator can detect a normal and abnormal behaviour of the distributed system. Also, an operator can better plan any upgrades or enhancements in the platform.
 
@@ -238,14 +223,13 @@ The XML prefixes used in this document are mapped as follows:
 - xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0",
 - xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0" and
 - xmlns:ietf-netconf-otlp-context=
-"urn:ietf:params:xml:ns:yang:ietf-netconf-otlp-context"
-
+    "urn:ietf:params:xml:ns:yang:otlp-context"
 
 # NETCONF Extension
 
-When performing NETCONF operations by sending NETCONF RPCs, a NETCONF client MAY include trace context information in the form of XML attributes.  The {{W3C-Trace-Context}} defines two HTTP headers; traceparent and tracestate for this purpose.  NETCONF clients that are taking advantage of this feature MUST add one w3ctc:traceparent attribute and MAY add one w3ctc:tracestate attribute to the nc:rpc tag.
+When performing NETCONF operations by sending NETCONF RPCs, a NETCONF client MAY include trace context information in the form of XML attributes.  The {{W3C-Trace-Context}} defines two HTTP headers; _traceparent_ and _tracestate_ for this purpose.  NETCONF clients that are taking advantage of this feature MUST add one _w3ctc:traceparent_ attribute and MAY add one _w3ctc:tracestate_ attribute to the _nc:rpc_ tag.
 
-A NETCONF server that receives a trace context attribute in the form of a w3ctc:traceparent attribute SHOULD apply the mutation rules described in {{W3C-Trace-Context}}.  A NETCONF server MAY add one w3ctc:traceparent attribute in the nc:rpc-reply response to the nc:rpc tag above.  NETCONF servers MAY also add one w3ctc:traceparent attribute in notification and update message envelopes: notif:notification, yp:push-update and yp:push-change-update.
+A NETCONF server that receives a trace context attribute in the form of a _w3ctc:traceparent_ attribute SHOULD apply the mutation rules described in {{W3C-Trace-Context}}.  A NETCONF server MAY add one _w3ctc:traceparent_ attribute in the _nc:rpc-reply_ response to the _nc:rpc_ tag above.  NETCONF servers MAY also add one _w3ctc:traceparent_ attribute in notification and update message envelopes: _notif:notification_, _yp:push-update_ and _yp:push-change-update_.
 
 For example, a NETCONF client might send:
 
@@ -258,9 +242,9 @@ For example, a NETCONF client might send:
 </rpc>
 ~~~
 
-In all cases above where a client or server adds a w3ctc:traceparent attribute to a tag, that client or server MAY also add one w3ctc:tracestate attribute to the same tag.
+In all cases above where a client or server adds a _w3ctc:traceparent_ attribute to a tag, that client or server MAY also add one _w3ctc:tracestate_ attribute to the same tag.
 
-The proper encoding and interpretation of the contents of the w3ctc:traceparent attribute is described in {{W3C-Trace-Context}} section 3.2 except 3.2.1.  The proper encoding and interpretation of the contents in the w3ctc:tracestate attribute is described in {{W3C-Trace-Context}} section 3.3 except 3.3.1 and 3.3.1.1.  A NETCONF XML tag can only have zero or one w3ctc:tracestate attributes, so its content MUST always be encoded as a single string.  The tracestate field value is a list of list-members separated by commas (,).  A list-member is a key/value pair separated by an equals sign (=).  Spaces and horizontal tabs surrounding list-members are ignored.  There is no limit to the number of list-members in a list.
+The proper encoding and interpretation of the contents of the _w3ctc:traceparent_ attribute is described in {{W3C-Trace-Context}} section 3.2 except 3.2.1.  The proper encoding and interpretation of the contents in the _w3ctc:tracestate_ attribute is described in {{W3C-Trace-Context}} section 3.3 except 3.3.1 and 3.3.1.1.  A NETCONF XML tag can only have zero or one _w3ctc:tracestate_ attributes, so its content MUST always be encoded as a single string.  The _tracestate_ field value is a list of list-members separated by commas (,).  A list-member is a key/value pair separated by an equals sign (=).  Spaces and horizontal tabs surrounding list-members are ignored.  There is no limit to the number of list-members in a list.
 
 For example, a NETCONF client might send:
 
@@ -274,7 +258,7 @@ For example, a NETCONF client might send:
 </rpc>
 ~~~
 
-As in all XML documents, the order between the attributes in an XML tag has no significance.  Clients and servers MUST be prepared to handle the attributes no matter in which order they appear.  The tracestate value MAY contain double quotes in its payload.  If so, they MUST be encoded according to XML rules, for example:
+As in all XML documents, the order between the attributes in an XML tag has no significance.  Clients and servers MUST be prepared to handle the attributes no matter in which order they appear.  The _tracestate_ value MAY contain double quotes in its payload.  If so, they MUST be encoded according to XML rules, for example:
 
 ~~~ xml
 <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1"
@@ -289,9 +273,9 @@ As in all XML documents, the order between the attributes in an XML tag has no s
 
 ## Error handling
 
-The NETCONF server SHOULD follow the "Processing Model for Working with Trace Context" as specified in {{W3C-Trace-Context}}.
+The NETCONF server SHOULD follow the "Processing Model for Working with Trace Context" as specified in {{W3C-Trace-Context}}.  Based on this processing model, it is NOT RECOMMENDED to reject an RPC because of the trace context attribute values.
 
-If the server rejects the RPC because of the trace context extension value, the server MUST return an rpc-error with the following values:
+If the server still decides to reject the RPC because of the trace context attribute values, the server MUST return a NETCONF rpc-error with the following values:
 
       error-tag:      operation-failed
       error-type:     protocol
@@ -346,7 +330,7 @@ This might give the following error response:
 
 ## Trace Context extension versionning
 
-This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C traceparent and trace-state headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the deffinition of new NETCONF capabilities for each headers' version.
+This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C _traceparent_ and _tracestate_ headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.
 
 We define a pair YANG modules (ietf-netconf-otlp-context-traceparent-version-1.0.yang and ietf-netconf-otlp-context-tracestate-version-1.0.yang) that SHOULD be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
 
@@ -376,13 +360,13 @@ sourcecode-name="ietf-netconf-otlp-context-tracestate-version-1.0@2023-03-13.yan
 
 # Security Considerations
 
-The YANG modules specified in this document are used to flag capabilities define and define an error information structure that is designed to be accessed via network management protocols such as NETCONF [RFC6241] or RESTCONF [RFC8040]. 
+The YANG modules specified in this document are used to flag capabilities define and define an error information structure that is designed to be accessed via network management protocols such as NETCONF [RFC6241] or RESTCONF [RFC8040].
 
 As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.
 
-The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.
+The _traceparent_ and _tracestate_ attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.
 
-The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242]. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC 8446].
+The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242]. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC8446].
 
 The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.
 
