@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: nc_trace
 category: std
-date: 2024-06-27
+date: 2024-07-08
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 obsoletes: draft-netconf-trace-ctx-extension-00
@@ -281,7 +281,7 @@ If the server still decides to reject the RPC because of the trace context attri
       error-type:     protocol
       error-severity: error
 
-Additionally, the error-info tag SHOULD contain a
+Additionally, the error-info tag MUST contain a
 otlp-trace-context-error-info structure with relevant details about
 the error.  This structure is defined in the module
 ietf-netconf-otlp-context.yang.  Example of a badly formated trace
@@ -332,7 +332,7 @@ This might give the following error response:
 
 This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C _traceparent_ and _tracestate_ headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.
 
-We define a pair YANG modules (ietf-netconf-otlp-context-traceparent-version-1.0.yang and ietf-netconf-otlp-context-tracestate-version-1.0.yang) that SHOULD be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
+We define a pair YANG modules (ietf-netconf-otlp-context-traceparent-version-1.0.yang and ietf-netconf-otlp-context-tracestate-version-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
 
 # YANG Modules
 
@@ -437,6 +437,7 @@ The authors would like to acknowledge the valuable implementation feedback from 
 - Added Acknowledgements
 - Added several Normative references
 - Updated link to latest document on github
+- Firmed up error handling and YANG-library to MUST-requirements
 
 ## From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 - Adopted by NETCONF WG
