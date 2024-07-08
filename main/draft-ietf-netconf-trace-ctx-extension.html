@@ -11,13 +11,13 @@
 <meta content="
        This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), that enables distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification. 
     " name="description">
-<meta content="xml2rfc 3.21.0" name="generator">
+<meta content="xml2rfc 3.22.0" name="generator">
 <meta content="telemetry" name="keyword">
 <meta content="distributed systems" name="keyword">
 <meta content="opentelemetry" name="keyword">
 <meta content="draft-ietf-netconf-trace-ctx-extension-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.21.0
+  xml2rfc 3.22.0
     Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
@@ -27,9 +27,8 @@
     platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
-    requests 2.31.0
+    requests 2.32.3
     setuptools 69.5.1
-    six 1.16.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-netconf-trace-ctx-extension.xml" rel="alternate" type="application/rfc+xml">
@@ -1029,11 +1028,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">nc_trace</td>
-<td class="right">June 2024</td>
+<td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Gagliano, et al.</td>
-<td class="center">Expires 29 December 2024</td>
+<td class="center">Expires 9 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1049,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfcdraft-netconf-trace-ctx-extension-00" class="eref">draft-netconf-trace-ctx-extension-00</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-27" class="published">27 June 2024</time>
+<time datetime="2024-07-08" class="published">8 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-29">29 December 2024</time></dd>
+<dd class="expires"><time datetime="2025-01-09">9 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1112,7 +1111,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1483,7 +1482,7 @@ sub-systems and together with the network devices they manage, they effectively 
   error-severity: error
 </pre><a href="#section-2.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1-4">Additionally, the error-info tag SHOULD contain a
+<p id="section-2.1-4">Additionally, the error-info tag MUST contain a
 otlp-trace-context-error-info structure with relevant details about
 the error.  This structure is defined in the module
 ietf-netconf-otlp-context.yang.  Example of a badly formated trace
@@ -1538,7 +1537,7 @@ context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-trace-context-extension-ver" class="section-name selfRef">Trace Context extension versionning</a>
         </h3>
 <p id="section-2.2-1">This extension refers to the <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> trace context capability. The W3C <em>traceparent</em> and <em>tracestate</em> headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">We define a pair YANG modules (ietf-netconf-otlp-context-traceparent-version-1.0.yang and ietf-netconf-otlp-context-tracestate-version-1.0.yang) that SHOULD be included in the YANG library per <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">We define a pair YANG modules (ietf-netconf-otlp-context-traceparent-version-1.0.yang and ietf-netconf-otlp-context-tracestate-version-1.0.yang) that MUST be included in the YANG library per <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1897,6 +1896,9 @@ module ietf-netconf-otlp-context-tracestate-version-1.0 {
 </li>
           <li class="normal" id="appendix-A.1-1.4">
             <p id="appendix-A.1-1.4.1">Updated link to latest document on github<a href="#appendix-A.1-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.1-1.5">
+            <p id="appendix-A.1-1.5.1">Firmed up error handling and YANG-library to MUST-requirements<a href="#appendix-A.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>

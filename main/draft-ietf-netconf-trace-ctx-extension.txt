@@ -7,8 +7,8 @@ Internet-Draft                                             Cisco Systems
 Obsoletes: draft-netconf-trace-ctx-extension-00               K. Larsson
            (if approved)                             Deutsche Telekom AG
 Intended status: Standards Track                             J. Lindblad
-Expires: 29 December 2024                                  Cisco Systems
-                                                            27 June 2024
+Expires: 9 January 2025                                    Cisco Systems
+                                                             8 July 2024
 
 
          NETCONF Extension to support Trace Context propagation
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 December 2024.
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -445,7 +445,7 @@ Table of Contents
      error-type:     protocol
      error-severity: error
 
-   Additionally, the error-info tag SHOULD contain a otlp-trace-context-
+   Additionally, the error-info tag MUST contain a otlp-trace-context-
    error-info structure with relevant details about the error.  This
    structure is defined in the module ietf-netconf-otlp-context.yang.
    Example of a badly formated trace context extension:
@@ -498,8 +498,8 @@ Table of Contents
 
    We define a pair YANG modules (ietf-netconf-otlp-context-traceparent-
    version-1.0.yang and ietf-netconf-otlp-context-tracestate-version-
-   1.0.yang) that SHOULD be included in the YANG library per [RFC8525]
-   of the NETCONF server supporting the NETCONF Trace Context extension.
+   1.0.yang) that MUST be included in the YANG library per [RFC8525] of
+   the NETCONF server supporting the NETCONF Trace Context extension.
    These capabilities that will refer to the headers' supported
    versions.  Future updates of this document could include additional
    YANG modules for new headers' versions.
@@ -821,6 +821,8 @@ A.1.  From version 00 to 01
    *  Added several Normative references
 
    *  Updated link to latest document on github
+
+   *  Firmed up error handling and YANG-library to MUST-requirements
 
 A.2.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
