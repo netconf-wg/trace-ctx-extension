@@ -1,0 +1,4 @@
+module ietf-trace-context-tracestate-version-1.0 {
+  namespace "urn:ietf:params:xml:ns:yang:tracestate:1.0";
+  prefix ietf-trace-context-otlpstate-1.0;
+}

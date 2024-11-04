@@ -67,8 +67,8 @@ informative:
   OpenTelemetry:
     title: OpenTelemetry Cloud Native Computing Foundation project
     target: https://opentelemetry.io
-    date: 2024-22-04
-  
+    date: 2024-11-04
+
   gNMI:
     title: gNMI - gRPC Network Management Interface
     target: https://github.com/openconfig/gnmi
