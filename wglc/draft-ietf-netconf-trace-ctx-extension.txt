@@ -4,11 +4,11 @@
 
 Network Configuration                                        R. Gagliano
 Internet-Draft                                             Cisco Systems
-Obsoletes: draft-netconf-trace-ctx-extension-00               K. Larsson
-           (if approved)                             Deutsche Telekom AG
-Intended status: Standards Track                             J. Lindblad
-Expires: 9 January 2025                                    Cisco Systems
-                                                             8 July 2024
+Intended status: Standards Track                              K. Larsson
+Expires: 8 May 2025                                  Deutsche Telekom AG
+                                                             J. Lindblad
+                                                           Cisco Systems
+                                                         4 November 2024
 
 
          NETCONF Extension to support Trace Context propagation
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2025.
+   This Internet-Draft will expire on 8 May 2025.
 
 Copyright Notice
 
@@ -73,16 +73,16 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Implementation example 1: OpenTelemetry
-     1.2.  Implementation example 2: YANG DataStore
-     1.3.  Use Cases
-       1.3.1.  Provisioning root cause analysis
-       1.3.2.  System performance profiling
-       1.3.3.  Billing and auditing
-     1.4.  Terminology
+     1.1.  Terminology
+     1.2.  Implementation example 1: OpenTelemetry
+     1.3.  Implementation example 2: YANG Datastore
+     1.4.  Use Cases
+       1.4.1.  Provisioning root cause analysis
+       1.4.2.  System performance profiling
+       1.4.3.  Billing and auditing
    2.  NETCONF Extension
      2.1.  Error handling
-     2.2.  Trace Context extension versionning
+     2.2.  Trace Context extension versioning
    3.  YANG Modules
      3.1.  YANG module for otlp-trace-context-error-info structure
      3.2.  YANG module for traceparent header version 1.0
@@ -100,6 +100,7 @@ Table of Contents
      A.3.  From version 02 to 03
      A.4.  From version 01 to 02
      A.5.  From version 00 to 01
+     A.6.  From version 03 to 04
    Appendix B.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
    Authors' Addresses
@@ -133,7 +134,7 @@ Table of Contents
    trace context scope may include the full application stack
    (orchestrator, controller, devices, etc) rather than a single NETCONF
    server, which is the scope for the transaction-id.  The trace context
-   is also complemetary to [I-D.ietf-netconf-transaction-id] as a given
+   is also complementary to [I-D.ietf-netconf-transaction-id] as a given
    trace-id can be associated with the different transaction-ids as part
    of the information exported to the collector.
 
@@ -182,7 +183,32 @@ Table of Contents
    specified in [W3C-Baggage].  Mapping of the Baggage functionality
    into YANG may be specified in a future document.
 
-1.1.  Implementation example 1: OpenTelemetry
+1.1.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+   NOT","SHOULD","SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY",
+   and "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   Additionally, the document utilizes the following abbreviations:
+
+   *  OTLP: OpenTelemetry protocol as defined by [OpenTelemetry]
+
+   *  M.E.L.T: Metrics, Events, Logs and Traces
+
+   *  gNMI: gRPC Network Management Interface, as defined by [gNMI]
+
+   The XML prefixes used in this document are mapped as follows:
+
+   *  xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0",
+
+   *  xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0" and
+
+   *  xmlns:ietf-trce-context= "urn:ietf:params:xml:ns:yang:trace-
+      context"
+
+1.2.  Implementation example 1: OpenTelemetry
 
    We will describe an example to show the value of trace context
    propagation in the NETCONF protocol.  In the OTLP Sample Architecture
@@ -246,7 +272,7 @@ Table of Contents
    the monitoring and troubleshooting operations for the full
    application stack.
 
-1.2.  Implementation example 2: YANG DataStore
+1.3.  Implementation example 2: YANG Datastore
 
    OpenTelemetry implements the "push" model for data streaming where
    information is sent to the back-end as soon as produced and is not
@@ -274,21 +300,21 @@ Table of Contents
                +------------------+                        +-----------+
                | Orchestrator     |                        |           |
                |                  |    NC/RC/gNMI or YP    |           |
-               |   YANG DataStore | <------------------->  |           |
+               |   YANG Datastore | <------------------->  |           |
                .------------------+     pull or push       |           |
               .  NETCONF                                   |           |
              .   edit-config (trace-id "1", parent-id "A") | Collector |
    +----------------+                                      | (Metrics, |
    |                |           NC/RC/gNMI or YP           |  Events,  |
-   | Controller     |   -------------------------------->  |  Logs,    |
-   |  YANG DataStore|             pull or push             |  Traces)  |
+   | Controller     |   <------------------------------->  |  Logs,    |
+   |  YANG Datastore|             pull or push             |  Traces)  |
    +----------------+                                      |           |
       :      .  NETCONF                                    |           |
       :        . edit-config (trace-id "1", parent-id "B") |           |
       :          .                                         |           |
    +---------+   +---------+                               |           |
    | Network |   | Network |        NC/RC/gNMI or YP       |           |
-   | Element |   | Element |  -------------------------->  |           |
+   | Element |   | Element |  <------------------------->  |           |
    | YANG DS |   | YANG DS |         pull or push          |           |
    +---------+   +---------+                               +-----------+
 
@@ -300,9 +326,9 @@ Table of Contents
      gNMI protocols.  A "push" strategy is also possible via YANG-Push
                                   or gNMI.
 
-1.3.  Use Cases
+1.4.  Use Cases
 
-1.3.1.  Provisioning root cause analysis
+1.4.1.  Provisioning root cause analysis
 
    When a provisioning activity fails, errors are typically propagated
    northbound, however this information may be difficult to troubleshoot
@@ -312,12 +338,12 @@ Table of Contents
    With the support for trace context propagation as described in this
    document for NETCONF, the collector will be able to search every
    trace, event, metric, or log in connection to that trace-id and
-   faciliate the performance of a root cause analysis due to a network
+   facilitate the performance of a root cause analysis due to a network
    changes.  The trace information could also be included as an optional
    resource with the different NETCONF transaction ids described in
    [I-D.ietf-netconf-transaction-id].
 
-1.3.2.  System performance profiling
+1.4.2.  System performance profiling
 
    When operating a distributed system such as the one shown in
    Figure 2, operators are expected to benchmark Key Performance
@@ -337,29 +363,12 @@ Table of Contents
    abnormal behaviours can also be troubleshot from the system view down
    to the individual element.
 
-1.3.3.  Billing and auditing
+1.4.3.  Billing and auditing
 
-   In certain circumstances, we could envision tracing infomration used
+   In certain circumstances, we could envision tracing information used
    as additional inputs to billing systems.  In particular, trace
    context information could be used to validate that a certain
    northbound order was carried out in southbound systems.
-
-1.4.  Terminology
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
-   NOT","SHOULD","SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY",
-   and "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
-   The XML prefixes used in this document are mapped as follows:
-
-   *  xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0",
-
-   *  xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0" and
-
-   *  xmlns:ietf-netconf-otlp-context=
-      "urn:ietf:params:xml:ns:yang:otlp-context"
 
 2.  NETCONF Extension
 
@@ -445,10 +454,10 @@ Table of Contents
      error-type:     protocol
      error-severity: error
 
-   Additionally, the error-info tag MUST contain a otlp-trace-context-
-   error-info structure with relevant details about the error.  This
-   structure is defined in the module ietf-netconf-otlp-context.yang.
-   Example of a badly formated trace context extension:
+   Additionally, the error-info tag MUST contain a trace-context-error-
+   info structure with relevant details about the error.  This structure
+   is defined in the module ietf-netconf-context.yang.  Example of a
+   badly formated trace context extension:
 
    <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1"
         xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0"
@@ -463,8 +472,8 @@ Table of Contents
 
    <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
                xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0"
-               xmlns:ietf-netconf-otlp-context=
-               "urn:ietf:params:xml:ns:yang:otlp-context"
+               xmlns:ietf-trace-context=
+               "urn:ietf:params:xml:ns:yang:trace-context"
                message-id="1">
      <rpc-error>
        <error-type>protocol</error-type>
@@ -474,20 +483,20 @@ Table of Contents
          OTLP traceparent attribute incorrectly formatted
        </error-message>
        <error-info>
-         <ietf-netconf-otlp-context:meta-name>
+         <ietf-trace-context:meta-name>
            w3ctc:traceparent
-         </ietf-netconf-otlp-context:meta-name>
-         <ietf-netconf-otlp-context:meta-value>
+         </ietf-trace-context:meta-name>
+         <ietf-trace-context:meta-value>
            Bad Format
-         </ietf-netconf-otlp-context:meta-value>
-         <ietf-netconf-otlp-context:error-type>
-           ietf-netconf-otlp-context:bad-format
-         </ietf-netconf-otlp-context:error-type>
+         </ietf-trace-context:meta-value>
+         <ietf-trace-context:error-type>
+           ietf-trace-context:bad-format
+         </ietf-trace-context:error-type>
        </error-info>
      </rpc-error>
    </rpc-reply>
 
-2.2.  Trace Context extension versionning
+2.2.  Trace Context extension versioning
 
    This extension refers to the [W3C-Trace-Context] trace context
    capability.  The W3C _traceparent_ and _tracestate_ headers include
@@ -496,23 +505,23 @@ Table of Contents
    supported by a server.  We would like to achieve this goal avoiding
    the definition of new NETCONF capabilities for each headers' version.
 
-   We define a pair YANG modules (ietf-netconf-otlp-context-traceparent-
-   version-1.0.yang and ietf-netconf-otlp-context-tracestate-version-
-   1.0.yang) that MUST be included in the YANG library per [RFC8525] of
-   the NETCONF server supporting the NETCONF Trace Context extension.
-   These capabilities that will refer to the headers' supported
-   versions.  Future updates of this document could include additional
-   YANG modules for new headers' versions.
+   We define a pair YANG modules (ietf-trace-context-traceparent-
+   version-1.0.yang and ietf-trace-context-tracestate-version-1.0.yang)
+   that MUST be included in the YANG library per [RFC8525] of the
+   NETCONF server supporting the NETCONF Trace Context extension.  These
+   capabilities that will refer to the headers' supported versions.
+   Future updates of this document could include additional YANG modules
+   for new headers' versions.
 
 3.  YANG Modules
 
 3.1.  YANG module for otlp-trace-context-error-info structure
 
    <CODE BEGINS>
-   module ietf-netconf-otlp-context {
+   module ietf-trace-context {
      yang-version 1.1;
-     namespace "urn:ietf:params:xml:ns:yang:otlp-context";
-     prefix ietf-netconf-otlp-context;
+     namespace "urn:ietf:params:xml:ns:yang:trace-context";
+     prefix ietf-trace-context;
 
      import ietf-yang-structure-ext {
        prefix sx;
@@ -633,18 +642,18 @@ Table of Contents
 3.2.  YANG module for traceparent header version 1.0
 
    <CODE BEGINS>
-   module ietf-netconf-otlp-context-traceparent-version-1.0 {
+   module ietf-trace-context-traceparent-version-1.0 {
      namespace "urn:ietf:params:xml:ns:yang:traceparent:1.0";
-     prefix ietf-netconf-otlpparent-1.0;
+     prefix ietf-trace-context-otlpparent-1.0;
    }
    <CODE ENDS>
 
 3.3.  YANG module for tracestate header version 1.0
 
    <CODE BEGINS>
-   module ietf-netconf-otlp-context-tracestate-version-1.0 {
+   module ietf-trace-context-tracestate-version-1.0 {
      namespace "urn:ietf:params:xml:ns:yang:tracestate:1.0";
-     prefix ietf-netconf-otlpstate-1.0;
+     prefix ietf-trace-context-otlpstate-1.0;
    }
    <CODE ENDS>
 
@@ -698,9 +707,9 @@ Table of Contents
    This document registers three module names in the 'YANG Module Names'
    registry, defined in RFC 6020:
 
-     name: ietf-netconf-otlp-context-traceparent-version-1.0
+     name: ietf-trace-context-traceparent-version-1.0
 
-     prefix: ietf-netconf-otlpparent-1.0
+     prefix: ietf-trace-context-otlpparent-1.0
 
      namespace: urn:ietf:params:xml:ns:yang:traceparent:1.0
 
@@ -708,9 +717,9 @@ Table of Contents
 
    and
 
-     name: ietf-netconf-otlp-context-tracestate-version-1.0
+     name: ietf-trace-context-tracestate-version-1.0
 
-     prefix: ietf-netconf-otlpstate-1.0
+     prefix: ietf-trace-context-otlpstate-1.0
 
      namespace: urn:ietf:params:xml:ns:yang:tracestate:1.0
 
@@ -718,11 +727,11 @@ Table of Contents
 
    and
 
-     name: ietf-netconf-otlp-context
+     name: ietf-trace-context
 
-     prefix: ietf-netconf-otlp-context
+     prefix: ietf-trace-context
 
-     namespace: urn:ietf:params:xml:ns:yang:otlp-context
+     namespace: urn:ietf:params:xml:ns:yang:trace-context
 
      RFC: XXXX
 
@@ -786,16 +795,19 @@ Table of Contents
 
 7.2.  Informative References
 
+   [gNMI]     "gNMI - gRPC Network Management Interface", 4 November
+              2024, <https://github.com/openconfig/gnmi>.
+
    [I-D.ietf-netconf-transaction-id]
               Lindblad, J., "Transaction ID Mechanism for NETCONF", Work
               in Progress, Internet-Draft, draft-ietf-netconf-
-              transaction-id-05, 20 June 2024,
+              transaction-id-07, 19 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              transaction-id-05>.
+              transaction-id-07>.
 
    [OpenTelemetry]
               "OpenTelemetry Cloud Native Computing Foundation project",
-              29 August 2022, <https://opentelemetry.io>.
+              4 November 2024, <https://opentelemetry.io>.
 
    [RFC8309]  Wu, Q., Liu, W., and A. Farrel, "Service Models
               Explained", RFC 8309, DOI 10.17487/RFC8309, January 2018,
@@ -857,7 +869,7 @@ A.4.  From version 01 to 02
 
 A.5.  From version 00 to 01
 
-   *  Added new section: Implementation example 2: YANG DataStore
+   *  Added new section: Implementation example 2: YANG Datastore
 
    *  Added new use case: Billing and auditing
 
@@ -866,6 +878,12 @@ A.5.  From version 00 to 01
       [I-D.ietf-netconf-transaction-id] could be added as part of the
       tracing information to be exported to the collectors, showing how
       the two documents are complementary.
+
+A.6.  From version 03 to 04
+
+   *  Enhanced Terminology and moved it up in the document.
+
+   *  Changed namespaces and module names to map WGLC comments.
 
 Appendix B.  XML Attributes vs RPCs input augmentations discussion (to
              be deleted by RFC Editor)
