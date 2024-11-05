@@ -94,13 +94,13 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Changes (to be deleted by RFC Editor)
-     A.1.  From version 00 to 01
-     A.2.  From version 03 to
+     A.1.  From version 01 to 02
+     A.2.  From version 00 to 01
+     A.3.  From version 03 to
            draft-ietf-netconf-trace-ctx-extension-00
-     A.3.  From version 02 to 03
-     A.4.  From version 01 to 02
-     A.5.  From version 00 to 01
-     A.6.  From version 03 to 04
+     A.4.  From version 02 to 03
+     A.5.  From version 01 to 02
+     A.6.  From version 00 to 01
    Appendix B.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
    Authors' Addresses
@@ -193,11 +193,11 @@ Table of Contents
 
    Additionally, the document utilizes the following abbreviations:
 
-   *  OTLP: OpenTelemetry protocol as defined by [OpenTelemetry]
+   OTLP:  OpenTelemetry protocol as defined by [OpenTelemetry]
 
-   *  M.E.L.T: Metrics, Events, Logs and Traces
+   M.E.L.T:  Metrics, Events, Logs and Traces
 
-   *  gNMI: gRPC Network Management Interface, as defined by [gNMI]
+   gNMI:  gRPC Network Management Interface, as defined by [gNMI]
 
    The XML prefixes used in this document are mapped as follows:
 
@@ -205,7 +205,7 @@ Table of Contents
 
    *  xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0" and
 
-   *  xmlns:ietf-trce-context= "urn:ietf:params:xml:ns:yang:trace-
+   *  xmlns:ietf-trace-context= "urn:ietf:params:xml:ns:yang:trace-
       context"
 
 1.2.  Implementation example 1: OpenTelemetry
@@ -517,7 +517,7 @@ Table of Contents
 
 3.1.  YANG module for otlp-trace-context-error-info structure
 
-   <CODE BEGINS>
+   <CODE BEGINS> file "ietf-trace-context@2024-11-04.yang"
    module ietf-trace-context {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:trace-context";
@@ -532,7 +532,7 @@ Table of Contents
         "IETF NETCONF (Network Configuration) Working Group";
 
      contact
-       "WG Web:   <http://tools.ietf.org/wg/netconf/>
+       "WG Web:   <https://datatracker.ietf.org/wg/netconf/>
        WG List:  <mailto:netconf@ietf.org>";
 
      description
@@ -642,18 +642,20 @@ Table of Contents
 3.2.  YANG module for traceparent header version 1.0
 
    <CODE BEGINS>
+     file "ietf-trace-context-traceparent-version-1.0@2024-11-04.yang"
    module ietf-trace-context-traceparent-version-1.0 {
      namespace "urn:ietf:params:xml:ns:yang:traceparent:1.0";
-     prefix ietf-trace-context-otlpparent-1.0;
+     prefix ietf-trace-context-traceparent-version-1.0;
    }
    <CODE ENDS>
 
 3.3.  YANG module for tracestate header version 1.0
 
    <CODE BEGINS>
+     file "ietf-trace-context-tracestate-version-1.0@2024-11-04.yang"
    module ietf-trace-context-tracestate-version-1.0 {
      namespace "urn:ietf:params:xml:ns:yang:tracestate:1.0";
-     prefix ietf-trace-context-otlpstate-1.0;
+     prefix ietf-trace-context-tracestate-version-1.0;
    }
    <CODE ENDS>
 
@@ -696,7 +698,7 @@ Table of Contents
 
    This document registers one XML namespace URN in the 'IETF XML
    registry', following the format defined in [RFC3688]
-   (https://tools.ietf.org/html/rfc3688).
+   (https://www.rfc-editor.org/rfc/rfc3688.html).
 
      URI: urn:ietf:params:xml:ns:netconf:w3ctc:1.0
 
@@ -709,7 +711,7 @@ Table of Contents
 
      name: ietf-trace-context-traceparent-version-1.0
 
-     prefix: ietf-trace-context-otlpparent-1.0
+     prefix: ietf-trace-context-traceparent-version-1.0
 
      namespace: urn:ietf:params:xml:ns:yang:traceparent:1.0
 
@@ -719,7 +721,7 @@ Table of Contents
 
      name: ietf-trace-context-tracestate-version-1.0
 
-     prefix: ietf-trace-context-otlpstate-1.0
+     prefix: ietf-trace-context-tracestate-version-1.0
 
      namespace: urn:ietf:params:xml:ns:yang:tracestate:1.0
 
@@ -824,7 +826,13 @@ Table of Contents
 
 Appendix A.  Changes (to be deleted by RFC Editor)
 
-A.1.  From version 00 to 01
+A.1.  From version 01 to 02
+
+   *  Enhanced Terminology and moved it up in the document.
+
+   *  Changed namespaces and module names to map WGLC comments.
+
+A.2.  From version 00 to 01
 
    *  Added Security considerations
 
@@ -836,7 +844,7 @@ A.1.  From version 00 to 01
 
    *  Firmed up error handling and YANG-library to MUST-requirements
 
-A.2.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
+A.3.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Adopted by NETCONF WG
 
@@ -848,7 +856,7 @@ A.2.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Added this change note.  No other content changes.
 
-A.3.  From version 02 to 03
+A.4.  From version 02 to 03
 
    *  Changed IANA section to IESG per IANA email
 
@@ -858,7 +866,7 @@ A.3.  From version 02 to 03
 
    *  Created a dedicated section for the YANG modules
 
-A.4.  From version 01 to 02
+A.5.  From version 01 to 02
 
    *  Added Error Handling intial section
 
@@ -867,7 +875,7 @@ A.4.  From version 01 to 02
 
    *  Added 'YANG Module Names' to IANA Considerations
 
-A.5.  From version 00 to 01
+A.6.  From version 00 to 01
 
    *  Added new section: Implementation example 2: YANG Datastore
 
@@ -878,12 +886,6 @@ A.5.  From version 00 to 01
       [I-D.ietf-netconf-transaction-id] could be added as part of the
       tracing information to be exported to the collectors, showing how
       the two documents are complementary.
-
-A.6.  From version 03 to 04
-
-   *  Enhanced Terminology and moved it up in the document.
-
-   *  Changed namespaces and module names to map WGLC comments.
 
 Appendix B.  XML Attributes vs RPCs input augmentations discussion (to
              be deleted by RFC Editor)
