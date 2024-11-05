@@ -1,4 +1,4 @@
 module ietf-trace-context-traceparent-version-1.0 {
   namespace "urn:ietf:params:xml:ns:yang:traceparent:1.0";
-  prefix ietf-trace-context-otlpparent-1.0;
+  prefix ietf-trace-context-traceparent-version-1.0;
 }

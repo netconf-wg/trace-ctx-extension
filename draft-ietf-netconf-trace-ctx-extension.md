@@ -8,7 +8,7 @@ docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 4
+v: 3
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -136,17 +136,20 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT","SHOULD","SHO
 
 Additionally, the document utilizes the following abbreviations:
 
-- OTLP: OpenTelemetry protocol as defined by {{OpenTelemetry}}
+OTLP:
+: OpenTelemetry protocol as defined by {{OpenTelemetry}}
 
-- M.E.L.T: Metrics, Events, Logs and Traces
+M.E.L.T:
+: Metrics, Events, Logs and Traces
 
-- gNMI: gRPC Network Management Interface, as defined by {{gNMI}}
+gNMI:
+: gRPC Network Management Interface, as defined by {{gNMI}}
 
 The XML prefixes used in this document are mapped as follows:
 
 - xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0",
 - xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0" and
-- xmlns:ietf-trce-context=
+- xmlns:ietf-trace-context=
     "urn:ietf:params:xml:ns:yang:trace-context"
 
 ## Implementation example 1: OpenTelemetry
@@ -354,21 +357,21 @@ We define a pair YANG modules (ietf-trace-context-traceparent-version-1.0.yang a
 {::include src/yang/ietf-trace-context.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context@2024-11-04.yang”}
+sourcecode-name="ietf-trace-context@2024-11-04.yang"}
 
 ## YANG module for traceparent header version 1.0
 ~~~~ yang
 {::include src/yang/ietf-trace-context-traceparent-version-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context-traceparent-version-1.0@2024-11-04.yang”}
+sourcecode-name="ietf-trace-context-traceparent-version-1.0@2024-11-04.yang"}
 
 ## YANG module for tracestate header version 1.0
 ~~~~ yang
 {::include src/yang/ietf-trace-context-tracestate-version-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context-tracestate-version-1.0@2024-11-04.yang”}
+sourcecode-name="ietf-trace-context-tracestate-version-1.0@2024-11-04.yang"}
 
 # Security Considerations
 
@@ -390,7 +393,7 @@ This document registers the following capability identifier URN in the 'Network 
   urn:ietf:params:netconf:capability:w3ctc:1.0
 ~~~
 
-This document registers one XML namespace URN in the 'IETF XML registry', following the format defined in {{RFC3688}} (https://tools.ietf.org/html/rfc3688).
+This document registers one XML namespace URN in the 'IETF XML registry', following the format defined in {{RFC3688}} (https://www.rfc-editor.org/rfc/rfc3688.html).
 
 ~~~
   URI: urn:ietf:params:xml:ns:netconf:w3ctc:1.0
@@ -405,7 +408,7 @@ This document registers three module names in the 'YANG Module Names' registry, 
 ~~~
   name: ietf-trace-context-traceparent-version-1.0
 
-  prefix: ietf-trace-context-otlpparent-1.0
+  prefix: ietf-trace-context-traceparent-version-1.0
 
   namespace: urn:ietf:params:xml:ns:yang:traceparent:1.0
 
@@ -417,7 +420,7 @@ and
 ~~~
   name: ietf-trace-context-tracestate-version-1.0
 
-  prefix: ietf-trace-context-otlpstate-1.0
+  prefix: ietf-trace-context-tracestate-version-1.0
 
   namespace: urn:ietf:params:xml:ns:yang:tracestate:1.0
 
@@ -443,6 +446,10 @@ The authors would like to acknowledge the valuable implementation feedback from 
 --- back
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 01 to 02
+- Enhanced Terminology and moved it up in the document.
+- Changed namespaces and module names to map WGLC comments.
 
 ## From version 00 to 01
 - Added Security considerations
@@ -473,10 +480,6 @@ The authors would like to acknowledge the valuable implementation feedback from 
 - Added new section: Implementation example 2: YANG Datastore
 - Added new use case: Billing and auditing
 - Added in introduction and in "Provisioning root cause analysis" the idea that the different transaction-ids defined in {{I-D.ietf-netconf-transaction-id}} could be added as part of the tracing information to be exported to the collectors, showing how the two documents are complementary.
-
-## From version 03 to 04
-- Enhanced Terminology and moved it up in the document.
-- Changed namespaces and module names to map WGLC comments.
 
 # XML Attributes vs RPCs input augmentations discussion (to be deleted by RFC Editor)
 

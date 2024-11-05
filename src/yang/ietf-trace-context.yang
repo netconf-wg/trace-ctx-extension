@@ -12,7 +12,7 @@ module ietf-trace-context {
      "IETF NETCONF (Network Configuration) Working Group";
 
   contact
-    "WG Web:   <http://tools.ietf.org/wg/netconf/>
+    "WG Web:   <https://datatracker.ietf.org/wg/netconf/>
     WG List:  <mailto:netconf@ietf.org>";
   
   description 
