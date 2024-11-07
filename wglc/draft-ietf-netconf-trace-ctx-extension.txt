@@ -519,7 +519,7 @@ Table of Contents
 
 3.1.  YANG module for trace-context-error-info structure
 
-   <CODE BEGINS> file "ietf-trace-context@2024-11-04.yang"
+   <CODE BEGINS> file "ietf-trace-context@2024-11-07.yang"
    module ietf-trace-context {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-trace-context";
