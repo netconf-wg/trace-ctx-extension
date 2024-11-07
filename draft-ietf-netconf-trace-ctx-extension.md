@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: nc_trace
 category: std
-date: 2024-11-04
+date: 2024-11-07
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
@@ -150,7 +150,7 @@ The XML prefixes used in this document are mapped as follows:
 - xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0",
 - xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0" and
 - xmlns:ietf-trace-context=
-    "urn:ietf:params:xml:ns:yang:trace-context"
+    "urn:ietf:params:xml:ns:yang:ietf-trace-context"
 
 ## Implementation example 1: OpenTelemetry
 
@@ -319,7 +319,7 @@ This might give the following error response:
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
             xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0"
             xmlns:ietf-trace-context=
-            "urn:ietf:params:xml:ns:yang:trace-context"
+            "urn:ietf:params:xml:ns:yang:ietf-trace-context"
             message-id="1">
   <rpc-error>
     <error-type>protocol</error-type>
@@ -410,7 +410,7 @@ This document registers three module names in the 'YANG Module Names' registry, 
 
   prefix: ietf-trace-context-traceparent-version-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:traceparent:1.0
+  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-version-1.0
 
   RFC: XXXX
 ~~~
@@ -422,7 +422,7 @@ and
 
   prefix: ietf-trace-context-tracestate-version-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:tracestate:1.0
+  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-version-1.0
 
   RFC: XXXX
 ~~~
@@ -449,7 +449,8 @@ The authors would like to acknowledge the valuable implementation feedback from 
 
 ## From version 01 to 02
 - Enhanced Terminology and moved it up in the document.
-- Changed namespaces and module names to map WGLC comments.
+- Changed namespaces and module names to map WGLC comments
+and IETF requirements
 
 ## From version 00 to 01
 - Added Security considerations
