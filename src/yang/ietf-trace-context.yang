@@ -77,8 +77,8 @@ module ietf-trace-context {
     description "Error type";
   }
 
-  sx:structure otlp-trace-context-error-info {
-    container otlp-trace-context-error-info {
+  sx:structure trace-context-error-info {
+    container trace-context-error-info {
       description
          "This error is returned by a NETCONF or RESTCONF server
          when a client sends a NETCONF RPC with additonal 

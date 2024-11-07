@@ -326,7 +326,7 @@ This might give the following error response:
     <error-tag>operation-failed</error-tag>
     <error-severity>error</error-severity>
     <error-message>
-      OTLP traceparent attribute incorrectly formatted
+      Context traceparent attribute incorrectly formatted
     </error-message>
     <error-info>
       <ietf-trace-context:meta-name>
@@ -351,7 +351,7 @@ We define a pair YANG modules (ietf-trace-context-traceparent-version-1.0.yang a
 
 # YANG Modules
 
-## YANG module for otlp-trace-context-error-info structure
+## YANG module for trace-context-error-info structure
 
 ~~~~ yang
 {::include src/yang/ietf-trace-context.yang}
