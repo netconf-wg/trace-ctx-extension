@@ -1608,7 +1608,7 @@ context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-trace-context-extension-ver" class="section-name selfRef">Trace Context extension versioning</a>
         </h3>
 <p id="section-2.2-1">This extension refers to the <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> trace context capability. The W3C <em>traceparent</em> and <em>tracestate</em> headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">We define a pair YANG modules (ietf-trace-context-traceparent-version-1.0.yang and ietf-trace-context-tracestate-version-1.0.yang) that MUST be included in the YANG library per <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">We define a pair YANG modules (ietf-trace-context-traceparent-1.0.yang and ietf-trace-context-tracestate-1.0.yang) that MUST be included in the YANG library per <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1773,11 +1773,12 @@ module ietf-trace-context {
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-yang-module-for-traceparent" class="section-name selfRef">YANG module for traceparent header version 1.0</a>
         </h3>
 <div class="breakable lang-yang sourcecode" id="section-3.2-1">
-<pre>&lt;CODE BEGINS&gt; file "ietf-trace-context-traceparent-version-1.0@2024-11-04.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-trace-context-traceparent-1.0@2024-11-07.yang"
 
-module ietf-trace-context-traceparent-version-1.0 {
-  namespace "urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-version-1.0";
-  prefix ietf-trace-context-traceparent-version-1.0;
+module ietf-trace-context-traceparent-1.0 {
+  namespace
+  "urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-1.0";
+  prefix ietf-trace-context-traceparent-1.0;
 
   organization
     "IETF NETCONF (Network Configuration) Working Group";
@@ -1839,11 +1840,12 @@ module ietf-trace-context-traceparent-version-1.0 {
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-yang-module-for-tracestate-" class="section-name selfRef">YANG module for tracestate header version 1.0</a>
         </h3>
 <div class="breakable lang-yang sourcecode" id="section-3.3-1">
-<pre>&lt;CODE BEGINS&gt; file "ietf-trace-context-tracestate-version-1.0@2024-11-04.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-trace-context-tracestate-1.0@2024-11-07.yang"
 
-module ietf-trace-context-tracestate-version-1.0 {
-  namespace "urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-version-1.0";
-  prefix ietf-trace-context-tracestate-version-1.0;
+module ietf-trace-context-tracestate-1.0 {
+  namespace
+    "urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-1.0";
+  prefix ietf-trace-context-tracestate-1.0;
 
   organization
     "IETF NETCONF (Network Configuration) Working Group";
@@ -1937,11 +1939,12 @@ module ietf-trace-context-tracestate-version-1.0 {
 <p id="section-5-5">This document registers three module names in the 'YANG Module Names' registry, defined in RFC 6020:<a href="#section-5-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-6">
 <pre>
-  name: ietf-trace-context-traceparent-version-1.0
+  name: ietf-trace-context-traceparent-1.0
 
-  prefix: ietf-trace-context-traceparent-version-1.0
+  prefix: ietf-trace-context-traceparent-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-version-1.0
+  namespace:
+  urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-1.0
 
   RFC: XXXX
 </pre><a href="#section-5-6" class="pilcrow">¶</a>
@@ -1949,11 +1952,12 @@ module ietf-trace-context-tracestate-version-1.0 {
 <p id="section-5-7">and<a href="#section-5-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-8">
 <pre>
-  name: ietf-trace-context-tracestate-version-1.0
+  name: ietf-trace-context-tracestate-1.0
 
-  prefix: ietf-trace-context-tracestate-version-1.0
+  prefix: ietf-trace-context-tracestate-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-version-1.0
+  namespace:
+  urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-1.0
 
   RFC: XXXX
 </pre><a href="#section-5-8" class="pilcrow">¶</a>
