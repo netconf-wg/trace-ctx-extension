@@ -2,14 +2,13 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: nc_trace
 category: std
-date: 2024-07-08
+date: 2024-11-07
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
-obsoletes: draft-netconf-trace-ctx-extension-00
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 3
+v: 02
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -68,7 +67,12 @@ informative:
   OpenTelemetry:
     title: OpenTelemetry Cloud Native Computing Foundation project
     target: https://opentelemetry.io
-    date: 2022-08-29
+    date: 2024-11-04
+
+  gNMI:
+    title: gNMI - gRPC Network Management Interface
+    target: https://github.com/openconfig/gnmi
+    date: 2024-11-04
 
   I-D.ietf-netconf-transaction-id:
 
@@ -94,7 +98,7 @@ The W3C has defined two HTTP headers for context propagation that are useful in 
 
 It is worth noting that the trace context is not meant to have any relationship with the data that is carried with a given operation (including configurations, service identifiers or state information).
 
-A trace context also differs from {{I-D.ietf-netconf-transaction-id}} in several ways as the trace operation may involve any operation (including for example validate, lock, unlock, etc.) Additionally, a trace context scope may include the full application stack (orchestrator, controller, devices, etc) rather than a single NETCONF server, which is the scope for the transaction-id. The trace context is also complemetary to {{I-D.ietf-netconf-transaction-id}} as a given trace-id can be associated with the different transaction-ids as part of the information exported to the collector.
+A trace context also differs from {{I-D.ietf-netconf-transaction-id}} in several ways as the trace operation may involve any operation (including for example validate, lock, unlock, etc.) Additionally, a trace context scope may include the full application stack (orchestrator, controller, devices, etc) rather than a single NETCONF server, which is the scope for the transaction-id. The trace context is also complementary to {{I-D.ietf-netconf-transaction-id}} as a given trace-id can be associated with the different transaction-ids as part of the information exported to the collector.
 
 The following enhancement of the reference SDN Architecture from {{?RFC8309}} shows the impact of distributed traces for a network operator.
 
@@ -125,6 +129,28 @@ The network automation, management and control architectures are distributed in 
 With the implementation of this trace context propagation extension to NETCONF, backend systems behind the M.E.L.T collector will be able to correlate information from different systems but related to a common context.
 
 This document does not cover the somewhat related functionality specified in {{W3C-Baggage}}.  Mapping of the Baggage functionality into YANG may be specified in a future document.
+
+## Terminology
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT","SHOULD","SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
+
+Additionally, the document utilizes the following abbreviations:
+
+OTLP:
+: OpenTelemetry protocol as defined by {{OpenTelemetry}}
+
+M.E.L.T:
+: Metrics, Events, Logs and Traces
+
+gNMI:
+: gRPC Network Management Interface, as defined by {{gNMI}}
+
+The XML prefixes used in this document are mapped as follows:
+
+- xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0",
+- xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0" and
+- xmlns:ietf-trace-context=
+    "urn:ietf:params:xml:ns:yang:ietf-trace-context"
 
 ## Implementation example 1: OpenTelemetry
 
@@ -162,7 +188,7 @@ Another interesting attribute is the parent-id.  We can see in this example that
 
 With this additional metadata exchanged between the components and exposed to the M.E.L.T collector, there are important improvements to the monitoring and troubleshooting operations for the full application stack.
 
-## Implementation example 2: YANG DataStore
+## Implementation example 2: YANG Datastore
 
 OpenTelemetry implements the "push" model for data streaming where information is sent to the back-end as soon as produced and is not required to be stored in the system. In certain cases, a "pull" model may be envisioned, for example for performing forensic analysis while not all OTLP traces are available in the back-end systems.
 
@@ -174,21 +200,21 @@ This document does not specify the YANG module in which traces could be stored i
             +------------------+                        +-----------+
             | Orchestrator     |                        |           |
             |                  |    NC/RC/gNMI or YP    |           |
-            |   YANG DataStore | <------------------->  |           |
+            |   YANG Datastore | <------------------->  |           |
             .------------------+     pull or push       |           |
            .  NETCONF                                   |           |
           .   edit-config (trace-id "1", parent-id "A") | Collector |
 +----------------+                                      | (Metrics, |
 |                |           NC/RC/gNMI or YP           |  Events,  |
-| Controller     |   -------------------------------->  |  Logs,    |
-|  YANG DataStore|             pull or push             |  Traces)  |
+| Controller     |   <------------------------------->  |  Logs,    |
+|  YANG Datastore|             pull or push             |  Traces)  |
 +----------------+                                      |           |
    :      .  NETCONF                                    |           |
    :        . edit-config (trace-id "1", parent-id "B") |           |
    :          .                                         |           |
 +---------+   +---------+                               |           |
 | Network |   | Network |        NC/RC/gNMI or YP       |           |
-| Element |   | Element |  -------------------------->  |           |
+| Element |   | Element |  <------------------------->  |           |
 | YANG DS |   | YANG DS |         pull or push          |           |
 +---------+   +---------+                               +-----------+
 ~~~
@@ -200,7 +226,7 @@ This document does not specify the YANG module in which traces could be stored i
 
 When a provisioning activity fails, errors are typically propagated northbound, however this information may be difficult to troubleshoot and typically, operators are required to navigate logs across all the different components.
 
-With the support for trace context propagation as described in this document for NETCONF, the collector will be able to search every trace, event, metric, or log in connection to that trace-id and faciliate the performance of a root cause analysis due to a network changes. The trace information could also be included as an optional resource with the different NETCONF transaction ids described in {{I-D.ietf-netconf-transaction-id}}.
+With the support for trace context propagation as described in this document for NETCONF, the collector will be able to search every trace, event, metric, or log in connection to that trace-id and facilitate the performance of a root cause analysis due to a network changes. The trace information could also be included as an optional resource with the different NETCONF transaction ids described in {{I-D.ietf-netconf-transaction-id}}.
 
 ### System performance profiling
 
@@ -212,18 +238,7 @@ With the support for context propagation as described in this document for NETCO
 
 ### Billing and auditing
 
-In certain circumstances, we could envision tracing infomration used as additional inputs to billing systems. In particular, trace context information could be used to validate that a certain northbound order was carried out in southbound systems.
-
-## Terminology
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT","SHOULD","SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
-
-The XML prefixes used in this document are mapped as follows:
-
-- xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0",
-- xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0" and
-- xmlns:ietf-netconf-otlp-context=
-    "urn:ietf:params:xml:ns:yang:otlp-context"
+In certain circumstances, we could envision tracing information used as additional inputs to billing systems. In particular, trace context information could be used to validate that a certain northbound order was carried out in southbound systems.
 
 # NETCONF Extension
 
@@ -282,9 +297,9 @@ If the server still decides to reject the RPC because of the trace context attri
       error-severity: error
 
 Additionally, the error-info tag MUST contain a
-otlp-trace-context-error-info structure with relevant details about
+trace-context-error-info structure with relevant details about
 the error.  This structure is defined in the module
-ietf-netconf-otlp-context.yang.  Example of a badly formated trace
+ietf-netconf-context.yang.  Example of a badly formated trace
 context extension:
 
 ~~~ xml
@@ -303,60 +318,62 @@ This might give the following error response:
 ~~~ xml
 <rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
             xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0"
-            xmlns:ietf-netconf-otlp-context=
-            "urn:ietf:params:xml:ns:yang:otlp-context"
+            xmlns:ietf-trace-context=
+            "urn:ietf:params:xml:ns:yang:ietf-trace-context"
             message-id="1">
   <rpc-error>
     <error-type>protocol</error-type>
     <error-tag>operation-failed</error-tag>
     <error-severity>error</error-severity>
     <error-message>
-      OTLP traceparent attribute incorrectly formatted
+      Context traceparent attribute incorrectly formatted
     </error-message>
     <error-info>
-      <ietf-netconf-otlp-context:meta-name>
-        w3ctc:traceparent
-      </ietf-netconf-otlp-context:meta-name>
-      <ietf-netconf-otlp-context:meta-value>
-        Bad Format
-      </ietf-netconf-otlp-context:meta-value>
-      <ietf-netconf-otlp-context:error-type>
-        ietf-netconf-otlp-context:bad-format
-      </ietf-netconf-otlp-context:error-type>
+      <ietf-trace-context:trace-context-error-info>
+        <ietf-trace-context:meta-name>
+          w3ctc:traceparent
+        </ietf-trace-context:meta-name>
+        <ietf-trace-context:meta-value>
+          Bad Format
+        </ietf-trace-context:meta-value>
+        <ietf-trace-context:error-type>
+          ietf-trace-context:bad-format
+        </ietf-trace-context:error-type>
+      </ietf-trace-context:trace-context-error-info>
     </error-info>
   </rpc-error>
 </rpc-reply>
 ~~~
 
-## Trace Context extension versionning
+## Trace Context extension versioning
 
 This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C _traceparent_ and _tracestate_ headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.
 
-We define a pair YANG modules (ietf-netconf-otlp-context-traceparent-version-1.0.yang and ietf-netconf-otlp-context-tracestate-version-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
+We define a pair YANG modules (ietf-trace-context-traceparent-1.0.yang and ietf-trace-context-tracestate-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
 
 # YANG Modules
 
-## YANG module for otlp-trace-context-error-info structure
+## YANG module for trace-context-error-info structure
 
 ~~~~ yang
-{::include src/yang/ietf-netconf-otlp-context.yang}
+{::include src/yang/ietf-trace-context.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-netconf-otlp-context@2023-07-01.yang”}
+sourcecode-name="ietf-trace-context@2024-11-04.yang"}
 
 ## YANG module for traceparent header version 1.0
 ~~~~ yang
-{::include src/yang/ietf-netconf-otlp-context-traceparent-version-1.0.yang}
+{::include src/yang/ietf-trace-context-traceparent-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-netconf-otlp-context-traceparent-version-1.0@2023-03-13.yang”}
+sourcecode-name="ietf-trace-context-traceparent-1.0@2024-11-07.yang"}
 
 ## YANG module for tracestate header version 1.0
 ~~~~ yang
-{::include src/yang/ietf-netconf-otlp-context-tracestate-version-1.0.yang}
+{::include src/yang/ietf-trace-context-tracestate-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-netconf-otlp-context-tracestate-version-1.0@2023-03-13.yang”}
+sourcecode-name="ietf-trace-context-tracestate-1.0@2024-11-07.yang"}
 
 # Security Considerations
 
@@ -378,7 +395,7 @@ This document registers the following capability identifier URN in the 'Network 
   urn:ietf:params:netconf:capability:w3ctc:1.0
 ~~~
 
-This document registers one XML namespace URN in the 'IETF XML registry', following the format defined in {{RFC3688}} (https://tools.ietf.org/html/rfc3688).
+This document registers one XML namespace URN in the 'IETF XML registry', following the format defined in {{RFC3688}} (https://www.rfc-editor.org/rfc/rfc3688.html).
 
 ~~~
   URI: urn:ietf:params:xml:ns:netconf:w3ctc:1.0
@@ -391,23 +408,12 @@ This document registers one XML namespace URN in the 'IETF XML registry', follow
 This document registers three module names in the 'YANG Module Names' registry, defined in RFC 6020:
 
 ~~~
-  name: ietf-netconf-otlp-context-traceparent-version-1.0
+  name: ietf-trace-context-traceparent-1.0
 
-  prefix: ietf-netconf-otlpparent-1.0
+  prefix: ietf-trace-context-traceparent-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:traceparent:1.0
-
-  RFC: XXXX
-~~~
-
-and
-
-~~~
-  name: ietf-netconf-otlp-context-tracestate-version-1.0
-
-  prefix: ietf-netconf-otlpstate-1.0
-
-  namespace: urn:ietf:params:xml:ns:yang:tracestate:1.0
+  namespace:
+  urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-1.0
 
   RFC: XXXX
 ~~~
@@ -415,11 +421,24 @@ and
 and
 
 ~~~
-  name: ietf-netconf-otlp-context
+  name: ietf-trace-context-tracestate-1.0
 
-  prefix: ietf-netconf-otlp-context
+  prefix: ietf-trace-context-tracestate-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:otlp-context
+  namespace:
+  urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-1.0
+
+  RFC: XXXX
+~~~
+
+and
+
+~~~
+  name: ietf-trace-context
+
+  prefix: ietf-trace-context
+
+  namespace: urn:ietf:params:xml:ns:yang:trace-context
 
   RFC: XXXX
 ~~~
@@ -431,6 +450,11 @@ The authors would like to acknowledge the valuable implementation feedback from 
 --- back
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 01 to 02
+- Enhanced Terminology and moved it up in the document.
+- Changed namespaces and module names to map WGLC comments
+and IETF requirements
 
 ## From version 00 to 01
 - Added Security considerations
@@ -458,7 +482,7 @@ The authors would like to acknowledge the valuable implementation feedback from 
 - Added 'YANG Module Names'  to IANA Considerations
 
 ## From version 00 to 01
-- Added new section: Implementation example 2: YANG DataStore
+- Added new section: Implementation example 2: YANG Datastore
 - Added new use case: Billing and auditing
 - Added in introduction and in "Provisioning root cause analysis" the idea that the different transaction-ids defined in {{I-D.ietf-netconf-transaction-id}} could be added as part of the tracing information to be exported to the collectors, showing how the two documents are complementary.
 
