@@ -1586,15 +1586,17 @@ context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
       Context traceparent attribute incorrectly formatted
     &lt;/error-message&gt;
     &lt;error-info&gt;
-      &lt;ietf-trace-context:meta-name&gt;
-        w3ctc:traceparent
-      &lt;/ietf-trace-context:meta-name&gt;
-      &lt;ietf-trace-context:meta-value&gt;
-        Bad Format
-      &lt;/ietf-trace-context:meta-value&gt;
-      &lt;ietf-trace-context:error-type&gt;
-        ietf-trace-context:bad-format
-      &lt;/ietf-trace-context:error-type&gt;
+      &lt;ietf-trace-context:trace-context-error-info&gt;
+        &lt;ietf-trace-context:meta-name&gt;
+          w3ctc:traceparent
+        &lt;/ietf-trace-context:meta-name&gt;
+        &lt;ietf-trace-context:meta-value&gt;
+          Bad Format
+        &lt;/ietf-trace-context:meta-value&gt;
+        &lt;ietf-trace-context:error-type&gt;
+          ietf-trace-context:bad-format
+        &lt;/ietf-trace-context:error-type&gt;
+      &lt;/ietf-trace-context:trace-context-error-info&gt;
     &lt;/error-info&gt;
   &lt;/rpc-error&gt;
 &lt;/rpc-reply&gt;
@@ -1757,7 +1759,7 @@ module ietf-trace-context {
            If a client sent an RPC annotated with the attribute
            w3ctc:traceparent='incorrect-format'
            this leaf might have the value
-           'ietf-trace-contextt:bad-format'.";
+           'ietf-trace-context:bad-format'.";
       }
     }
   }
