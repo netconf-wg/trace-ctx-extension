@@ -1085,7 +1085,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Gagliano, et al.</td>
-<td class="center">Expires 8 May 2025</td>
+<td class="center">Expires 11 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1098,12 +1098,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netconf-trace-ctx-extension-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-04" class="published">4 November 2024</time>
+<time datetime="2024-11-07" class="published">7 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-08">8 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-11">11 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1161,7 +1161,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1372,7 +1372,7 @@ sub-systems and together with the network devices they manage, they effectively 
 </li>
           <li class="normal" id="section-1.1-5.3">
             <p id="section-1.1-5.3.1">xmlns:ietf-trace-context=
-  "urn:ietf:params:xml:ns:yang:trace-context"<a href="#section-1.1-5.3.1" class="pilcrow">¶</a></p>
+  "urn:ietf:params:xml:ns:yang:ietf-trace-context"<a href="#section-1.1-5.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1576,7 +1576,7 @@ context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 &lt;rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
             xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0"
             xmlns:ietf-trace-context=
-            "urn:ietf:params:xml:ns:yang:trace-context"
+            "urn:ietf:params:xml:ns:yang:ietf-trace-context"
             message-id="1"&gt;
   &lt;rpc-error&gt;
     &lt;error-type&gt;protocol&lt;/error-type&gt;
@@ -1628,87 +1628,104 @@ context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 
 module ietf-trace-context {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:trace-context";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-trace-context";
   prefix ietf-trace-context;
 
   import ietf-yang-structure-ext {
     prefix sx;
-    reference "RFC8791: YANG Data Structure Extensions";
+    reference
+      "RFC8791: YANG Data Structure Extensions";
   }
 
   organization
-     "IETF NETCONF (Network Configuration) Working Group";
-
+    "IETF NETCONF (Network Configuration) Working Group";
   contact
     "WG Web:   &lt;https://datatracker.ietf.org/wg/netconf/&gt;
-    WG List:  &lt;mailto:netconf@ietf.org&gt;";
+     WG List:  &lt;mailto:netconf@ietf.org&gt;
 
+     Authors:  Roque Gagliano
+               &lt;mailto:rogaglia@cisco.com&gt;
+
+               Jan Lindblad
+               &lt;mailto:jlindbla@cisco.com&gt;
+
+               Kristian Larsson
+               &lt;mailto:kll@dev.terastrm.net&gt;
+    ";
   description
     "When propagating tracing information across applications,
-    client and servers needs to share some specific contextual
-    information. This NETCONF extensions aligns the NETCONF
-    protocol to the W3C trace-context document:
-    https://www.w3.org/TR/2021/REC-trace-context-1-20211123
+     client and servers needs to share some specific contextual
+     information. This  extensions aligns the NETCONF and RESTCONF
+     protocols to the W3C trace-context document:
+     https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
-    Copyright (c) 2024 IETF Trust and the persons identified as
-    authors of the code.  All rights reserved.
+     Copyright (c) 2024 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
 
-    Redistribution and use in source and binary forms, with or
-    without modification, is permitted pursuant to, and subject to
-    the license terms contained in, the Revised BSD License set
-    forth in Section 4.c of the IETF Trust's Legal Provisions
-    Relating to IETF Documents
-    (https://trustee.ietf.org/license-info).
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Revised BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC XXXX
-    (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-    for full legal notices
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices
 
-    The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
-    NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
-    'MAY', and 'OPTIONAL' in this document are to be interpreted as
-    described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
-    they appear in all capitals, as shown here.
+     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+     NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+     'MAY', and 'OPTIONAL' in this document are to be interpreted as
+     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+     they appear in all capitals, as shown here.
     ";
 
-  revision 2023-07-01 {
+  revision 2024-11-07 {
     description
       "Initial revision";
     reference
-      "RFC XXXX";
+      "RFC XXXX:
+       NETCONF Extension to support Trace Context propagation";
   }
 
   identity meta-error {
-    description "Base identity for otlp attribute errors.";
+    description
+      "Base identity for trace context attribute errors.";
   }
 
   identity missing {
     base meta-error;
-    description "Indicates an attribute or header that is required
-      (in the current situation) is missing.";
+    description
+      "Indicates an attribute or header that is required
+       (in the current situation) is missing.";
   }
+
   identity bad-format {
     base meta-error;
-    description "Indicates an attribute or header value where the
-      value is incorrectly formatted.";
+    description
+      "Indicates an attribute or header value where the
+       value is incorrectly formatted.";
   }
+
   identity processing-error {
     base meta-error;
-    description "Indicates that the server encountered a processing
-      error while processing the attribute or header value.";
+    description
+      "Indicates that the server encountered a processing
+       error while processing the attribute or header value.";
   }
 
   typedef meta-error-type {
     type identityref {
       base meta-error;
     }
-    description "Error type";
+    description
+      "Error type";
   }
 
   sx:structure trace-context-error-info {
     container trace-context-error-info {
       description
-         "This error is returned by a NETCONF or RESTCONF server
+        "This error is returned by a NETCONF or RESTCONF server
          when a client sends a NETCONF RPC with additonal
          attributes or RESTCONF RPC with additional headers
          for trace context processing, and there is an error
@@ -1717,30 +1734,30 @@ module ietf-trace-context {
         type string;
         description
           "The name of the problematic or missing meta information.
-          In NETCONF, the qualified XML attribute name.
-          In RESTCONF, the HTTP header name.
-          If a client sent a NETCONF RPC with the attribute
-          w3ctc:traceparent='incorrect-format'
-          this leaf would have the value 'w3ctc:traceparent'";
+           In NETCONF, the qualified XML attribute name.
+           In RESTCONF, the HTTP header name.
+           If a client sent a NETCONF RPC with the attribute
+           w3ctc:traceparent='incorrect-format'
+           this leaf would have the value 'w3ctc:traceparent'";
       }
       leaf meta-value {
         type string;
         description
           "The value of the problematic meta information received
-          by the server.
-          If a client sent a NETCONF RPC with the attribute
-          w3ctc:traceparent='incorrect-format'
-          this leaf would have the value 'incorrect-format'.";
+           by the server.
+           If a client sent a NETCONF RPC with the attribute
+           w3ctc:traceparent='incorrect-format'
+           this leaf would have the value 'incorrect-format'.";
       }
       leaf error-type {
         type meta-error-type;
         description
-          "Indicates the type of OTLP meta information problem
-          detected by the server.
-          If a client sent an RPC annotated with the attribute
-          w3ctc:traceparent='incorrect-format'
-          this leaf might have the value
-          'ietf-netconf-otlp-context:bad-format'.";
+          "Indicates the type of meta information problem
+           detected by the server.
+           If a client sent an RPC annotated with the attribute
+           w3ctc:traceparent='incorrect-format'
+           this leaf might have the value
+           'ietf-trace-contextt:bad-format'.";
       }
     }
   }
@@ -1755,12 +1772,61 @@ module ietf-trace-context {
         <h3 id="name-yang-module-for-traceparent">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-yang-module-for-traceparent" class="section-name selfRef">YANG module for traceparent header version 1.0</a>
         </h3>
-<div class="lang-yang sourcecode" id="section-3.2-1">
+<div class="breakable lang-yang sourcecode" id="section-3.2-1">
 <pre>&lt;CODE BEGINS&gt; file "ietf-trace-context-traceparent-version-1.0@2024-11-04.yang"
 
 module ietf-trace-context-traceparent-version-1.0 {
-  namespace "urn:ietf:params:xml:ns:yang:traceparent:1.0";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-version-1.0";
   prefix ietf-trace-context-traceparent-version-1.0;
+
+  organization
+    "IETF NETCONF (Network Configuration) Working Group";
+  contact
+    "WG Web:   &lt;https://datatracker.ietf.org/wg/netconf/&gt;
+     WG List:  &lt;mailto:netconf@ietf.org&gt;
+
+     Authors:  Roque Gagliano
+               &lt;mailto:rogaglia@cisco.com&gt;
+
+               Jan Lindblad
+               &lt;mailto:jlindbla@cisco.com&gt;
+
+               Kristian Larsson
+               &lt;mailto:kll@dev.terastrm.net&gt;
+    ";
+  description
+    "This module documents the support for trace context traceparent
+     versiom 1.0 in alignment with W3C versions:
+     https://www.w3.org/TR/2021/REC-trace-context-1-20211123
+
+     Copyright (c) 2024 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Revised BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices
+
+     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+     NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+     'MAY', and 'OPTIONAL' in this document are to be interpreted as
+     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+     they appear in all capitals, as shown here.
+    ";
+
+  revision 2024-11-07 {
+    description
+      "Initial revision";
+    reference
+      "RFC XXXX:
+       NETCONF Extension to support Trace Context propagation";
+  }
 }
 
 &lt;CODE ENDS&gt;</pre><a href="#section-3.2-1" class="pilcrow">¶</a>
@@ -1772,12 +1838,61 @@ module ietf-trace-context-traceparent-version-1.0 {
         <h3 id="name-yang-module-for-tracestate-">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-yang-module-for-tracestate-" class="section-name selfRef">YANG module for tracestate header version 1.0</a>
         </h3>
-<div class="lang-yang sourcecode" id="section-3.3-1">
+<div class="breakable lang-yang sourcecode" id="section-3.3-1">
 <pre>&lt;CODE BEGINS&gt; file "ietf-trace-context-tracestate-version-1.0@2024-11-04.yang"
 
 module ietf-trace-context-tracestate-version-1.0 {
-  namespace "urn:ietf:params:xml:ns:yang:tracestate:1.0";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-version-1.0";
   prefix ietf-trace-context-tracestate-version-1.0;
+
+  organization
+    "IETF NETCONF (Network Configuration) Working Group";
+  contact
+    "WG Web:   &lt;https://datatracker.ietf.org/wg/netconf/&gt;
+     WG List:  &lt;mailto:netconf@ietf.org&gt;
+
+     Authors:  Roque Gagliano
+               &lt;mailto:rogaglia@cisco.com&gt;
+
+               Jan Lindblad
+               &lt;mailto:jlindbla@cisco.com&gt;
+
+               Kristian Larsson
+               &lt;mailto:kll@dev.terastrm.net&gt;
+    ";
+  description
+    "This module documents the support for trace context tracestate
+     versiom 1.0 in alignment with W3C versions:
+     https://www.w3.org/TR/2021/REC-trace-context-1-20211123
+
+     Copyright (c) 2024 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Revised BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices
+
+     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+     NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+     'MAY', and 'OPTIONAL' in this document are to be interpreted as
+     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+     they appear in all capitals, as shown here.
+    ";
+
+  revision 2024-11-07 {
+    description
+      "Initial revision";
+    reference
+      "RFC XXXX:
+       NETCONF Extension to support Trace Context propagation";
+  }
 }
 
 &lt;CODE ENDS&gt;</pre><a href="#section-3.3-1" class="pilcrow">¶</a>
@@ -1826,7 +1941,7 @@ module ietf-trace-context-tracestate-version-1.0 {
 
   prefix: ietf-trace-context-traceparent-version-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:traceparent:1.0
+  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-version-1.0
 
   RFC: XXXX
 </pre><a href="#section-5-6" class="pilcrow">¶</a>
@@ -1838,7 +1953,7 @@ module ietf-trace-context-tracestate-version-1.0 {
 
   prefix: ietf-trace-context-tracestate-version-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:tracestate:1.0
+  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-version-1.0
 
   RFC: XXXX
 </pre><a href="#section-5-8" class="pilcrow">¶</a>
@@ -1969,7 +2084,8 @@ module ietf-trace-context-tracestate-version-1.0 {
             <p id="appendix-A.1-1.1.1">Enhanced Terminology and moved it up in the document.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-A.1-1.2">
-            <p id="appendix-A.1-1.2.1">Changed namespaces and module names to map WGLC comments.<a href="#appendix-A.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.1-1.2.1">Changed namespaces and module names to map WGLC comments
+and IETF requirements<a href="#appendix-A.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
