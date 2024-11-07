@@ -1499,8 +1499,8 @@ sub-systems and together with the network devices they manage, they effectively 
       <h2 id="name-netconf-extension">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-netconf-extension" class="section-name selfRef">NETCONF Extension</a>
       </h2>
-<p id="section-2-1">When performing NETCONF operations by sending NETCONF RPCs, a NETCONF client MAY include trace context information in the form of XML attributes.  The <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> defines two HTTP headers; <em>traceparent</em> and <em>tracestate</em> for this purpose.  NETCONF clients that are taking advantage of this feature MUST add one <em>w3ctc:traceparent</em> attribute and MAY add one <em>w3ctc:tracestate</em> attribute to the <em>nc:rpc</em> tag.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">A NETCONF server that receives a trace context attribute in the form of a <em>w3ctc:traceparent</em> attribute SHOULD apply the mutation rules described in <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span>.  A NETCONF server MAY add one <em>w3ctc:traceparent</em> attribute in the <em>nc:rpc-reply</em> response to the <em>nc:rpc</em> tag above.  NETCONF servers MAY also add one <em>w3ctc:traceparent</em> attribute in notification and update message envelopes: <em>notif:notification</em>, <em>yp:push-update</em> and <em>yp:push-change-update</em>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-1">When performing NETCONF operations by sending NETCONF RPCs, a NETCONF client MAY include trace context information in the form of XML attributes.  The <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> defines two HTTP headers; traceparent and tracestate for this purpose.  NETCONF clients that are taking advantage of this feature MUST add one w3ctc:traceparent attribute and MAY add one w3ctc:tracestate attribute to the nc:rpc tag.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">A NETCONF server that receives a trace context attribute in the form of a w3ctc:traceparent attribute SHOULD apply the mutation rules described in <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span>. A NETCONF server MAY add one w3ctc:traceparent attribute in the nc:rpc-reply response to the nc:rpc tag above.  NETCONF servers MAY also add one w3ctc:traceparent attribute in notification and update message envelopes: notif:notification, yp:push-update and yp:push-change-update.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">For example, a NETCONF client might send:<a href="#section-2-3" class="pilcrow">¶</a></p>
 <div class="lang-xml sourcecode" id="section-2-4">
 <pre>
@@ -1512,8 +1512,8 @@ sub-systems and together with the network devices they manage, they effectively 
 &lt;/rpc&gt;
 </pre><a href="#section-2-4" class="pilcrow">¶</a>
 </div>
-<p id="section-2-5">In all cases above where a client or server adds a <em>w3ctc:traceparent</em> attribute to a tag, that client or server MAY also add one <em>w3ctc:tracestate</em> attribute to the same tag.<a href="#section-2-5" class="pilcrow">¶</a></p>
-<p id="section-2-6">The proper encoding and interpretation of the contents of the <em>w3ctc:traceparent</em> attribute is described in <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> section 3.2 except 3.2.1.  The proper encoding and interpretation of the contents in the <em>w3ctc:tracestate</em> attribute is described in <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> section 3.3 except 3.3.1 and 3.3.1.1.  A NETCONF XML tag can only have zero or one <em>w3ctc:tracestate</em> attributes, so its content MUST always be encoded as a single string.  The <em>tracestate</em> field value is a list of list-members separated by commas (,).  A list-member is a key/value pair separated by an equals sign (=).  Spaces and horizontal tabs surrounding list-members are ignored.  There is no limit to the number of list-members in a list.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-5">In all cases above where a client or server adds a w3ctc:traceparent attribute to a tag, that client or server MAY also add one w3ctc:tracestate attribute to the same tag.<a href="#section-2-5" class="pilcrow">¶</a></p>
+<p id="section-2-6">The proper encoding and interpretation of the contents of the w3ctc:traceparent attribute is described in <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> section 3.2 except 3.2.1.  The proper encoding and interpretation of the contents in the w3ctc:tracestate attribute is described in <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> section 3.3 except 3.3.1 and 3.3.1.1.  A NETCONF XML tag can only have zero or one w3ctc:tracestate attributes, so its content MUST always be encoded as a single string.  The tracestate field value is a list of list-members separated by commas (,).  A list-member is a key/value pair separated by an equals sign (=).  Spaces and horizontal tabs surrounding list-members are ignored.  There is no limit to the number of list-members in a list.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <p id="section-2-7">For example, a NETCONF client might send:<a href="#section-2-7" class="pilcrow">¶</a></p>
 <div class="lang-xml sourcecode" id="section-2-8">
 <pre>
@@ -1526,7 +1526,7 @@ sub-systems and together with the network devices they manage, they effectively 
 &lt;/rpc&gt;
 </pre><a href="#section-2-8" class="pilcrow">¶</a>
 </div>
-<p id="section-2-9">As in all XML documents, the order between the attributes in an XML tag has no significance.  Clients and servers MUST be prepared to handle the attributes no matter in which order they appear.  The <em>tracestate</em> value MAY contain double quotes in its payload.  If so, they MUST be encoded according to XML rules, for example:<a href="#section-2-9" class="pilcrow">¶</a></p>
+<p id="section-2-9">As in all XML documents, the order between the attributes in an XML tag has no significance.  Clients and servers MUST be prepared to handle the attributes no matter in which order they appear.  The tracestate value MAY contain double quotes in its payload.  If so, they MUST be encoded according to XML rules, for example:<a href="#section-2-9" class="pilcrow">¶</a></p>
 <div class="lang-xml sourcecode" id="section-2-10">
 <pre>
 &lt;rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1"
@@ -1609,8 +1609,8 @@ context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
         <h3 id="name-trace-context-extension-ver">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-trace-context-extension-ver" class="section-name selfRef">Trace Context extension versioning</a>
         </h3>
-<p id="section-2.2-1">This extension refers to the <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> trace context capability. The W3C <em>traceparent</em> and <em>tracestate</em> headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">We define a pair YANG modules (ietf-trace-context-traceparent-1.0.yang and ietf-trace-context-tracestate-1.0.yang) that MUST be included in the YANG library per <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">This extension refers to the <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> trace context capability. The W3C traceparent and tracestate headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">We define a pair YANG modules (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-1.0.yang) that MUST be included in the YANG library per <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1775,12 +1775,12 @@ module ietf-trace-context {
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-yang-module-for-traceparent" class="section-name selfRef">YANG module for traceparent header version 1.0</a>
         </h3>
 <div class="breakable lang-yang sourcecode" id="section-3.2-1">
-<pre>&lt;CODE BEGINS&gt; file "ietf-trace-context-traceparent-1.0@2024-11-07.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-trace-ctx-traceparent-1.0@2024-11-07.yang"
 
-module ietf-trace-context-traceparent-1.0 {
+module ietf-trace-ctx-traceparent-1.0 {
   namespace
-  "urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-1.0";
-  prefix ietf-trace-context-traceparent-1.0;
+  "urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0";
+  prefix ietf-trace-ctx-traceparent-1.0;
 
   organization
     "IETF NETCONF (Network Configuration) Working Group";
@@ -1842,12 +1842,12 @@ module ietf-trace-context-traceparent-1.0 {
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-yang-module-for-tracestate-" class="section-name selfRef">YANG module for tracestate header version 1.0</a>
         </h3>
 <div class="breakable lang-yang sourcecode" id="section-3.3-1">
-<pre>&lt;CODE BEGINS&gt; file "ietf-trace-context-tracestate-1.0@2024-11-07.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-trace-ctx-tracestate-1.0@2024-11-07.yang"
 
-module ietf-trace-context-tracestate-1.0 {
+module ietf-trace-ctx-tracestate-1.0 {
   namespace
-    "urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-1.0";
-  prefix ietf-trace-context-tracestate-1.0;
+    "urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0";
+  prefix ietf-trace-ctx-tracestate-1.0;
 
   organization
     "IETF NETCONF (Network Configuration) Working Group";
@@ -1912,7 +1912,7 @@ module ietf-trace-context-tracestate-1.0 {
       </h2>
 <p id="section-4-1">The YANG modules specified in this document are used to flag capabilities define and define an error information structure that is designed to be accessed via network management protocols such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">The <em>traceparent</em> and <em>tracestate</em> attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-3">The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <p id="section-4-4">The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span> provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.<a href="#section-4-5" class="pilcrow">¶</a></p>
 </section>
@@ -1941,12 +1941,12 @@ module ietf-trace-context-tracestate-1.0 {
 <p id="section-5-5">This document registers three module names in the 'YANG Module Names' registry, defined in RFC 6020:<a href="#section-5-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-6">
 <pre>
-  name: ietf-trace-context-traceparent-1.0
+  name: ietf-trace-ctx-traceparent-1.0
 
-  prefix: ietf-trace-context-traceparent-1.0
+  prefix: ietf-trace-ctx-traceparent-1.0
 
   namespace:
-  urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-1.0
+  urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0
 
   RFC: XXXX
 </pre><a href="#section-5-6" class="pilcrow">¶</a>
@@ -1954,12 +1954,12 @@ module ietf-trace-context-tracestate-1.0 {
 <p id="section-5-7">and<a href="#section-5-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-8">
 <pre>
-  name: ietf-trace-context-tracestate-1.0
+  name: ietf-trace-ctx-tracestate-1.0
 
-  prefix: ietf-trace-context-tracestate-1.0
+  prefix: ietf-trace-ctx-tracestate-1.0
 
   namespace:
-  urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-1.0
+  urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0
 
   RFC: XXXX
 </pre><a href="#section-5-8" class="pilcrow">¶</a>
