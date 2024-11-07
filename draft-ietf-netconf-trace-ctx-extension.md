@@ -242,9 +242,9 @@ In certain circumstances, we could envision tracing information used as addition
 
 # NETCONF Extension
 
-When performing NETCONF operations by sending NETCONF RPCs, a NETCONF client MAY include trace context information in the form of XML attributes.  The {{W3C-Trace-Context}} defines two HTTP headers; _traceparent_ and _tracestate_ for this purpose.  NETCONF clients that are taking advantage of this feature MUST add one _w3ctc:traceparent_ attribute and MAY add one _w3ctc:tracestate_ attribute to the _nc:rpc_ tag.
+When performing NETCONF operations by sending NETCONF RPCs, a NETCONF client MAY include trace context information in the form of XML attributes.  The {{W3C-Trace-Context}} defines two HTTP headers; traceparent and tracestate for this purpose.  NETCONF clients that are taking advantage of this feature MUST add one w3ctc:traceparent attribute and MAY add one w3ctc:tracestate attribute to the nc:rpc tag.
 
-A NETCONF server that receives a trace context attribute in the form of a _w3ctc:traceparent_ attribute SHOULD apply the mutation rules described in {{W3C-Trace-Context}}.  A NETCONF server MAY add one _w3ctc:traceparent_ attribute in the _nc:rpc-reply_ response to the _nc:rpc_ tag above.  NETCONF servers MAY also add one _w3ctc:traceparent_ attribute in notification and update message envelopes: _notif:notification_, _yp:push-update_ and _yp:push-change-update_.
+A NETCONF server that receives a trace context attribute in the form of a w3ctc:traceparent attribute SHOULD apply the mutation rules described in {{W3C-Trace-Context}}. A NETCONF server MAY add one w3ctc:traceparent attribute in the nc:rpc-reply response to the nc:rpc tag above.  NETCONF servers MAY also add one w3ctc:traceparent attribute in notification and update message envelopes: notif:notification, yp:push-update and yp:push-change-update.
 
 For example, a NETCONF client might send:
 
@@ -257,9 +257,9 @@ For example, a NETCONF client might send:
 </rpc>
 ~~~
 
-In all cases above where a client or server adds a _w3ctc:traceparent_ attribute to a tag, that client or server MAY also add one _w3ctc:tracestate_ attribute to the same tag.
+In all cases above where a client or server adds a w3ctc:traceparent attribute to a tag, that client or server MAY also add one w3ctc:tracestate attribute to the same tag.
 
-The proper encoding and interpretation of the contents of the _w3ctc:traceparent_ attribute is described in {{W3C-Trace-Context}} section 3.2 except 3.2.1.  The proper encoding and interpretation of the contents in the _w3ctc:tracestate_ attribute is described in {{W3C-Trace-Context}} section 3.3 except 3.3.1 and 3.3.1.1.  A NETCONF XML tag can only have zero or one _w3ctc:tracestate_ attributes, so its content MUST always be encoded as a single string.  The _tracestate_ field value is a list of list-members separated by commas (,).  A list-member is a key/value pair separated by an equals sign (=).  Spaces and horizontal tabs surrounding list-members are ignored.  There is no limit to the number of list-members in a list.
+The proper encoding and interpretation of the contents of the w3ctc:traceparent attribute is described in {{W3C-Trace-Context}} section 3.2 except 3.2.1.  The proper encoding and interpretation of the contents in the w3ctc:tracestate attribute is described in {{W3C-Trace-Context}} section 3.3 except 3.3.1 and 3.3.1.1.  A NETCONF XML tag can only have zero or one w3ctc:tracestate attributes, so its content MUST always be encoded as a single string.  The tracestate field value is a list of list-members separated by commas (,).  A list-member is a key/value pair separated by an equals sign (=).  Spaces and horizontal tabs surrounding list-members are ignored.  There is no limit to the number of list-members in a list.
 
 For example, a NETCONF client might send:
 
@@ -273,7 +273,7 @@ For example, a NETCONF client might send:
 </rpc>
 ~~~
 
-As in all XML documents, the order between the attributes in an XML tag has no significance.  Clients and servers MUST be prepared to handle the attributes no matter in which order they appear.  The _tracestate_ value MAY contain double quotes in its payload.  If so, they MUST be encoded according to XML rules, for example:
+As in all XML documents, the order between the attributes in an XML tag has no significance.  Clients and servers MUST be prepared to handle the attributes no matter in which order they appear.  The tracestate value MAY contain double quotes in its payload.  If so, they MUST be encoded according to XML rules, for example:
 
 ~~~ xml
 <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1"
@@ -347,9 +347,9 @@ This might give the following error response:
 
 ## Trace Context extension versioning
 
-This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C _traceparent_ and _tracestate_ headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.
+This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C traceparent and tracestate headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.
 
-We define a pair YANG modules (ietf-trace-context-traceparent-1.0.yang and ietf-trace-context-tracestate-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
+We define a pair YANG modules (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
 
 # YANG Modules
 
@@ -363,17 +363,17 @@ sourcecode-name="ietf-trace-context@2024-11-07.yang"}
 
 ## YANG module for traceparent header version 1.0
 ~~~~ yang
-{::include src/yang/ietf-trace-context-traceparent-1.0.yang}
+{::include src/yang/ietf-trace-ctx-traceparent-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context-traceparent-1.0@2024-11-07.yang"}
+sourcecode-name="ietf-trace-ctx-traceparent-1.0@2024-11-07.yang"}
 
 ## YANG module for tracestate header version 1.0
 ~~~~ yang
-{::include src/yang/ietf-trace-context-tracestate-1.0.yang}
+{::include src/yang/ietf-trace-ctx-tracestate-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context-tracestate-1.0@2024-11-07.yang"}
+sourcecode-name="ietf-trace-ctx-tracestate-1.0@2024-11-07.yang"}
 
 # Security Considerations
 
@@ -381,7 +381,7 @@ The YANG modules specified in this document are used to flag capabilities define
 
 As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.
 
-The _traceparent_ and _tracestate_ attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.
+The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.
 
 The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242]. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC8446].
 
@@ -408,12 +408,12 @@ This document registers one XML namespace URN in the 'IETF XML registry', follow
 This document registers three module names in the 'YANG Module Names' registry, defined in RFC 6020:
 
 ~~~
-  name: ietf-trace-context-traceparent-1.0
+  name: ietf-trace-ctx-traceparent-1.0
 
-  prefix: ietf-trace-context-traceparent-1.0
+  prefix: ietf-trace-ctx-traceparent-1.0
 
   namespace:
-  urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-1.0
+  urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0
 
   RFC: XXXX
 ~~~
@@ -421,12 +421,12 @@ This document registers three module names in the 'YANG Module Names' registry, 
 and
 
 ~~~
-  name: ietf-trace-context-tracestate-1.0
+  name: ietf-trace-ctx-tracestate-1.0
 
-  prefix: ietf-trace-context-tracestate-1.0
+  prefix: ietf-trace-ctx-tracestate-1.0
 
   namespace:
-  urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-1.0
+  urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0
 
   RFC: XXXX
 ~~~

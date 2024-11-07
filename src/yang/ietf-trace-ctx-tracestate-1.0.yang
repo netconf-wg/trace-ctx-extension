@@ -1,7 +1,7 @@
-module ietf-trace-context-tracestate-1.0 {
+module ietf-trace-ctx-tracestate-1.0 {
   namespace 
-    "urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-1.0";
-  prefix ietf-trace-context-tracestate-1.0;
+    "urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0";
+  prefix ietf-trace-ctx-tracestate-1.0;
 
   organization
     "IETF NETCONF (Network Configuration) Working Group";
