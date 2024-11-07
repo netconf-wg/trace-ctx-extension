@@ -84,7 +84,7 @@ Table of Contents
      2.1.  Error handling
      2.2.  Trace Context extension versioning
    3.  YANG Modules
-     3.1.  YANG module for otlp-trace-context-error-info structure
+     3.1.  YANG module for trace-context-error-info structure
      3.2.  YANG module for traceparent header version 1.0
      3.3.  YANG module for tracestate header version 1.0
    4.  Security Considerations
@@ -480,7 +480,7 @@ Table of Contents
        <error-tag>operation-failed</error-tag>
        <error-severity>error</error-severity>
        <error-message>
-         OTLP traceparent attribute incorrectly formatted
+         Context traceparent attribute incorrectly formatted
        </error-message>
        <error-info>
          <ietf-trace-context:meta-name>
@@ -515,7 +515,7 @@ Table of Contents
 
 3.  YANG Modules
 
-3.1.  YANG module for otlp-trace-context-error-info structure
+3.1.  YANG module for trace-context-error-info structure
 
    <CODE BEGINS> file "ietf-trace-context@2024-11-04.yang"
    module ietf-trace-context {
@@ -597,8 +597,8 @@ Table of Contents
        description "Error type";
      }
 
-     sx:structure otlp-trace-context-error-info {
-       container otlp-trace-context-error-info {
+     sx:structure trace-context-error-info {
+       container trace-context-error-info {
          description
             "This error is returned by a NETCONF or RESTCONF server
             when a client sends a NETCONF RPC with additonal
