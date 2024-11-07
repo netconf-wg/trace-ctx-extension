@@ -359,7 +359,7 @@ We define a pair YANG modules (ietf-trace-context-traceparent-1.0.yang and ietf-
 {::include src/yang/ietf-trace-context.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context@2024-11-04.yang"}
+sourcecode-name="ietf-trace-context@2024-11-07.yang"}
 
 ## YANG module for traceparent header version 1.0
 ~~~~ yang
