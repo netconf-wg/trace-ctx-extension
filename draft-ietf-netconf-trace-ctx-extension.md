@@ -347,7 +347,7 @@ This might give the following error response:
 
 This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C _traceparent_ and _tracestate_ headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.
 
-We define a pair YANG modules (ietf-trace-context-traceparent-version-1.0.yang and ietf-trace-context-tracestate-version-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
+We define a pair YANG modules (ietf-trace-context-traceparent-1.0.yang and ietf-trace-context-tracestate-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
 
 # YANG Modules
 
@@ -361,17 +361,17 @@ sourcecode-name="ietf-trace-context@2024-11-04.yang"}
 
 ## YANG module for traceparent header version 1.0
 ~~~~ yang
-{::include src/yang/ietf-trace-context-traceparent-version-1.0.yang}
+{::include src/yang/ietf-trace-context-traceparent-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context-traceparent-version-1.0@2024-11-04.yang"}
+sourcecode-name="ietf-trace-context-traceparent-1.0@2024-11-07.yang"}
 
 ## YANG module for tracestate header version 1.0
 ~~~~ yang
-{::include src/yang/ietf-trace-context-tracestate-version-1.0.yang}
+{::include src/yang/ietf-trace-context-tracestate-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context-tracestate-version-1.0@2024-11-04.yang"}
+sourcecode-name="ietf-trace-context-tracestate-1.0@2024-11-07.yang"}
 
 # Security Considerations
 
@@ -406,11 +406,12 @@ This document registers one XML namespace URN in the 'IETF XML registry', follow
 This document registers three module names in the 'YANG Module Names' registry, defined in RFC 6020:
 
 ~~~
-  name: ietf-trace-context-traceparent-version-1.0
+  name: ietf-trace-context-traceparent-1.0
 
-  prefix: ietf-trace-context-traceparent-version-1.0
+  prefix: ietf-trace-context-traceparent-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-version-1.0
+  namespace:
+  urn:ietf:params:xml:ns:yang:ietf-trace-context-traceparent-1.0
 
   RFC: XXXX
 ~~~
@@ -418,11 +419,12 @@ This document registers three module names in the 'YANG Module Names' registry, 
 and
 
 ~~~
-  name: ietf-trace-context-tracestate-version-1.0
+  name: ietf-trace-context-tracestate-1.0
 
-  prefix: ietf-trace-context-tracestate-version-1.0
+  prefix: ietf-trace-context-tracestate-1.0
 
-  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-version-1.0
+  namespace:
+  urn:ietf:params:xml:ns:yang:ietf-trace-context-tracestate-1.0
 
   RFC: XXXX
 ~~~
