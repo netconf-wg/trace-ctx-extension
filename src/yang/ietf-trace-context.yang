@@ -129,7 +129,7 @@ module ietf-trace-context {
            If a client sent an RPC annotated with the attribute
            w3ctc:traceparent='incorrect-format'
            this leaf might have the value
-           'ietf-trace-contextt:bad-format'.";
+           'ietf-trace-context:bad-format'.";
       }
     }
   }

@@ -329,15 +329,17 @@ This might give the following error response:
       Context traceparent attribute incorrectly formatted
     </error-message>
     <error-info>
-      <ietf-trace-context:meta-name>
-        w3ctc:traceparent
-      </ietf-trace-context:meta-name>
-      <ietf-trace-context:meta-value>
-        Bad Format
-      </ietf-trace-context:meta-value>
-      <ietf-trace-context:error-type>
-        ietf-trace-context:bad-format
-      </ietf-trace-context:error-type>
+      <ietf-trace-context:trace-context-error-info>
+        <ietf-trace-context:meta-name>
+          w3ctc:traceparent
+        </ietf-trace-context:meta-name>
+        <ietf-trace-context:meta-value>
+          Bad Format
+        </ietf-trace-context:meta-value>
+        <ietf-trace-context:error-type>
+          ietf-trace-context:bad-format
+        </ietf-trace-context:error-type>
+      </ietf-trace-context:trace-context-error-info>
     </error-info>
   </rpc-error>
 </rpc-reply>
