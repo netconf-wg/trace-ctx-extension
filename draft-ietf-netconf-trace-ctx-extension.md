@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2024-11-07
+date: 2024-12-12
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
