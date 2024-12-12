@@ -5,10 +5,10 @@
 Network Configuration                                        R. Gagliano
 Internet-Draft                                             Cisco Systems
 Intended status: Standards Track                              K. Larsson
-Expires: 11 May 2025                                 Deutsche Telekom AG
+Expires: 15 June 2025                                Deutsche Telekom AG
                                                              J. Lindblad
                                                            Cisco Systems
-                                                         7 November 2024
+                                                        12 December 2024
 
 
          NETCONF Extension to support Trace Context propagation
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 May 2025.
+   This Internet-Draft will expire on 15 June 2025.
 
 Copyright Notice
 
