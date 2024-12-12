@@ -1,14 +1,14 @@
 ---
 title:  NETCONF Extension to support Trace Context propagation
-abbrev: nc_trace
+abbrev: NETCONF Trace Context Extension
 category: std
-date: 2024-11-07
+date: 2024-12-12
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 02
+v: 03
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -450,6 +450,9 @@ The authors would like to acknowledge the valuable implementation feedback from 
 --- back
 
 # Changes (to be deleted by RFC Editor)
+## From version 02 to 03
+- Changed document Abbreviation
+- trace-context-error-info is a container in example
 
 ## From version 01 to 02
 - Enhanced Terminology and moved it up in the document.
