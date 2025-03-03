@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2025-03-02
+date: 2025-03-03
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
@@ -450,6 +450,9 @@ The authors would like to acknowledge the valuable implementation feedback from 
 --- back
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 03 to version 04
+- WGLC data change.
 
 ## From version 02 to 03
 - Changed document Abbreviation
