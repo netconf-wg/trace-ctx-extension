@@ -2,13 +2,13 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2024-12-12
+date: 2025-03-03
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 03
+v: 04
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -139,7 +139,7 @@ Additionally, the document utilizes the following abbreviations:
 OTLP:
 : OpenTelemetry protocol as defined by {{OpenTelemetry}}
 
-M.E.L.T:
+M.E.L.T.:
 : Metrics, Events, Logs and Traces
 
 gNMI:
@@ -450,6 +450,10 @@ The authors would like to acknowledge the valuable implementation feedback from 
 --- back
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 03 to version 04
+- WGLC data change.
+
 ## From version 02 to 03
 - Changed document Abbreviation
 - trace-context-error-info is a container in example
