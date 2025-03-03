@@ -5,10 +5,10 @@
 Network Configuration                                        R. Gagliano
 Internet-Draft                                             Cisco Systems
 Intended status: Standards Track                              K. Larsson
-Expires: 15 June 2025                                Deutsche Telekom AG
+Expires: 4 September 2025                            Deutsche Telekom AG
                                                              J. Lindblad
                                                            Cisco Systems
-                                                        12 December 2024
+                                                            3 March 2025
 
 
          NETCONF Extension to support Trace Context propagation
@@ -54,11 +54,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 June 2025.
+   This Internet-Draft will expire on 4 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -94,13 +94,15 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Changes (to be deleted by RFC Editor)
-     A.1.  From version 01 to 02
-     A.2.  From version 00 to 01
-     A.3.  From version 03 to
+     A.1.  From version 03 to version 04
+     A.2.  From version 02 to 03
+     A.3.  From version 01 to 02
+     A.4.  From version 00 to 01
+     A.5.  From version 03 to
            draft-ietf-netconf-trace-ctx-extension-00
-     A.4.  From version 02 to 03
-     A.5.  From version 01 to 02
-     A.6.  From version 00 to 01
+     A.6.  From version 02 to 03
+     A.7.  From version 01 to 02
+     A.8.  From version 00 to 01
    Appendix B.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
    Authors' Addresses
@@ -195,7 +197,7 @@ Table of Contents
 
    OTLP:  OpenTelemetry protocol as defined by [OpenTelemetry]
 
-   M.E.L.T:  Metrics, Events, Logs and Traces
+   M.E.L.T.:  Metrics, Events, Logs and Traces
 
    gNMI:  gRPC Network Management Interface, as defined by [gNMI]
 
@@ -920,9 +922,9 @@ Table of Contents
    [I-D.ietf-netconf-transaction-id]
               Lindblad, J., "Transaction ID Mechanism for NETCONF", Work
               in Progress, Internet-Draft, draft-ietf-netconf-
-              transaction-id-07, 19 October 2024,
+              transaction-id-08, 20 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              transaction-id-07>.
+              transaction-id-08>.
 
    [OpenTelemetry]
               "OpenTelemetry Cloud Native Computing Foundation project",
@@ -943,17 +945,24 @@ Table of Contents
 
 Appendix A.  Changes (to be deleted by RFC Editor)
 
-   ## From version 02 to 03 - Changed document Abbreviation - trace-
-   context-error-info is a container in example
+A.1.  From version 03 to version 04
 
-A.1.  From version 01 to 02
+   *  WGLC data change.
+
+A.2.  From version 02 to 03
+
+   *  Changed document Abbreviation
+
+   *  trace-context-error-info is a container in example
+
+A.3.  From version 01 to 02
 
    *  Enhanced Terminology and moved it up in the document.
 
    *  Changed namespaces and module names to map WGLC comments and IETF
       requirements
 
-A.2.  From version 00 to 01
+A.4.  From version 00 to 01
 
    *  Added Security considerations
 
@@ -965,7 +974,7 @@ A.2.  From version 00 to 01
 
    *  Firmed up error handling and YANG-library to MUST-requirements
 
-A.3.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
+A.5.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Adopted by NETCONF WG
 
@@ -977,7 +986,7 @@ A.3.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Added this change note.  No other content changes.
 
-A.4.  From version 02 to 03
+A.6.  From version 02 to 03
 
    *  Changed IANA section to IESG per IANA email
 
@@ -987,7 +996,7 @@ A.4.  From version 02 to 03
 
    *  Created a dedicated section for the YANG modules
 
-A.5.  From version 01 to 02
+A.7.  From version 01 to 02
 
    *  Added Error Handling intial section
 
@@ -996,7 +1005,7 @@ A.5.  From version 01 to 02
 
    *  Added 'YANG Module Names' to IANA Considerations
 
-A.6.  From version 00 to 01
+A.8.  From version 00 to 01
 
    *  Added new section: Implementation example 2: YANG Datastore
 

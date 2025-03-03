@@ -11,22 +11,22 @@
 <meta content="
        This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), that enables distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification. 
     " name="description">
-<meta content="xml2rfc 3.25.0" name="generator">
+<meta content="xml2rfc 3.28.0" name="generator">
 <meta content="telemetry" name="keyword">
 <meta content="distributed systems" name="keyword">
 <meta content="opentelemetry" name="keyword">
 <meta content="draft-ietf-netconf-trace-ctx-extension-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.25.0
-    Python 3.12.7
+  xml2rfc 3.28.0
+    Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
+    Jinja2 3.1.5
     lxml 5.3.0
     platformdirs 4.3.6
-    pycountry 22.3.5
-    PyYAML 6.0.1
+    pycountry 24.6.1
+    PyYAML 6.0.2
     requests 2.32.3
     setuptools 70.3.0
     wcwidth 0.2.13
@@ -439,7 +439,7 @@ dl {
     margin-bottom: 0;
   }
 }
-dl > dt {
+dl:not(.dlNewline) > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
@@ -1048,11 +1048,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">NETCONF Trace Context Extension</td>
-<td class="right">December 2024</td>
+<td class="right">March 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Gagliano, et al.</td>
-<td class="center">Expires 15 June 2025</td>
+<td class="center">Expires 4 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netconf-trace-ctx-extension-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-12" class="published">12 December 2024</time>
+<time datetime="2025-03-03" class="published">3 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-15">15 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-04">4 September 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1137,7 +1137,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1234,22 +1234,28 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-changes-to-be-deleted-by-rf" class="internal xref">Changes (to be deleted by RFC Editor)</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-from-version-01-to-02" class="internal xref">From version 01 to 02</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-from-version-03-to-version-" class="internal xref">From version 03 to version 04</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-from-version-00-to-01" class="internal xref">From version 00 to 01</a></p>
+                <p id="section-toc.1-1.8.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-from-version-02-to-03" class="internal xref">From version 02 to 03</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
-                <p id="section-toc.1-1.8.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-from-version-03-to-draft-ie" class="internal xref">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a></p>
+                <p id="section-toc.1-1.8.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-from-version-01-to-02" class="internal xref">From version 01 to 02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
-                <p id="section-toc.1-1.8.2.4.1"><a href="#appendix-A.4" class="auto internal xref">A.4</a>.  <a href="#name-from-version-02-to-03" class="internal xref">From version 02 to 03</a></p>
+                <p id="section-toc.1-1.8.2.4.1"><a href="#appendix-A.4" class="auto internal xref">A.4</a>.  <a href="#name-from-version-00-to-01" class="internal xref">From version 00 to 01</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5">
-                <p id="section-toc.1-1.8.2.5.1"><a href="#appendix-A.5" class="auto internal xref">A.5</a>.  <a href="#name-from-version-01-to-02-2" class="internal xref">From version 01 to 02</a></p>
+                <p id="section-toc.1-1.8.2.5.1"><a href="#appendix-A.5" class="auto internal xref">A.5</a>.  <a href="#name-from-version-03-to-draft-ie" class="internal xref">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.6">
-                <p id="section-toc.1-1.8.2.6.1"><a href="#appendix-A.6" class="auto internal xref">A.6</a>.  <a href="#name-from-version-00-to-01-2" class="internal xref">From version 00 to 01</a></p>
+                <p id="section-toc.1-1.8.2.6.1"><a href="#appendix-A.6" class="auto internal xref">A.6</a>.  <a href="#name-from-version-02-to-03-2" class="internal xref">From version 02 to 03</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.7">
+                <p id="section-toc.1-1.8.2.7.1"><a href="#appendix-A.7" class="auto internal xref">A.7</a>.  <a href="#name-from-version-01-to-02-2" class="internal xref">From version 01 to 02</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8">
+                <p id="section-toc.1-1.8.2.8.1"><a href="#appendix-A.8" class="auto internal xref">A.8</a>.  <a href="#name-from-version-00-to-01-2" class="internal xref">From version 00 to 01</a></p>
 </li>
             </ul>
 </li>
@@ -1318,7 +1324,7 @@ sub-systems and together with the network devices they manage, they effectively 
             <p id="section-1.1-3.2.1">OpenTelemetry protocol as defined by <span>[<a href="#OpenTelemetry" class="cite xref">OpenTelemetry</a>]</span><a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.3">M.E.L.T:</dt>
+<dt id="section-1.1-3.3">M.E.L.T.:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.4">
             <p id="section-1.1-3.4.1">Metrics, Events, Logs and Traces<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2019,7 +2025,7 @@ module ietf-trace-ctx-tracestate-1.0 {
 <dd class="break"></dd>
 <dt id="I-D.ietf-netconf-transaction-id">[I-D.ietf-netconf-transaction-id]</dt>
         <dd>
-<span class="refAuthor">Lindblad, J.</span>, <span class="refTitle">"Transaction ID Mechanism for NETCONF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-transaction-id-07</span>, <time datetime="2024-10-19" class="refDate">19 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-07">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Lindblad, J.</span>, <span class="refTitle">"Transaction ID Mechanism for NETCONF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-transaction-id-08</span>, <time datetime="2025-02-20" class="refDate">20 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-08">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OpenTelemetry">[OpenTelemetry]</dt>
         <dd>
@@ -2047,126 +2053,150 @@ module ietf-trace-ctx-tracestate-1.0 {
       <h2 id="name-changes-to-be-deleted-by-rf">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-changes-to-be-deleted-by-rf" class="section-name selfRef">Changes (to be deleted by RFC Editor)</a>
       </h2>
-<p id="appendix-A-1">## From version 02 to 03
-- Changed document Abbreviation
-- trace-context-error-info is a container in example<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<div id="from-version-01-to-02">
+<div id="from-version-03-to-version-04">
 <section id="appendix-A.1">
-        <h3 id="name-from-version-01-to-02">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-from-version-01-to-02" class="section-name selfRef">From version 01 to 02</a>
+        <h3 id="name-from-version-03-to-version-">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-from-version-03-to-version-" class="section-name selfRef">From version 03 to version 04</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-A.1-1.1">
-            <p id="appendix-A.1-1.1.1">Enhanced Terminology and moved it up in the document.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.1-1.2">
-            <p id="appendix-A.1-1.2.1">Changed namespaces and module names to map WGLC comments
-and IETF requirements<a href="#appendix-A.1-1.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-</section>
-</div>
-<div id="from-version-00-to-01">
-<section id="appendix-A.2">
-        <h3 id="name-from-version-00-to-01">
-<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-from-version-00-to-01" class="section-name selfRef">From version 00 to 01</a>
-        </h3>
-<ul class="normal">
-<li class="normal" id="appendix-A.2-1.1">
-            <p id="appendix-A.2-1.1.1">Added Security considerations<a href="#appendix-A.2-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.2-1.2">
-            <p id="appendix-A.2-1.2.1">Added Acknowledgements<a href="#appendix-A.2-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.2-1.3">
-            <p id="appendix-A.2-1.3.1">Added several Normative references<a href="#appendix-A.2-1.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.2-1.4">
-            <p id="appendix-A.2-1.4.1">Updated link to latest document on github<a href="#appendix-A.2-1.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.2-1.5">
-            <p id="appendix-A.2-1.5.1">Firmed up error handling and YANG-library to MUST-requirements<a href="#appendix-A.2-1.5.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-</section>
-</div>
-<div id="from-version-03-to-draft-ietf-netconf-trace-ctx-extension-00">
-<section id="appendix-A.3">
-        <h3 id="name-from-version-03-to-draft-ie">
-<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-from-version-03-to-draft-ie" class="section-name selfRef">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a>
-        </h3>
-<ul class="normal">
-<li class="normal" id="appendix-A.3-1.1">
-            <p id="appendix-A.3-1.1.1">Adopted by NETCONF WG<a href="#appendix-A.3-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.3-1.2">
-            <p id="appendix-A.3-1.2.1">Moved repository to NETCONF WG<a href="#appendix-A.3-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.3-1.3">
-            <p id="appendix-A.3-1.3.1">Changed build system to use martinthomson's excellent framework<a href="#appendix-A.3-1.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.3-1.4">
-            <p id="appendix-A.3-1.4.1">Ran make fix-lint to remove white space at EOL etc.<a href="#appendix-A.3-1.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="appendix-A.3-1.5">
-            <p id="appendix-A.3-1.5.1">Added this change note. No other content changes.<a href="#appendix-A.3-1.5.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.1-1.1.1">WGLC data change.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-02-to-03">
-<section id="appendix-A.4">
+<section id="appendix-A.2">
         <h3 id="name-from-version-02-to-03">
-<a href="#appendix-A.4" class="section-number selfRef">A.4. </a><a href="#name-from-version-02-to-03" class="section-name selfRef">From version 02 to 03</a>
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-from-version-02-to-03" class="section-name selfRef">From version 02 to 03</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-A.2-1.1">
+            <p id="appendix-A.2-1.1.1">Changed document Abbreviation<a href="#appendix-A.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.2-1.2">
+            <p id="appendix-A.2-1.2.1">trace-context-error-info is a container in example<a href="#appendix-A.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="from-version-01-to-02">
+<section id="appendix-A.3">
+        <h3 id="name-from-version-01-to-02">
+<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-from-version-01-to-02" class="section-name selfRef">From version 01 to 02</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-A.3-1.1">
+            <p id="appendix-A.3-1.1.1">Enhanced Terminology and moved it up in the document.<a href="#appendix-A.3-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.3-1.2">
+            <p id="appendix-A.3-1.2.1">Changed namespaces and module names to map WGLC comments
+and IETF requirements<a href="#appendix-A.3-1.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="from-version-00-to-01">
+<section id="appendix-A.4">
+        <h3 id="name-from-version-00-to-01">
+<a href="#appendix-A.4" class="section-number selfRef">A.4. </a><a href="#name-from-version-00-to-01" class="section-name selfRef">From version 00 to 01</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-A.4-1.1">
-            <p id="appendix-A.4-1.1.1">Changed IANA section to IESG per IANA email<a href="#appendix-A.4-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.4-1.1.1">Added Security considerations<a href="#appendix-A.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-A.4-1.2">
-            <p id="appendix-A.4-1.2.1">Created sx:structure and improved error example<a href="#appendix-A.4-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.4-1.2.1">Added Acknowledgements<a href="#appendix-A.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-A.4-1.3">
-            <p id="appendix-A.4-1.3.1">Added ietf-netconf-otlp-context.yang for the sx:structure<a href="#appendix-A.4-1.3.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.4-1.3.1">Added several Normative references<a href="#appendix-A.4-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-A.4-1.4">
-            <p id="appendix-A.4-1.4.1">Created a dedicated section for the YANG modules<a href="#appendix-A.4-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.4-1.4.1">Updated link to latest document on github<a href="#appendix-A.4-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.4-1.5">
+            <p id="appendix-A.4-1.5.1">Firmed up error handling and YANG-library to MUST-requirements<a href="#appendix-A.4-1.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="from-version-03-to-draft-ietf-netconf-trace-ctx-extension-00">
+<section id="appendix-A.5">
+        <h3 id="name-from-version-03-to-draft-ie">
+<a href="#appendix-A.5" class="section-number selfRef">A.5. </a><a href="#name-from-version-03-to-draft-ie" class="section-name selfRef">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-A.5-1.1">
+            <p id="appendix-A.5-1.1.1">Adopted by NETCONF WG<a href="#appendix-A.5-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.5-1.2">
+            <p id="appendix-A.5-1.2.1">Moved repository to NETCONF WG<a href="#appendix-A.5-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.5-1.3">
+            <p id="appendix-A.5-1.3.1">Changed build system to use martinthomson's excellent framework<a href="#appendix-A.5-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.5-1.4">
+            <p id="appendix-A.5-1.4.1">Ran make fix-lint to remove white space at EOL etc.<a href="#appendix-A.5-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.5-1.5">
+            <p id="appendix-A.5-1.5.1">Added this change note. No other content changes.<a href="#appendix-A.5-1.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="from-version-02-to-03-1">
+<section id="appendix-A.6">
+        <h3 id="name-from-version-02-to-03-2">
+<a href="#appendix-A.6" class="section-number selfRef">A.6. </a><a href="#name-from-version-02-to-03-2" class="section-name selfRef">From version 02 to 03</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-A.6-1.1">
+            <p id="appendix-A.6-1.1.1">Changed IANA section to IESG per IANA email<a href="#appendix-A.6-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.6-1.2">
+            <p id="appendix-A.6-1.2.1">Created sx:structure and improved error example<a href="#appendix-A.6-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.6-1.3">
+            <p id="appendix-A.6-1.3.1">Added ietf-netconf-otlp-context.yang for the sx:structure<a href="#appendix-A.6-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.6-1.4">
+            <p id="appendix-A.6-1.4.1">Created a dedicated section for the YANG modules<a href="#appendix-A.6-1.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-01-to-02-1">
-<section id="appendix-A.5">
+<section id="appendix-A.7">
         <h3 id="name-from-version-01-to-02-2">
-<a href="#appendix-A.5" class="section-number selfRef">A.5. </a><a href="#name-from-version-01-to-02-2" class="section-name selfRef">From version 01 to 02</a>
+<a href="#appendix-A.7" class="section-number selfRef">A.7. </a><a href="#name-from-version-01-to-02-2" class="section-name selfRef">From version 01 to 02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.5-1.1">
-            <p id="appendix-A.5-1.1.1">Added Error Handling intial section<a href="#appendix-A.5-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-A.7-1.1">
+            <p id="appendix-A.7-1.1.1">Added Error Handling intial section<a href="#appendix-A.7-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.5-1.2">
-            <p id="appendix-A.5-1.2.1">Added how to manage versioning by defining YANG modules for each traceparent and trastate versions as defined by W3C.<a href="#appendix-A.5-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-A.7-1.2">
+            <p id="appendix-A.7-1.2.1">Added how to manage versioning by defining YANG modules for each traceparent and trastate versions as defined by W3C.<a href="#appendix-A.7-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.5-1.3">
-            <p id="appendix-A.5-1.3.1">Added 'YANG Module Names'  to IANA Considerations<a href="#appendix-A.5-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-A.7-1.3">
+            <p id="appendix-A.7-1.3.1">Added 'YANG Module Names'  to IANA Considerations<a href="#appendix-A.7-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-00-to-01-1">
-<section id="appendix-A.6">
+<section id="appendix-A.8">
         <h3 id="name-from-version-00-to-01-2">
-<a href="#appendix-A.6" class="section-number selfRef">A.6. </a><a href="#name-from-version-00-to-01-2" class="section-name selfRef">From version 00 to 01</a>
+<a href="#appendix-A.8" class="section-number selfRef">A.8. </a><a href="#name-from-version-00-to-01-2" class="section-name selfRef">From version 00 to 01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.6-1.1">
-            <p id="appendix-A.6-1.1.1">Added new section: Implementation example 2: YANG Datastore<a href="#appendix-A.6-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-A.8-1.1">
+            <p id="appendix-A.8-1.1.1">Added new section: Implementation example 2: YANG Datastore<a href="#appendix-A.8-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.6-1.2">
-            <p id="appendix-A.6-1.2.1">Added new use case: Billing and auditing<a href="#appendix-A.6-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-A.8-1.2">
+            <p id="appendix-A.8-1.2.1">Added new use case: Billing and auditing<a href="#appendix-A.8-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.6-1.3">
-            <p id="appendix-A.6-1.3.1">Added in introduction and in "Provisioning root cause analysis" the idea that the different transaction-ids defined in <span>[<a href="#I-D.ietf-netconf-transaction-id" class="cite xref">I-D.ietf-netconf-transaction-id</a>]</span> could be added as part of the tracing information to be exported to the collectors, showing how the two documents are complementary.<a href="#appendix-A.6-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-A.8-1.3">
+            <p id="appendix-A.8-1.3.1">Added in introduction and in "Provisioning root cause analysis" the idea that the different transaction-ids defined in <span>[<a href="#I-D.ietf-netconf-transaction-id" class="cite xref">I-D.ietf-netconf-transaction-id</a>]</span> could be added as part of the tracing information to be exported to the collectors, showing how the two documents are complementary.<a href="#appendix-A.8-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
