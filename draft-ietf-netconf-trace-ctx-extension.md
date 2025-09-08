@@ -355,9 +355,9 @@ To achieve this goal, and to avoid having to define a new NETCONF extension for 
 # YANG Modules
 
 This document defines three YANG modules:
-  - YANG module for ietf-trace-context structure as mentioned in section 2.1
-  - YANG module for traceparent header version as mentioned in section 2.2
-  - YANG module for tracestate header version as mentioned in section 2.2
+- YANG module for ietf-trace-context structure as mentioned in section 2.1
+- YANG module for traceparent header version as mentioned in section 2.2
+- YANG module for tracestate header version as mentioned in section 2.2
 
 ## YANG module for ietf-trace-context structure
 
