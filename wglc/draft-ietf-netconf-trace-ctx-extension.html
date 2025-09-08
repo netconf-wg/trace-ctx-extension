@@ -11,24 +11,24 @@
 <meta content="
        This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), that enables distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification. 
     " name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.30.1" name="generator">
 <meta content="telemetry" name="keyword">
 <meta content="distributed systems" name="keyword">
 <meta content="opentelemetry" name="keyword">
 <meta content="draft-ietf-netconf-trace-ctx-extension-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
-    Python 3.12.9
+  xml2rfc 3.30.1
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.5
-    lxml 5.3.0
-    platformdirs 4.3.6
+    Jinja2 3.1.6
+    lxml 5.3.1
+    platformdirs 4.4.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
-    setuptools 70.3.0
+    requests 2.32.5
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-netconf-trace-ctx-extension.xml" rel="alternate" type="application/rfc+xml">
@@ -1048,11 +1048,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">NETCONF Trace Context Extension</td>
-<td class="right">March 2025</td>
+<td class="right">September 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Gagliano, et al.</td>
-<td class="center">Expires 4 September 2025</td>
+<td class="center">Expires 12 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netconf-trace-ctx-extension-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-03" class="published">3 March 2025</time>
+<time datetime="2025-09-08" class="published">8 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-04">4 September 2025</time></dd>
+<dd class="expires"><time datetime="2026-03-12">12 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1200,7 +1200,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-yang-modules" class="internal xref">YANG Modules</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-yang-module-for-trace-conte" class="internal xref">YANG module for trace-context-error-info structure</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-yang-module-for-ietf-trace-" class="internal xref">YANG module for ietf-trace-context structure</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-yang-module-for-traceparent" class="internal xref">YANG module for traceparent header version 1.0</a></p>
@@ -1518,7 +1518,7 @@ sub-systems and together with the network devices they manage, they effectively 
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-error-handling" class="section-name selfRef">Error handling</a>
         </h3>
 <p id="section-2.1-1">The NETCONF server SHOULD follow the "Processing Model for Working with Trace Context" as specified in <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span>.  Based on this processing model, it is NOT RECOMMENDED to reject an RPC because of the trace context attribute values.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">If the server still decides to reject the RPC because of the trace context attribute values, the server MUST return a NETCONF rpc-error with the following values:<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">If the server still decides to reject the RPC because of the trace context attribute values, ietf-trace-context.yang SHOULD be included in the YANG library and the server MUST return a NETCONF rpc-error with the following values:<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2.1-3">
 <pre>
   error-tag:      operation-failed
@@ -1526,11 +1526,7 @@ sub-systems and together with the network devices they manage, they effectively 
   error-severity: error
 </pre><a href="#section-2.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1-4">Additionally, the error-info tag MUST contain a
-trace-context-error-info structure with relevant details about
-the error.  This structure is defined in the module
-ietf-netconf-context.yang.  Example of a badly formated trace
-context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
+<p id="section-2.1-4">Additionally, the error-info tag MUST contain a trace-context-error-info structure with relevant details about the error.  This structure is defined in the module ietf-trace-context.yang.  Example of a badly formatted trace context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 <div class="lang-xml sourcecode" id="section-2.1-5">
 <pre>
 &lt;rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1"
@@ -1582,8 +1578,8 @@ context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
         <h3 id="name-trace-context-extension-ver">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-trace-context-extension-ver" class="section-name selfRef">Trace Context extension versioning</a>
         </h3>
-<p id="section-2.2-1">This extension refers to the <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> trace context capability. The W3C traceparent and tracestate headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">We define a pair YANG modules (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-1.0.yang) that MUST be included in the YANG library per <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">This extension refers to the <span>[<a href="#W3C-Trace-Context" class="cite xref">W3C-Trace-Context</a>]</span> trace context capability. The W3C traceparent and tracestate headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">To achieve this goal, and to avoid having to define a new NETCONF extension for each headers versions, we define a pair of YANG modules (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-1.0.yang) that MUST be included in the YANG library per <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1593,10 +1589,14 @@ context extension:<a href="#section-2.1-4" class="pilcrow">¶</a></p>
       <h2 id="name-yang-modules">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-yang-modules" class="section-name selfRef">YANG Modules</a>
       </h2>
-<div id="yang-module-for-trace-context-error-info-structure">
+<p id="section-3-1">This document defines three YANG modules:
+  - YANG module for ietf-trace-context structure as mentioned in section 2.1
+  - YANG module for traceparent header version as mentioned in section 2.2
+  - YANG module for tracestate header version as mentioned in section 2.2<a href="#section-3-1" class="pilcrow">¶</a></p>
+<div id="yang-module-for-ietf-trace-context-structure">
 <section id="section-3.1">
-        <h3 id="name-yang-module-for-trace-conte">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-yang-module-for-trace-conte" class="section-name selfRef">YANG module for trace-context-error-info structure</a>
+        <h3 id="name-yang-module-for-ietf-trace-">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-yang-module-for-ietf-trace-" class="section-name selfRef">YANG module for ietf-trace-context structure</a>
         </h3>
 <div class="breakable lang-yang sourcecode" id="section-3.1-1">
 <pre>&lt;CODE BEGINS&gt; file "ietf-trace-context@2024-11-07.yang"
@@ -1633,6 +1633,8 @@ module ietf-trace-context {
      information. This  extensions aligns the NETCONF and RESTCONF
      protocols to the W3C trace-context document:
      https://www.w3.org/TR/2021/REC-trace-context-1-20211123
+
+     This document has a normative reference to RFC 8791.
 
      Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -1883,11 +1885,12 @@ module ietf-trace-ctx-tracestate-1.0 {
       <h2 id="name-security-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-4-1">The YANG modules specified in this document are used to flag capabilities define and define an error information structure that is designed to be accessed via network management protocols such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>.<a href="#section-4-4" class="pilcrow">¶</a></p>
-<p id="section-4-5">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span> provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section is modeled after the template described in Section 3.7 of <span>[<a href="#I-D.draft-ietf-netmod-rfc8407bis-28" class="cite xref">I-D.draft-ietf-netmod-rfc8407bis-28</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">The ietf-trace-context, ietf-trace-ctx-tracestate-1.0 and ietf-trace-ctx-traceparent-1.0  YANG modules define data models that are designed to be accessed via YANG-based management protocols, such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>. These YANG-based management protocols (1) have to use a secure transport layer (e.g., SSH <span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) and (2) have to use mutual authentication.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span> provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">The YANG modules specified in this document are used to flag capabilities define and define an error information structure. As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-5">The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-6">The meta-name and meta-value attributes in the ietf-trace-context.yang should not echo any information received from an erroneos request or the system, in order to avoid bad actors receiving additional contextual information.<a href="#section-4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1944,7 +1947,7 @@ module ietf-trace-ctx-tracestate-1.0 {
 
   prefix: ietf-trace-context
 
-  namespace: urn:ietf:params:xml:ns:yang:trace-context
+  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context
 
   RFC: XXXX
 </pre><a href="#section-5-10" class="pilcrow">¶</a>
@@ -1970,6 +1973,10 @@ module ietf-trace-ctx-tracestate-1.0 {
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.draft-ietf-netmod-rfc8407bis-28">[I-D.draft-ietf-netmod-rfc8407bis-28]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-28</span>, <time datetime="2025-06-05" class="refDate">5 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -1977,6 +1984,10 @@ module ietf-trace-ctx-tracestate-1.0 {
 <dt id="RFC3688">[RFC3688]</dt>
         <dd>
 <span class="refAuthor">Mealling, M.</span>, <span class="refTitle">"The IETF XML Registry"</span>, <span class="seriesInfo">BCP 81</span>, <span class="seriesInfo">RFC 3688</span>, <span class="seriesInfo">DOI 10.17487/RFC3688</span>, <time datetime="2004-01" class="refDate">January 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3688">https://www.rfc-editor.org/rfc/rfc3688</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4252">[RFC4252]</dt>
+        <dd>
+<span class="refAuthor">Ylonen, T.</span> and <span class="refAuthor">C. Lonvick, Ed.</span>, <span class="refTitle">"The Secure Shell (SSH) Authentication Protocol"</span>, <span class="seriesInfo">RFC 4252</span>, <span class="seriesInfo">DOI 10.17487/RFC4252</span>, <time datetime="2006-01" class="refDate">January 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4252">https://www.rfc-editor.org/rfc/rfc4252</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6241">[RFC6241]</dt>
         <dd>
@@ -2006,6 +2017,14 @@ module ietf-trace-ctx-tracestate-1.0 {
         <dd>
 <span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Schoenwaelder, J.</span>, <span class="refAuthor">Watsen, K.</span>, and <span class="refAuthor">R. Wilton</span>, <span class="refTitle">"YANG Library"</span>, <span class="seriesInfo">RFC 8525</span>, <span class="seriesInfo">DOI 10.17487/RFC8525</span>, <time datetime="2019-03" class="refDate">March 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8525">https://www.rfc-editor.org/rfc/rfc8525</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8791">[RFC8791]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Björklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"YANG Data Structure Extensions"</span>, <span class="seriesInfo">RFC 8791</span>, <span class="seriesInfo">DOI 10.17487/RFC8791</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8791">https://www.rfc-editor.org/rfc/rfc8791</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9000">[RFC9000]</dt>
+        <dd>
+<span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9000">https://www.rfc-editor.org/rfc/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="W3C-Trace-Context">[W3C-Trace-Context]</dt>
       <dd>
 <span class="refTitle">"W3C Recommendation on Trace Context"</span>, <time datetime="2021-11-23" class="refDate">23 November 2021</time>, <span>&lt;<a href="https://www.w3.org/TR/2021/REC-trace-context-1-20211123/">https://www.w3.org/TR/2021/REC-trace-context-1-20211123/</a>&gt;</span>. </dd>
@@ -2025,7 +2044,7 @@ module ietf-trace-ctx-tracestate-1.0 {
 <dd class="break"></dd>
 <dt id="I-D.ietf-netconf-transaction-id">[I-D.ietf-netconf-transaction-id]</dt>
         <dd>
-<span class="refAuthor">Lindblad, J.</span>, <span class="refTitle">"Transaction ID Mechanism for NETCONF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-transaction-id-08</span>, <time datetime="2025-02-20" class="refDate">20 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-08">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Lindblad, J.</span>, <span class="refTitle">"Transaction ID Mechanism for NETCONF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-transaction-id-10</span>, <time datetime="2025-08-01" class="refDate">1 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-10">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-transaction-id-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OpenTelemetry">[OpenTelemetry]</dt>
         <dd>
@@ -2219,7 +2238,7 @@ and IETF requirements<a href="#appendix-A.3-1.2.1" class="pilcrow">¶</a></p>
           <p id="appendix-B-4.2.1">Same encoding for RESTCONF and NETCONF enabling code reuse<a href="#appendix-B-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-4.3">
-          <p id="appendix-B-4.3.1">One specification for all current and future rpcs<a href="#appendix-B-4.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-4.3.1">One specification for all current and future RPCss<a href="#appendix-B-4.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-5">XML Attributes Cons:<a href="#appendix-B-5" class="pilcrow">¶</a></p>
@@ -2249,7 +2268,7 @@ and IETF requirements<a href="#appendix-A.3-1.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-B-9">RPCs Input Augmentations Cons:<a href="#appendix-B-9" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-10.1">
-          <p id="appendix-B-10.1.1">Need to augment every rpc, including future rpcs would need to consider these augmentations, which is harder to maintain<a href="#appendix-B-10.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-10.1.1">Need to augment every RPC, including future RPCs would need to consider these augmentations, which is harder to maintain<a href="#appendix-B-10.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-10.2">
           <p id="appendix-B-10.2.1">There is no literal alignment with W3C standard. However, as mentioned before most of the time there will be modifications to the content<a href="#appendix-B-10.2.1" class="pilcrow">¶</a></p>
