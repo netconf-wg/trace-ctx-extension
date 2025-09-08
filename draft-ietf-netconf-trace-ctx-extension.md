@@ -8,7 +8,7 @@ docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 04
+v: 05
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -49,6 +49,7 @@ author:
 
 normative:
   RFC2119:
+  RFC4252:
   RFC6241:
   RFC6242:
   RFC3688:
@@ -57,6 +58,9 @@ normative:
   RFC8341:
   RFC8446:
   RFC8525:
+  RFC8791:
+  RFC9000:
+  I-D.draft-ietf-netmod-rfc8407bis-28:
 
   W3C-Trace-Context:
     title: W3C Recommendation on Trace Context
@@ -290,17 +294,13 @@ As in all XML documents, the order between the attributes in an XML tag has no s
 
 The NETCONF server SHOULD follow the "Processing Model for Working with Trace Context" as specified in {{W3C-Trace-Context}}.  Based on this processing model, it is NOT RECOMMENDED to reject an RPC because of the trace context attribute values.
 
-If the server still decides to reject the RPC because of the trace context attribute values, the server MUST return a NETCONF rpc-error with the following values:
+If the server still decides to reject the RPC because of the trace context attribute values, ietf-trace-context.yang SHOULD be included in the YANG library and the server MUST return a NETCONF rpc-error with the following values:
 
       error-tag:      operation-failed
       error-type:     protocol
       error-severity: error
 
-Additionally, the error-info tag MUST contain a
-trace-context-error-info structure with relevant details about
-the error.  This structure is defined in the module
-ietf-netconf-context.yang.  Example of a badly formated trace
-context extension:
+Additionally, the error-info tag MUST contain a trace-context-error-info structure with relevant details about the error.  This structure is defined in the module ietf-trace-context.yang.  Example of a badly formatted trace context extension:
 
 ~~~ xml
 <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1"
@@ -345,15 +345,21 @@ This might give the following error response:
 </rpc-reply>
 ~~~
 
+
 ## Trace Context extension versioning
 
-This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C traceparent and tracestate headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server. We would like to achieve this goal avoiding the definition of new NETCONF capabilities for each headers' version.
+This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C traceparent and tracestate headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server.
 
-We define a pair YANG modules (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
+To achieve this goal, and to avoid having to define a new NETCONF extension for each headers versions, we define a pair of YANG modules (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
 
 # YANG Modules
 
-## YANG module for trace-context-error-info structure
+This document defines three YANG modules:
+  - YANG module for ietf-trace-context structure as mentioned in section 2.1
+  - YANG module for traceparent header version as mentioned in section 2.2
+  - YANG module for tracestate header version as mentioned in section 2.2
+
+## YANG module for ietf-trace-context structure
 
 ~~~~ yang
 {::include src/yang/ietf-trace-context.yang}
@@ -376,16 +382,17 @@ sourcecode-name="ietf-trace-ctx-traceparent-1.0@2024-11-07.yang"}
 sourcecode-name="ietf-trace-ctx-tracestate-1.0@2024-11-07.yang"}
 
 # Security Considerations
+This section is modeled after the template described in Section 3.7 of {{I-D.I-D.draft-ietf-netmod-rfc8407bis-28}}.
 
-The YANG modules specified in this document are used to flag capabilities define and define an error information structure that is designed to be accessed via network management protocols such as NETCONF [RFC6241] or RESTCONF [RFC8040].
+The ietf-trace-context, ietf-trace-ctx-tracestate-1.0 and ietf-trace-ctx-traceparent-1.0  YANG modules define data models that are designed to be accessed via YANG-based management protocols, such as NETCONF [RFC6241] and RESTCONF [RFC8040]. These YANG-based management protocols (1) have to use a secure transport layer (e.g., SSH [RFC4252], TLS [RFC8446], and QUIC [RFC9000]) and (2) have to use mutual authentication.
 
-As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.
+The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.
+
+The YANG modules specified in this document are used to flag capabilities define and define an error information structure. As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.
 
 The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.
 
-The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242]. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC8446].
-
-The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.
+The meta-name and meta-value attributes in the ietf-trace-context.yang should not echo any information received from an erroneos request or the system, in order to avoid bad actors receiving additional contextual information.
 
 # IANA Considerations
 
@@ -438,7 +445,7 @@ and
 
   prefix: ietf-trace-context
 
-  namespace: urn:ietf:params:xml:ns:yang:trace-context
+  namespace: urn:ietf:params:xml:ns:yang:ietf-trace-context
 
   RFC: XXXX
 ~~~
@@ -505,7 +512,7 @@ XML Attributes Pro:
 
 - Same encoding for RESTCONF and NETCONF enabling code reuse
 
-- One specification for all current and future rpcs
+- One specification for all current and future RPCss
 
 XML Attributes Cons:
 
@@ -525,7 +532,7 @@ RPCs Input Augmentations Pro:
 
 RPCs Input Augmentations Cons:
 
-- Need to augment every rpc, including future rpcs would need to consider these augmentations, which is harder to maintain
+- Need to augment every RPC, including future RPCs would need to consider these augmentations, which is harder to maintain
 
 - There is no literal alignment with W3C standard. However, as mentioned before most of the time there will be modifications to the content
 

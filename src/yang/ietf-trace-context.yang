@@ -31,6 +31,8 @@ module ietf-trace-context {
      protocols to the W3C trace-context document:
      https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
+     This document has a normative reference to RFC 8791.
+
      Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
