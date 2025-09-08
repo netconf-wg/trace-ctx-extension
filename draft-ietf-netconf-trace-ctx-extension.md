@@ -51,7 +51,6 @@ normative:
   RFC2119:
   RFC4252:
   RFC6241:
-  RFC6242:
   RFC3688:
   RFC8040:
   RFC8174:
