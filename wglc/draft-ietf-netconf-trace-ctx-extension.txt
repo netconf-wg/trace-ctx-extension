@@ -5,10 +5,10 @@
 Network Configuration                                        R. Gagliano
 Internet-Draft                                             Cisco Systems
 Intended status: Standards Track                              K. Larsson
-Expires: 12 March 2026                               Deutsche Telekom AG
+Expires: 22 April 2026                               Deutsche Telekom AG
                                                              J. Lindblad
                                                            Cisco Systems
-                                                        8 September 2025
+                                                         19 October 2025
 
 
          NETCONF Extension to support Trace Context propagation
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 March 2026.
+   This Internet-Draft will expire on 22 April 2026.
 
 Copyright Notice
 
@@ -94,15 +94,16 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Changes (to be deleted by RFC Editor)
-     A.1.  From version 03 to version 04
-     A.2.  From version 02 to 03
-     A.3.  From version 01 to 02
-     A.4.  From version 00 to 01
-     A.5.  From version 03 to
+     A.1.  From version 04 to version 05
+     A.2.  From version 03 to version 04
+     A.3.  From version 02 to 03
+     A.4.  From version 01 to 02
+     A.5.  From version 00 to 01
+     A.6.  From version 03 to
            draft-ietf-netconf-trace-ctx-extension-00
-     A.6.  From version 02 to 03
-     A.7.  From version 01 to 02
-     A.8.  From version 00 to 01
+     A.7.  From version 02 to 03
+     A.8.  From version 01 to 02
+     A.9.  From version 00 to 01
    Appendix B.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
    Authors' Addresses
@@ -530,7 +531,8 @@ Table of Contents
    <CODE BEGINS> file "ietf-trace-context@2024-11-07.yang"
    module ietf-trace-context {
      yang-version 1.1;
-     namespace "urn:ietf:params:xml:ns:yang:ietf-trace-context";
+     namespace
+       "urn:ietf:params:xml:ns:yang:ietf-trace-context";
      prefix ietf-trace-context;
 
      import ietf-yang-structure-ext {
@@ -849,7 +851,7 @@ Table of Contents
      prefix: ietf-trace-ctx-traceparent-1.0
 
      namespace:
-     urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0
+       urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0
 
      RFC: XXXX
 
@@ -860,7 +862,7 @@ Table of Contents
      prefix: ietf-trace-ctx-tracestate-1.0
 
      namespace:
-     urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0
+       urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0
 
      RFC: XXXX
 
@@ -935,10 +937,6 @@ Table of Contents
               DOI 10.17487/RFC8525, March 2019,
               <https://www.rfc-editor.org/rfc/rfc8525>.
 
-   [RFC8791]  Bierman, A., Björklund, M., and K. Watsen, "YANG Data
-              Structure Extensions", RFC 8791, DOI 10.17487/RFC8791,
-              June 2020, <https://www.rfc-editor.org/rfc/rfc8791>.
-
    [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
@@ -957,9 +955,9 @@ Table of Contents
    [I-D.ietf-netconf-transaction-id]
               Lindblad, J., "Transaction ID Mechanism for NETCONF", Work
               in Progress, Internet-Draft, draft-ietf-netconf-
-              transaction-id-10, 1 August 2025,
+              transaction-id-11, 7 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              transaction-id-10>.
+              transaction-id-11>.
 
    [OpenTelemetry]
               "OpenTelemetry Cloud Native Computing Foundation project",
@@ -980,24 +978,28 @@ Table of Contents
 
 Appendix A.  Changes (to be deleted by RFC Editor)
 
-A.1.  From version 03 to version 04
+A.1.  From version 04 to version 05
+
+   *  More WGLC and sheepard comments
+
+A.2.  From version 03 to version 04
 
    *  WGLC data change.
 
-A.2.  From version 02 to 03
+A.3.  From version 02 to 03
 
    *  Changed document Abbreviation
 
    *  trace-context-error-info is a container in example
 
-A.3.  From version 01 to 02
+A.4.  From version 01 to 02
 
    *  Enhanced Terminology and moved it up in the document.
 
    *  Changed namespaces and module names to map WGLC comments and IETF
       requirements
 
-A.4.  From version 00 to 01
+A.5.  From version 00 to 01
 
    *  Added Security considerations
 
@@ -1009,7 +1011,7 @@ A.4.  From version 00 to 01
 
    *  Firmed up error handling and YANG-library to MUST-requirements
 
-A.5.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
+A.6.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Adopted by NETCONF WG
 
@@ -1021,7 +1023,7 @@ A.5.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Added this change note.  No other content changes.
 
-A.6.  From version 02 to 03
+A.7.  From version 02 to 03
 
    *  Changed IANA section to IESG per IANA email
 
@@ -1031,7 +1033,7 @@ A.6.  From version 02 to 03
 
    *  Created a dedicated section for the YANG modules
 
-A.7.  From version 01 to 02
+A.8.  From version 01 to 02
 
    *  Added Error Handling intial section
 
@@ -1040,7 +1042,7 @@ A.7.  From version 01 to 02
 
    *  Added 'YANG Module Names' to IANA Considerations
 
-A.8.  From version 00 to 01
+A.9.  From version 00 to 01
 
    *  Added new section: Implementation example 2: YANG Datastore
 
