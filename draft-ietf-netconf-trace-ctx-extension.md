@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2025-09-08
+date: 2025-10-19
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
@@ -57,7 +57,6 @@ normative:
   RFC8341:
   RFC8446:
   RFC8525:
-  RFC8791:
   RFC9000:
   I-D.draft-ietf-netmod-rfc8407bis-28:
 
@@ -420,7 +419,7 @@ This document registers three module names in the 'YANG Module Names' registry, 
   prefix: ietf-trace-ctx-traceparent-1.0
 
   namespace:
-  urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0
+    urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0
 
   RFC: XXXX
 ~~~
@@ -433,7 +432,7 @@ and
   prefix: ietf-trace-ctx-tracestate-1.0
 
   namespace:
-  urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0
+    urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0
 
   RFC: XXXX
 ~~~
@@ -457,6 +456,9 @@ The authors would like to acknowledge the valuable implementation feedback from 
 --- back
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 04 to version 05
+- More WGLC and sheepard comments
 
 ## From version 03 to version 04
 - WGLC data change.
