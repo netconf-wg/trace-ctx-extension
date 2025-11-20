@@ -8,7 +8,7 @@ docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 05
+v: 06
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
