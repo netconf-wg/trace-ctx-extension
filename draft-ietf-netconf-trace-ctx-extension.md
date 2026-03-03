@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2025-10-19
+date: 2025-03-03
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
@@ -44,8 +44,8 @@ author:
 
  -
     fullname: Jan Lindblad
-    organization: Cisco Systems
-    email: jlindbla@cisco.com
+    organization: All For Eco
+    email: jan.lindblad+ietf@for.eco
 
 normative:
   RFC2119:
@@ -456,6 +456,9 @@ The authors would like to acknowledge the valuable implementation feedback from 
 --- back
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 05 to version 06
+- We introduced a bug in the YANG model in version 03 as container was not needed per RFC 8791.
 
 ## From version 04 to version 05
 - More WGLC and sheepard comments
