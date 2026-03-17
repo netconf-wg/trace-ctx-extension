@@ -2,7 +2,7 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2025-03-03
+date: 2026-03-17
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
@@ -290,7 +290,7 @@ As in all XML documents, the order between the attributes in an XML tag has no s
 
 ## Error handling
 
-The NETCONF server SHOULD follow the "Processing Model for Working with Trace Context" as specified in {{W3C-Trace-Context}}.  Based on this processing model, it is NOT RECOMMENDED to reject an RPC because of the trace context attribute values.
+When interacting with these extensions, the NETCONF server follow the specifications of section 2.3 in {{W3C-Trace-Context}}. A detailed processing model example is also provided in the document.  Based on this processing model, it is NOT RECOMMENDED to reject an RPC because of the trace context attribute values.
 
 If the server still decides to reject the RPC because of the trace context attribute values, ietf-trace-context.yang SHOULD be included in the YANG library and the server MUST return a NETCONF rpc-error with the following values:
 
@@ -459,6 +459,7 @@ The authors would like to acknowledge the valuable implementation feedback from 
 
 ## From version 05 to version 06
 - We introduced a bug in the YANG model in version 03 as container was not needed per RFC 8791.
+- Serveral edits based on OpsDir comments
 
 ## From version 04 to version 05
 - More WGLC and sheepard comments
