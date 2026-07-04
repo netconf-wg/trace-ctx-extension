@@ -2,13 +2,13 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2026-03-17
+date: 2026-07-04
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 06
+v: 07
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -261,7 +261,7 @@ For example, a NETCONF client might send:
 
 In all cases above where a client or server adds a w3ctc:traceparent attribute to a tag, that client or server MAY also add one w3ctc:tracestate attribute to the same tag.
 
-The proper encoding and interpretation of the contents of the w3ctc:traceparent attribute is described in {{W3C-Trace-Context}} section 3.2 except 3.2.1.  The proper encoding and interpretation of the contents in the w3ctc:tracestate attribute is described in {{W3C-Trace-Context}} section 3.3 except 3.3.1 and 3.3.1.1.  A NETCONF XML tag can only have zero or one w3ctc:tracestate attributes, so its content MUST always be encoded as a single string.  The tracestate field value is a list of list-members separated by commas (,).  A list-member is a key/value pair separated by an equals sign (=).  Spaces and horizontal tabs surrounding list-members are ignored.  There is no limit to the number of list-members in a list.
+The proper encoding and interpretation of the contents of the w3ctc:traceparent attribute is described in {{W3C-Trace-Context}} section 3.2 except 3.2.1.  The proper encoding and interpretation of the contents in the w3ctc:tracestate attribute is described in {{W3C-Trace-Context}} section 3.3 except 3.3.1 and 3.3.1.1.  A NETCONF XML tag can only have zero or one w3ctc:tracestate attributes, so its content MUST always be encoded as a single string.  The tracestate field value is a list of list-members separated by commas (,).  A list-member is a key/value pair separated by an equals sign (=). All whitespace surrounding list members is ignored. There is no limit to the number of list members in a list.
 
 For example, a NETCONF client might send:
 
@@ -275,7 +275,7 @@ For example, a NETCONF client might send:
 </rpc>
 ~~~
 
-As in all XML documents, the order between the attributes in an XML tag has no significance.  Clients and servers MUST be prepared to handle the attributes no matter in which order they appear.  The tracestate value MAY contain double quotes in its payload.  If so, they MUST be encoded according to XML rules, for example:
+As in all XML documents, the order between the attributes in an XML tag has no significance.  Clients and servers MUST be prepared to handle the attributes no matter in which order they appear.  The tracestate value MAY contain double quotes, commas (,), or equals (=) signs in its payload.  If so, they MUST be encoded according to XML rules to avoid injection attacks, for example:
 
 ~~~ xml
 <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1"
@@ -348,7 +348,7 @@ This might give the following error response:
 
 This extension refers to the {{W3C-Trace-Context}} trace context capability. The W3C traceparent and tracestate headers include the notion of versions. It would be desirable for a NETCONF client to be able to discover the one or multiple versions of these headers supported by a server.
 
-To achieve this goal, and to avoid having to define a new NETCONF extension for each headers versions, we define a pair of YANG modules (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These capabilities that will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
+To achieve this goal, and to avoid having to define a new NETCONF extension for each headers version, we define a pair of YANG modules (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-1.0.yang) that MUST be included in the YANG library per {{RFC8525}} of the NETCONF server supporting the NETCONF Trace Context extension. These YANG module capabilities will refer to the headers' supported versions. Future updates of this document could include additional YANG modules for new headers' versions.
 
 # YANG Modules
 
@@ -391,7 +391,7 @@ The YANG modules specified in this document are used to flag capabilities define
 
 The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.
 
-The meta-name and meta-value attributes in the ietf-trace-context.yang should not echo any information received from an erroneos request or the system, in order to avoid bad actors receiving additional contextual information.
+The meta-name and meta-value attributes in the ietf-trace-context.yang should not echo any information received from an erroneous request or the system, in order to avoid bad actors receiving additional contextual information.  When bad values are encountered, further processing of them should stop immediately.
 
 # IANA Considerations
 
@@ -456,6 +456,14 @@ The authors would like to acknowledge the valuable implementation feedback from 
 --- back
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 06 to version 07
+- All Shepperd comments.
+- Corrected missing period in YANG modules to avoid pyang warning.
+- Clarifies that all whitespaces are ignored.
+- Enhanced tracestate encoding guidance to explicitly mention commas (,) and equals (=) signs must be encoded per XML rules to avoid injection attacks.
+- Enhanced Security Considerations to clarify that meta-name and meta-value should not echo erroneous requests and that further processing should stop immediately when bad values are encountered.
+- Added clarification that Clients and servers MUST be prepared to handle special characters in tracestate values.
 
 ## From version 05 to version 06
 - We introduced a bug in the YANG model in version 03 as container was not needed per RFC 8791.
