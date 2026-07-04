@@ -5,10 +5,10 @@
 Network Configuration                                        R. Gagliano
 Internet-Draft                                             Cisco Systems
 Intended status: Standards Track                              K. Larsson
-Expires: 4 September 2025                            Deutsche Telekom AG
+Expires: 5 January 2027                              Deutsche Telekom AG
                                                              J. Lindblad
                                                              All For Eco
-                                                            3 March 2025
+                                                             4 July 2026
 
 
          NETCONF Extension to support Trace Context propagation
@@ -54,11 +54,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2025.
+   This Internet-Draft will expire on 5 January 2027.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -94,17 +94,18 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Changes (to be deleted by RFC Editor)
-     A.1.  From version 05 to version 06
-     A.2.  From version 04 to version 05
-     A.3.  From version 03 to version 04
-     A.4.  From version 02 to 03
-     A.5.  From version 01 to 02
-     A.6.  From version 00 to 01
-     A.7.  From version 03 to
+     A.1.  From version 06 to version 07
+     A.2.  From version 05 to version 06
+     A.3.  From version 04 to version 05
+     A.4.  From version 03 to version 04
+     A.5.  From version 02 to 03
+     A.6.  From version 01 to 02
+     A.7.  From version 00 to 01
+     A.8.  From version 03 to
             draft-ietf-netconf-trace-ctx-extension-00
-     A.8.  From version 02 to 03
-     A.9.  From version 01 to 02
-     A.10. From version 00 to 01
+     A.9.  From version 02 to 03
+     A.10. From version 01 to 02
+     A.11. From version 00 to 01
    Appendix B.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
    Authors' Addresses
@@ -413,9 +414,9 @@ Table of Contents
    XML tag can only have zero or one w3ctc:tracestate attributes, so its
    content MUST always be encoded as a single string.  The tracestate
    field value is a list of list-members separated by commas (,).  A
-   list-member is a key/value pair separated by an equals sign (=).
-   Spaces and horizontal tabs surrounding list-members are ignored.
-   There is no limit to the number of list-members in a list.
+   list-member is a key/value pair separated by an equals sign (=).  All
+   whitespace surrounding list members is ignored.  There is no limit to
+   the number of list members in a list.
 
    For example, a NETCONF client might send:
 
@@ -430,8 +431,9 @@ Table of Contents
    As in all XML documents, the order between the attributes in an XML
    tag has no significance.  Clients and servers MUST be prepared to
    handle the attributes no matter in which order they appear.  The
-   tracestate value MAY contain double quotes in its payload.  If so,
-   they MUST be encoded according to XML rules, for example:
+   tracestate value MAY contain double quotes, commas (,), or equals (=)
+   signs in its payload.  If so, they MUST be encoded according to XML
+   rules to avoid injection attacks, for example:
 
    <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1"
         xmlns:w3ctc="urn:ietf:params:xml:ns:netconf:w3ctc:1.0"
@@ -444,8 +446,9 @@ Table of Contents
 
 2.1.  Error handling
 
-   The NETCONF server SHOULD follow the "Processing Model for Working
-   with Trace Context" as specified in [W3C-Trace-Context].  Based on
+   When interacting with these extensions, the NETCONF server follow the
+   specifications of section 2.3 in [W3C-Trace-Context].  A detailed
+   processing model example is also provided in the document.  Based on
    this processing model, it is NOT RECOMMENDED to reject an RPC because
    of the trace context attribute values.
 
@@ -511,11 +514,11 @@ Table of Contents
    supported by a server.
 
    To achieve this goal, and to avoid having to define a new NETCONF
-   extension for each headers versions, we define a pair of YANG modules
+   extension for each headers version, we define a pair of YANG modules
    (ietf-trace-ctx-traceparent-1.0.yang and ietf-trace-ctx-tracestate-
    1.0.yang) that MUST be included in the YANG library per [RFC8525] of
    the NETCONF server supporting the NETCONF Trace Context extension.
-   These capabilities that will refer to the headers' supported
+   These YANG module capabilities will refer to the headers' supported
    versions.  Future updates of this document could include additional
    YANG modules for new headers' versions.
 
@@ -578,7 +581,7 @@ Table of Contents
 
         This version of this YANG module is part of RFC XXXX
         (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-        for full legal notices
+        for full legal notices.
 
         The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
         NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -709,7 +712,7 @@ Table of Contents
 
         This version of this YANG module is part of RFC XXXX
         (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-        for full legal notices
+        for full legal notices.
 
         The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
         NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -768,7 +771,7 @@ Table of Contents
 
         This version of this YANG module is part of RFC XXXX
         (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-        for full legal notices
+        for full legal notices.
 
         The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
         NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -821,8 +824,9 @@ Table of Contents
 
    The meta-name and meta-value attributes in the ietf-trace-
    context.yang should not echo any information received from an
-   erroneos request or the system, in order to avoid bad actors
-   receiving additional contextual information.
+   erroneous request or the system, in order to avoid bad actors
+   receiving additional contextual information.  When bad values are
+   encountered, further processing of them should stop immediately.
 
 5.  IANA Considerations
 
@@ -977,33 +981,55 @@ Table of Contents
 
 Appendix A.  Changes (to be deleted by RFC Editor)
 
-A.1.  From version 05 to version 06
+A.1.  From version 06 to version 07
+
+   *  All Shepperd comments.
+
+   *  Corrected missing period in YANG modules to avoid pyang warning.
+
+   *  Clarifies that all whitespaces are ignored.
+
+   *  Enhanced tracestate encoding guidance to explicitly mention commas
+      (,) and equals (=) signs must be encoded per XML rules to avoid
+      injection attacks.
+
+   *  Enhanced Security Considerations to clarify that meta-name and
+      meta-value should not echo erroneous requests and that further
+      processing should stop immediately when bad values are
+      encountered.
+
+   *  Added clarification that Clients and servers MUST be prepared to
+      handle special characters in tracestate values.
+
+A.2.  From version 05 to version 06
 
    *  We introduced a bug in the YANG model in version 03 as container
       was not needed per RFC 8791.
 
-A.2.  From version 04 to version 05
+   *  Serveral edits based on OpsDir comments
+
+A.3.  From version 04 to version 05
 
    *  More WGLC and sheepard comments
 
-A.3.  From version 03 to version 04
+A.4.  From version 03 to version 04
 
    *  WGLC data change.
 
-A.4.  From version 02 to 03
+A.5.  From version 02 to 03
 
    *  Changed document Abbreviation
 
    *  trace-context-error-info is a container in example
 
-A.5.  From version 01 to 02
+A.6.  From version 01 to 02
 
    *  Enhanced Terminology and moved it up in the document.
 
    *  Changed namespaces and module names to map WGLC comments and IETF
       requirements
 
-A.6.  From version 00 to 01
+A.7.  From version 00 to 01
 
    *  Added Security considerations
 
@@ -1015,7 +1041,7 @@ A.6.  From version 00 to 01
 
    *  Firmed up error handling and YANG-library to MUST-requirements
 
-A.7.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
+A.8.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Adopted by NETCONF WG
 
@@ -1027,7 +1053,7 @@ A.7.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Added this change note.  No other content changes.
 
-A.8.  From version 02 to 03
+A.9.  From version 02 to 03
 
    *  Changed IANA section to IESG per IANA email
 
@@ -1037,7 +1063,7 @@ A.8.  From version 02 to 03
 
    *  Created a dedicated section for the YANG modules
 
-A.9.  From version 01 to 02
+A.10.  From version 01 to 02
 
    *  Added Error Handling intial section
 
@@ -1046,7 +1072,7 @@ A.9.  From version 01 to 02
 
    *  Added 'YANG Module Names' to IANA Considerations
 
-A.10.  From version 00 to 01
+A.11.  From version 00 to 01
 
    *  Added new section: Implementation example 2: YANG Datastore
 
