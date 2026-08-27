@@ -3,12 +3,13 @@
 
 
 Network Configuration                                        R. Gagliano
-Internet-Draft                                             Cisco Systems
-Intended status: Standards Track                              K. Larsson
-Expires: 5 January 2027                              Deutsche Telekom AG
+Internet-Draft                                             C. Rennerskog
+Intended status: Standards Track                           Cisco Systems
+Expires: 28 February 2027                                     K. Larsson
+                                                     Deutsche Telekom AG
                                                              J. Lindblad
                                                              All For Eco
-                                                             4 July 2026
+                                                          27 August 2026
 
 
          NETCONF Extension to support Trace Context propagation
@@ -54,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 January 2027.
+   This Internet-Draft will expire on 28 February 2027.
 
 Copyright Notice
 
@@ -93,20 +94,22 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
-   Appendix A.  Changes (to be deleted by RFC Editor)
-     A.1.  From version 06 to version 07
-     A.2.  From version 05 to version 06
-     A.3.  From version 04 to version 05
-     A.4.  From version 03 to version 04
-     A.5.  From version 02 to 03
-     A.6.  From version 01 to 02
-     A.7.  From version 00 to 01
-     A.8.  From version 03 to
+   Appendix A.  Appendix A: Example of yang-library for trace context
+   Appendix B.  Changes (to be deleted by RFC Editor)
+     B.1.  From version 07 to version 08
+     B.2.  From version 06 to version 07
+     B.3.  From version 05 to version 06
+     B.4.  From version 04 to version 05
+     B.5.  From version 03 to version 04
+     B.6.  From version 02 to 03
+     B.7.  From version 01 to 02
+     B.8.  From version 00 to 01
+     B.9.  From version 03 to
             draft-ietf-netconf-trace-ctx-extension-00
-     A.9.  From version 02 to 03
-     A.10. From version 01 to 02
-     A.11. From version 00 to 01
-   Appendix B.  XML Attributes vs RPCs input augmentations discussion
+     B.10. From version 02 to 03
+     B.11. From version 01 to 02
+     B.12. From version 00 to 01
+   Appendix C.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
    Authors' Addresses
 
@@ -641,6 +644,7 @@ Table of Contents
            related to them.  The server has aborted the RPC.";
        leaf meta-name {
          type string;
+         mandatory true;
          description
            "The name of the problematic or missing meta information.
              In NETCONF, the qualified XML attribute name.
@@ -651,6 +655,7 @@ Table of Contents
        }
        leaf meta-value {
          type string;
+         mandatory true;
          description
            "The value of the problematic meta information received
              by the server.
@@ -660,6 +665,7 @@ Table of Contents
        }
        leaf error-type {
          type meta-error-type;
+         mandatory true;
          description
            "Indicates the type of meta information problem
              detected by the server.
@@ -670,6 +676,15 @@ Table of Contents
        }
      }
    }
+   <CODE ENDS>
+
+   <CODE BEGINS> file "ietf-trace-context.tree"
+   module: ietf-trace-context
+
+     structure trace-context-error-info:
+       +-- meta-name     string
+       +-- meta-value    string
+       +-- error-type    meta-error-type
    <CODE ENDS>
 
 3.2.  YANG module for traceparent header version 1.0
@@ -699,6 +714,9 @@ Table of Contents
        "This module documents the support for trace context traceparent
         versiom 1.0 in alignment with W3C versions:
         https://www.w3.org/TR/2021/REC-trace-context-1-20211123
+
+        This module is used for capability advertisement only, without
+        any YANG data nodes.
 
         Copyright (c) 2024 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
@@ -759,6 +777,9 @@ Table of Contents
         versiom 1.0 in alignment with W3C versions:
         https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
+        This module is used for capability advertisement only, without
+        any YANG data nodes.
+
         Copyright (c) 2024 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
 
@@ -793,7 +814,7 @@ Table of Contents
 4.  Security Considerations
 
    This section is modeled after the template described in Section 3.7
-   of [I-D.draft-ietf-netmod-rfc8407bis-28].
+   of [RFC9907].
 
    The ietf-trace-context, ietf-trace-ctx-tracestate-1.0 and ietf-trace-
    ctx-traceparent-1.0 YANG modules define data models that are designed
@@ -809,12 +830,12 @@ Table of Contents
    RESTCONF protocol operations and content.
 
    The YANG modules specified in this document are used to flag
-   capabilities define and define an error information structure.  As
-   such, these YANG modules do not contain any configuration data, state
-   data or RPC definitions, which makes their security implications very
-   limited.  The additional attributes specified in this document (but
-   not in YANG modules, since YANG cannot be used to specify attributes)
-   are worth mentioning, however.
+   capabilities support and to define an error information structure.
+   As such, these YANG modules do not contain any configuration data,
+   state data or RPC definitions, which makes their security
+   implications very limited.  The additional attributes specified in
+   this document (but not in YANG modules, since YANG cannot be used to
+   specify attributes) are worth mentioning, however.
 
    The traceparent and tracestate attributes make it easier to track the
    flow of requests and their downstream effect on other systems.  This
@@ -881,24 +902,15 @@ Table of Contents
 
 6.  Acknowledgments
 
-   The authors would like to acknowledge the valuable implementation
-   feedback from Christian Rennerskog and Per Andersson.  Many thanks to
-   Raul Rivas Felix, Alexander Stoklasa, Luca Relandini and Erwin
-   Vrolijk for their help with the demos regarding integrations.  The
-   help and support from Jean Quilbeuf and Benoit Claise has also been
-   invaluable to this work.
+   The authors would like to acknowledge the valuable feedback from Per
+   Andersson.  Many thanks to Raul Rivas Felix, Alexander Stoklasa, Luca
+   Relandini and Erwin Vrolijk for their help with the demos regarding
+   integrations.  The help and support from Jean Quilbeuf and Benoit
+   Claise has also been invaluable to this work.
 
 7.  References
 
 7.1.  Normative References
-
-   [I-D.draft-ietf-netmod-rfc8407bis-28]
-              Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
-              Authors and Reviewers of Documents Containing YANG Data
-              Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-28, 5 June 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-28>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -945,6 +957,11 @@ Table of Contents
               DOI 10.17487/RFC9000, May 2021,
               <https://www.rfc-editor.org/rfc/rfc9000>.
 
+   [RFC9907]  Bierman, A., Boucadair, M., Ed., and Q. Wu, "Guidelines
+              for Authors and Reviewers of Documents Containing YANG
+              Data Models", BCP 216, RFC 9907, DOI 10.17487/RFC9907,
+              March 2026, <https://www.rfc-editor.org/rfc/rfc9907>.
+
    [W3C-Trace-Context]
               "W3C Recommendation on Trace Context", 23 November 2021,
               <https://www.w3.org/TR/2021/REC-trace-context-
@@ -979,9 +996,45 @@ Table of Contents
               23 November 2021,
               <https://www.w3.org/TR/baggage/#examples-of-http-headers>.
 
-Appendix A.  Changes (to be deleted by RFC Editor)
+Appendix A.  Appendix A: Example of yang-library for trace context
 
-A.1.  From version 06 to version 07
+   This document includes three YANG modules, two of which are used only
+   for publishing the traceparent and tracestate header versions.  This
+   is an example of a YANG library response for the modules in this
+   document.
+
+   <yang-library xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-library">
+     <module-set>
+       <name>common</name>
+           <module>
+             <name>ietf-netconf-otlp-context</name>
+             <revision>2023-07-01</revision>
+             <namespace>urn:ietf:params:xml:ns:yang:otlp-context</namespace>
+           </module>
+       <module>
+         <name>ietf-netconf-otlp-context-traceparent-version-1.0</name>
+         <revision>2024-11-07</revision>
+         <namespace>urn:ietf:params:xml:ns:yang:traceparent:1.0</namespace>
+       </module>
+       <module>
+         <name>ietf-netconf-otlp-context-tracestate-version-1.0</name>
+         <revision>2024-11-07</revision>
+         <namespace>urn:ietf:params:xml:ns:yang:tracestate:1.0</namespace>
+       </module>
+     </module-set>
+   </yang-library>
+
+Appendix B.  Changes (to be deleted by RFC Editor)
+
+B.1.  From version 07 to version 08
+
+   *  Added comments from YANG DOCTOR review, includding adding
+      mandatory leafs, adding a tree file, adding an appendix with the
+      yang-library example
+
+   *  Added Christian Rennerskog as co-author
+
+B.2.  From version 06 to version 07
 
    *  All Shepperd comments.
 
@@ -1001,35 +1054,35 @@ A.1.  From version 06 to version 07
    *  Added clarification that Clients and servers MUST be prepared to
       handle special characters in tracestate values.
 
-A.2.  From version 05 to version 06
+B.3.  From version 05 to version 06
 
    *  We introduced a bug in the YANG model in version 03 as container
       was not needed per RFC 8791.
 
    *  Serveral edits based on OpsDir comments
 
-A.3.  From version 04 to version 05
+B.4.  From version 04 to version 05
 
    *  More WGLC and sheepard comments
 
-A.4.  From version 03 to version 04
+B.5.  From version 03 to version 04
 
    *  WGLC data change.
 
-A.5.  From version 02 to 03
+B.6.  From version 02 to 03
 
    *  Changed document Abbreviation
 
    *  trace-context-error-info is a container in example
 
-A.6.  From version 01 to 02
+B.7.  From version 01 to 02
 
    *  Enhanced Terminology and moved it up in the document.
 
    *  Changed namespaces and module names to map WGLC comments and IETF
       requirements
 
-A.7.  From version 00 to 01
+B.8.  From version 00 to 01
 
    *  Added Security considerations
 
@@ -1041,7 +1094,7 @@ A.7.  From version 00 to 01
 
    *  Firmed up error handling and YANG-library to MUST-requirements
 
-A.8.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
+B.9.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Adopted by NETCONF WG
 
@@ -1053,7 +1106,7 @@ A.8.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Added this change note.  No other content changes.
 
-A.9.  From version 02 to 03
+B.10.  From version 02 to 03
 
    *  Changed IANA section to IESG per IANA email
 
@@ -1063,7 +1116,7 @@ A.9.  From version 02 to 03
 
    *  Created a dedicated section for the YANG modules
 
-A.10.  From version 01 to 02
+B.11.  From version 01 to 02
 
    *  Added Error Handling intial section
 
@@ -1072,7 +1125,7 @@ A.10.  From version 01 to 02
 
    *  Added 'YANG Module Names' to IANA Considerations
 
-A.11.  From version 00 to 01
+B.12.  From version 00 to 01
 
    *  Added new section: Implementation example 2: YANG Datastore
 
@@ -1084,7 +1137,7 @@ A.11.  From version 00 to 01
       tracing information to be exported to the collectors, showing how
       the two documents are complementary.
 
-Appendix B.  XML Attributes vs RPCs input augmentations discussion (to
+Appendix C.  XML Attributes vs RPCs input augmentations discussion (to
              be deleted by RFC Editor)
 
    There are arguments that can be raised regarding using XML Attribute
@@ -1138,6 +1191,11 @@ Authors' Addresses
    CH-1180 Rolle
    Switzerland
    Email: rogaglia@cisco.com
+
+
+   Christian Rennerskog
+   Cisco Systems
+   Email: crenners@cisco.com
 
 
    Kristian Larsson

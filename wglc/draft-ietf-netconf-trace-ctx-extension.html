@@ -6,6 +6,7 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>NETCONF Extension to support Trace Context propagation</title>
 <meta content="Roque Gagliano" name="author">
+<meta content="Christian Rennerskog" name="author">
 <meta content="Kristian Larsson" name="author">
 <meta content="Jan Lindblad" name="author">
 <meta content="
@@ -18,14 +19,14 @@
 <meta content="draft-ietf-netconf-trace-ctx-extension-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.0
-    Python 3.14.5
+    Python 3.14.7
     ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.11.3
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
@@ -65,7 +66,6 @@
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -114,7 +114,6 @@
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -179,7 +178,6 @@
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1048,11 +1046,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">NETCONF Trace Context Extension</td>
-<td class="right">July 2026</td>
+<td class="right">August 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Gagliano, et al.</td>
-<td class="center">Expires 5 January 2027</td>
+<td class="center">Expires 28 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,16 +1063,20 @@ svg {
 <dd class="internet-draft">draft-ietf-netconf-trace-ctx-extension-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-04" class="published">4 July 2026</time>
+<time datetime="2026-08-27" class="published">27 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-05">5 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-28">28 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">R. Gagliano</div>
+<div class="org">Cisco Systems</div>
+</div>
+<div class="author">
+      <div class="author-name">C. Rennerskog</div>
 <div class="org">Cisco Systems</div>
 </div>
 <div class="author">
@@ -1128,7 +1130,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1231,48 +1233,54 @@ svg {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-changes-to-be-deleted-by-rf" class="internal xref">Changes (to be deleted by RFC Editor)</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-appendix-a-example-of-yang-" class="internal xref">Appendix A: Example of yang-library for trace context</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-changes-to-be-deleted-by-rf" class="internal xref">Changes (to be deleted by RFC Editor)</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-from-version-06-to-version-" class="internal xref">From version 06 to version 07</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-from-version-07-to-version-" class="internal xref">From version 07 to version 08</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-from-version-05-to-version-" class="internal xref">From version 05 to version 06</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-from-version-06-to-version-" class="internal xref">From version 06 to version 07</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
-                <p id="section-toc.1-1.8.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-from-version-04-to-version-" class="internal xref">From version 04 to version 05</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
+                <p id="section-toc.1-1.9.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-from-version-05-to-version-" class="internal xref">From version 05 to version 06</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
-                <p id="section-toc.1-1.8.2.4.1"><a href="#appendix-A.4" class="auto internal xref">A.4</a>.  <a href="#name-from-version-03-to-version-" class="internal xref">From version 03 to version 04</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
+                <p id="section-toc.1-1.9.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-from-version-04-to-version-" class="internal xref">From version 04 to version 05</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5">
-                <p id="section-toc.1-1.8.2.5.1"><a href="#appendix-A.5" class="auto internal xref">A.5</a>.  <a href="#name-from-version-02-to-03" class="internal xref">From version 02 to 03</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
+                <p id="section-toc.1-1.9.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-from-version-03-to-version-" class="internal xref">From version 03 to version 04</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.6">
-                <p id="section-toc.1-1.8.2.6.1"><a href="#appendix-A.6" class="auto internal xref">A.6</a>.  <a href="#name-from-version-01-to-02" class="internal xref">From version 01 to 02</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.6">
+                <p id="section-toc.1-1.9.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-from-version-02-to-03" class="internal xref">From version 02 to 03</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.7">
-                <p id="section-toc.1-1.8.2.7.1"><a href="#appendix-A.7" class="auto internal xref">A.7</a>.  <a href="#name-from-version-00-to-01" class="internal xref">From version 00 to 01</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.7">
+                <p id="section-toc.1-1.9.2.7.1"><a href="#appendix-B.7" class="auto internal xref">B.7</a>.  <a href="#name-from-version-01-to-02" class="internal xref">From version 01 to 02</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8">
-                <p id="section-toc.1-1.8.2.8.1"><a href="#appendix-A.8" class="auto internal xref">A.8</a>.  <a href="#name-from-version-03-to-draft-ie" class="internal xref">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.8">
+                <p id="section-toc.1-1.9.2.8.1"><a href="#appendix-B.8" class="auto internal xref">B.8</a>.  <a href="#name-from-version-00-to-01" class="internal xref">From version 00 to 01</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.9">
-                <p id="section-toc.1-1.8.2.9.1"><a href="#appendix-A.9" class="auto internal xref">A.9</a>.  <a href="#name-from-version-02-to-03-2" class="internal xref">From version 02 to 03</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.9">
+                <p id="section-toc.1-1.9.2.9.1"><a href="#appendix-B.9" class="auto internal xref">B.9</a>.  <a href="#name-from-version-03-to-draft-ie" class="internal xref">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.10">
-                <p id="section-toc.1-1.8.2.10.1"><a href="#appendix-A.10" class="auto internal xref">A.10</a>. <a href="#name-from-version-01-to-02-2" class="internal xref">From version 01 to 02</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.10">
+                <p id="section-toc.1-1.9.2.10.1"><a href="#appendix-B.10" class="auto internal xref">B.10</a>. <a href="#name-from-version-02-to-03-2" class="internal xref">From version 02 to 03</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.11">
-                <p id="section-toc.1-1.8.2.11.1"><a href="#appendix-A.11" class="auto internal xref">A.11</a>. <a href="#name-from-version-00-to-01-2" class="internal xref">From version 00 to 01</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.11">
+                <p id="section-toc.1-1.9.2.11.1"><a href="#appendix-B.11" class="auto internal xref">B.11</a>. <a href="#name-from-version-01-to-02-2" class="internal xref">From version 01 to 02</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.12">
+                <p id="section-toc.1-1.9.2.12.1"><a href="#appendix-B.12" class="auto internal xref">B.12</a>. <a href="#name-from-version-00-to-01-2" class="internal xref">From version 00 to 01</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-xml-attributes-vs-rpcs-inpu" class="internal xref">XML Attributes vs RPCs input augmentations discussion (to be deleted by RFC Editor)</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-xml-attributes-vs-rpcs-inpu" class="internal xref">XML Attributes vs RPCs input augmentations discussion (to be deleted by RFC Editor)</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1722,6 +1730,7 @@ module ietf-trace-context {
         related to them.  The server has aborted the RPC.";
     leaf meta-name {
       type string;
+      mandatory true;
       description
         "The name of the problematic or missing meta information.
           In NETCONF, the qualified XML attribute name.
@@ -1732,6 +1741,7 @@ module ietf-trace-context {
     }
     leaf meta-value {
       type string;
+      mandatory true;
       description
         "The value of the problematic meta information received
           by the server.
@@ -1741,6 +1751,7 @@ module ietf-trace-context {
     }
     leaf error-type {
       type meta-error-type;
+      mandatory true;
       description
         "Indicates the type of meta information problem
           detected by the server.
@@ -1753,6 +1764,18 @@ module ietf-trace-context {
 }
 
 &lt;CODE ENDS&gt;</pre><a href="#section-3.1-1" class="pilcrow">¶</a>
+</div>
+<div class="lang-text sourcecode" id="section-3.1-2">
+<pre>&lt;CODE BEGINS&gt; file "ietf-trace-context.tree"
+
+module: ietf-trace-context
+
+  structure trace-context-error-info:
+    +-- meta-name     string
+    +-- meta-value    string
+    +-- error-type    meta-error-type
+
+&lt;CODE ENDS&gt;</pre><a href="#section-3.1-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1788,6 +1811,9 @@ module ietf-trace-ctx-traceparent-1.0 {
     "This module documents the support for trace context traceparent
      versiom 1.0 in alignment with W3C versions:
      https://www.w3.org/TR/2021/REC-trace-context-1-20211123
+
+     This module is used for capability advertisement only, without
+     any YANG data nodes.
 
      Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -1856,6 +1882,9 @@ module ietf-trace-ctx-tracestate-1.0 {
      versiom 1.0 in alignment with W3C versions:
      https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
+     This module is used for capability advertisement only, without
+     any YANG data nodes.
+
      Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
@@ -1897,10 +1926,10 @@ module ietf-trace-ctx-tracestate-1.0 {
       <h2 id="name-security-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-4-1">This section is modeled after the template described in Section 3.7 of <span>[<a href="#I-D.draft-ietf-netmod-rfc8407bis-28" class="cite xref">I-D.draft-ietf-netmod-rfc8407bis-28</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section is modeled after the template described in Section 3.7 of <span>[<a href="#RFC9907" class="cite xref">RFC9907</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">The ietf-trace-context, ietf-trace-ctx-tracestate-1.0 and ietf-trace-ctx-traceparent-1.0  YANG modules define data models that are designed to be accessed via YANG-based management protocols, such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>. These YANG-based management protocols (1) have to use a secure transport layer (e.g., SSH <span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) and (2) have to use mutual authentication.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span> provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">The YANG modules specified in this document are used to flag capabilities define and define an error information structure. As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-4">The YANG modules specified in this document are used to flag capabilities support and to define an error information structure. As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <p id="section-4-6">The meta-name and meta-value attributes in the ietf-trace-context.yang should not echo any information received from an erroneous request or the system, in order to avoid bad actors receiving additional contextual information.  When bad values are encountered, further processing of them should stop immediately.<a href="#section-4-6" class="pilcrow">¶</a></p>
 </section>
@@ -1971,7 +2000,7 @@ module ietf-trace-ctx-tracestate-1.0 {
       <h2 id="name-acknowledgments">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-6-1">The authors would like to acknowledge the valuable implementation feedback from Christian Rennerskog and Per Andersson.  Many thanks to Raul Rivas Felix, Alexander Stoklasa, Luca Relandini and Erwin Vrolijk for their help with the demos regarding integrations.  The help and support from Jean Quilbeuf and Benoit Claise has also been invaluable to this work.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">The authors would like to acknowledge the valuable feedback from Per Andersson.  Many thanks to Raul Rivas Felix, Alexander Stoklasa, Luca Relandini and Erwin Vrolijk for their help with the demos regarding integrations.  The help and support from Jean Quilbeuf and Benoit Claise has also been invaluable to this work.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1985,10 +2014,6 @@ module ietf-trace-ctx-tracestate-1.0 {
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="I-D.draft-ietf-netmod-rfc8407bis-28">[I-D.draft-ietf-netmod-rfc8407bis-28]</dt>
-        <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-28</span>, <time datetime="2025-06-05" class="refDate">5 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -2028,6 +2053,10 @@ module ietf-trace-ctx-tracestate-1.0 {
 <dt id="RFC9000">[RFC9000]</dt>
         <dd>
 <span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9000">https://www.rfc-editor.org/rfc/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9907">[RFC9907]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="seriesInfo">BCP 216</span>, <span class="seriesInfo">RFC 9907</span>, <span class="seriesInfo">DOI 10.17487/RFC9907</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9907">https://www.rfc-editor.org/rfc/rfc9907</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="W3C-Trace-Context">[W3C-Trace-Context]</dt>
       <dd>
@@ -2071,209 +2100,258 @@ module ietf-trace-ctx-tracestate-1.0 {
 </div>
 </section>
 </div>
-<div id="changes-to-be-deleted-by-rfc-editor">
+<div id="appendix-a-example-of-yang-library-for-trace-context">
 <section id="appendix-A">
-      <h2 id="name-changes-to-be-deleted-by-rf">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-changes-to-be-deleted-by-rf" class="section-name selfRef">Changes (to be deleted by RFC Editor)</a>
+      <h2 id="name-appendix-a-example-of-yang-">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-appendix-a-example-of-yang-" class="section-name selfRef">Appendix A: Example of yang-library for trace context</a>
       </h2>
-<div id="from-version-06-to-version-07">
-<section id="appendix-A.1">
-        <h3 id="name-from-version-06-to-version-">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-from-version-06-to-version-" class="section-name selfRef">From version 06 to version 07</a>
+<p id="appendix-A-1">This document includes three YANG modules, two of which are used only for
+publishing the traceparent and tracestate header versions. This is an example
+of a YANG library response for the modules in this document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<div class="lang-xml sourcecode" id="appendix-A-2">
+<pre>
+&lt;yang-library xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-library"&gt;
+  &lt;module-set&gt;
+    &lt;name&gt;common&lt;/name&gt;
+        &lt;module&gt;
+          &lt;name&gt;ietf-netconf-otlp-context&lt;/name&gt;
+          &lt;revision&gt;2023-07-01&lt;/revision&gt;
+          &lt;namespace&gt;urn:ietf:params:xml:ns:yang:otlp-context&lt;/namespace&gt;
+        &lt;/module&gt;
+    &lt;module&gt;
+      &lt;name&gt;ietf-netconf-otlp-context-traceparent-version-1.0&lt;/name&gt;
+      &lt;revision&gt;2024-11-07&lt;/revision&gt;
+      &lt;namespace&gt;urn:ietf:params:xml:ns:yang:traceparent:1.0&lt;/namespace&gt;
+    &lt;/module&gt;
+    &lt;module&gt;
+      &lt;name&gt;ietf-netconf-otlp-context-tracestate-version-1.0&lt;/name&gt;
+      &lt;revision&gt;2024-11-07&lt;/revision&gt;
+      &lt;namespace&gt;urn:ietf:params:xml:ns:yang:tracestate:1.0&lt;/namespace&gt;
+    &lt;/module&gt;
+  &lt;/module-set&gt;
+&lt;/yang-library&gt;
+</pre><a href="#appendix-A-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="changes-to-be-deleted-by-rfc-editor">
+<section id="appendix-B">
+      <h2 id="name-changes-to-be-deleted-by-rf">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-changes-to-be-deleted-by-rf" class="section-name selfRef">Changes (to be deleted by RFC Editor)</a>
+      </h2>
+<div id="from-version-07-to-version-08">
+<section id="appendix-B.1">
+        <h3 id="name-from-version-07-to-version-">
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-from-version-07-to-version-" class="section-name selfRef">From version 07 to version 08</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.1-1.1">
-            <p id="appendix-A.1-1.1.1">All Shepperd comments.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.1-1.1">
+            <p id="appendix-B.1-1.1.1">Added comments from YANG DOCTOR review, includding adding mandatory leafs, adding a tree file, adding an appendix with the yang-library example<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.2">
-            <p id="appendix-A.1-1.2.1">Corrected missing period in YANG modules to avoid pyang warning.<a href="#appendix-A.1-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.1-1.2">
+            <p id="appendix-B.1-1.2.1">Added  Christian Rennerskog as co-author<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.3">
-            <p id="appendix-A.1-1.3.1">Clarifies that all whitespaces are ignored.<a href="#appendix-A.1-1.3.1" class="pilcrow">¶</a></p>
+        </ul>
+</section>
+</div>
+<div id="from-version-06-to-version-07">
+<section id="appendix-B.2">
+        <h3 id="name-from-version-06-to-version-">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-from-version-06-to-version-" class="section-name selfRef">From version 06 to version 07</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.2-1.1">
+            <p id="appendix-B.2-1.1.1">All Shepperd comments.<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.4">
-            <p id="appendix-A.1-1.4.1">Enhanced tracestate encoding guidance to explicitly mention commas (,) and equals (=) signs must be encoded per XML rules to avoid injection attacks.<a href="#appendix-A.1-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.2-1.2">
+            <p id="appendix-B.2-1.2.1">Corrected missing period in YANG modules to avoid pyang warning.<a href="#appendix-B.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.5">
-            <p id="appendix-A.1-1.5.1">Enhanced Security Considerations to clarify that meta-name and meta-value should not echo erroneous requests and that further processing should stop immediately when bad values are encountered.<a href="#appendix-A.1-1.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.2-1.3">
+            <p id="appendix-B.2-1.3.1">Clarifies that all whitespaces are ignored.<a href="#appendix-B.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.6">
-            <p id="appendix-A.1-1.6.1">Added clarification that Clients and servers MUST be prepared to handle special characters in tracestate values.<a href="#appendix-A.1-1.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.2-1.4">
+            <p id="appendix-B.2-1.4.1">Enhanced tracestate encoding guidance to explicitly mention commas (,) and equals (=) signs must be encoded per XML rules to avoid injection attacks.<a href="#appendix-B.2-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.2-1.5">
+            <p id="appendix-B.2-1.5.1">Enhanced Security Considerations to clarify that meta-name and meta-value should not echo erroneous requests and that further processing should stop immediately when bad values are encountered.<a href="#appendix-B.2-1.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.2-1.6">
+            <p id="appendix-B.2-1.6.1">Added clarification that Clients and servers MUST be prepared to handle special characters in tracestate values.<a href="#appendix-B.2-1.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-05-to-version-06">
-<section id="appendix-A.2">
+<section id="appendix-B.3">
         <h3 id="name-from-version-05-to-version-">
-<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-from-version-05-to-version-" class="section-name selfRef">From version 05 to version 06</a>
+<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-from-version-05-to-version-" class="section-name selfRef">From version 05 to version 06</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.2-1.1">
-            <p id="appendix-A.2-1.1.1">We introduced a bug in the YANG model in version 03 as container was not needed per RFC 8791.<a href="#appendix-A.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.3-1.1">
+            <p id="appendix-B.3-1.1.1">We introduced a bug in the YANG model in version 03 as container was not needed per RFC 8791.<a href="#appendix-B.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.2-1.2">
-            <p id="appendix-A.2-1.2.1">Serveral edits based on OpsDir comments<a href="#appendix-A.2-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.3-1.2">
+            <p id="appendix-B.3-1.2.1">Serveral edits based on OpsDir comments<a href="#appendix-B.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-04-to-version-05">
-<section id="appendix-A.3">
+<section id="appendix-B.4">
         <h3 id="name-from-version-04-to-version-">
-<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-from-version-04-to-version-" class="section-name selfRef">From version 04 to version 05</a>
+<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-from-version-04-to-version-" class="section-name selfRef">From version 04 to version 05</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.3-1.1">
-            <p id="appendix-A.3-1.1.1">More WGLC and sheepard comments<a href="#appendix-A.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.4-1.1">
+            <p id="appendix-B.4-1.1.1">More WGLC and sheepard comments<a href="#appendix-B.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-03-to-version-04">
-<section id="appendix-A.4">
+<section id="appendix-B.5">
         <h3 id="name-from-version-03-to-version-">
-<a href="#appendix-A.4" class="section-number selfRef">A.4. </a><a href="#name-from-version-03-to-version-" class="section-name selfRef">From version 03 to version 04</a>
+<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-from-version-03-to-version-" class="section-name selfRef">From version 03 to version 04</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.4-1.1">
-            <p id="appendix-A.4-1.1.1">WGLC data change.<a href="#appendix-A.4-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.5-1.1">
+            <p id="appendix-B.5-1.1.1">WGLC data change.<a href="#appendix-B.5-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-02-to-03">
-<section id="appendix-A.5">
+<section id="appendix-B.6">
         <h3 id="name-from-version-02-to-03">
-<a href="#appendix-A.5" class="section-number selfRef">A.5. </a><a href="#name-from-version-02-to-03" class="section-name selfRef">From version 02 to 03</a>
+<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-from-version-02-to-03" class="section-name selfRef">From version 02 to 03</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.5-1.1">
-            <p id="appendix-A.5-1.1.1">Changed document Abbreviation<a href="#appendix-A.5-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.6-1.1">
+            <p id="appendix-B.6-1.1.1">Changed document Abbreviation<a href="#appendix-B.6-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.5-1.2">
-            <p id="appendix-A.5-1.2.1">trace-context-error-info is a container in example<a href="#appendix-A.5-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.6-1.2">
+            <p id="appendix-B.6-1.2.1">trace-context-error-info is a container in example<a href="#appendix-B.6-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-01-to-02">
-<section id="appendix-A.6">
+<section id="appendix-B.7">
         <h3 id="name-from-version-01-to-02">
-<a href="#appendix-A.6" class="section-number selfRef">A.6. </a><a href="#name-from-version-01-to-02" class="section-name selfRef">From version 01 to 02</a>
+<a href="#appendix-B.7" class="section-number selfRef">B.7. </a><a href="#name-from-version-01-to-02" class="section-name selfRef">From version 01 to 02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.6-1.1">
-            <p id="appendix-A.6-1.1.1">Enhanced Terminology and moved it up in the document.<a href="#appendix-A.6-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.7-1.1">
+            <p id="appendix-B.7-1.1.1">Enhanced Terminology and moved it up in the document.<a href="#appendix-B.7-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.6-1.2">
-            <p id="appendix-A.6-1.2.1">Changed namespaces and module names to map WGLC comments
-and IETF requirements<a href="#appendix-A.6-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.7-1.2">
+            <p id="appendix-B.7-1.2.1">Changed namespaces and module names to map WGLC comments
+and IETF requirements<a href="#appendix-B.7-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-00-to-01">
-<section id="appendix-A.7">
+<section id="appendix-B.8">
         <h3 id="name-from-version-00-to-01">
-<a href="#appendix-A.7" class="section-number selfRef">A.7. </a><a href="#name-from-version-00-to-01" class="section-name selfRef">From version 00 to 01</a>
+<a href="#appendix-B.8" class="section-number selfRef">B.8. </a><a href="#name-from-version-00-to-01" class="section-name selfRef">From version 00 to 01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.7-1.1">
-            <p id="appendix-A.7-1.1.1">Added Security considerations<a href="#appendix-A.7-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.8-1.1">
+            <p id="appendix-B.8-1.1.1">Added Security considerations<a href="#appendix-B.8-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.7-1.2">
-            <p id="appendix-A.7-1.2.1">Added Acknowledgements<a href="#appendix-A.7-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.8-1.2">
+            <p id="appendix-B.8-1.2.1">Added Acknowledgements<a href="#appendix-B.8-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.7-1.3">
-            <p id="appendix-A.7-1.3.1">Added several Normative references<a href="#appendix-A.7-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.8-1.3">
+            <p id="appendix-B.8-1.3.1">Added several Normative references<a href="#appendix-B.8-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.7-1.4">
-            <p id="appendix-A.7-1.4.1">Updated link to latest document on github<a href="#appendix-A.7-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.8-1.4">
+            <p id="appendix-B.8-1.4.1">Updated link to latest document on github<a href="#appendix-B.8-1.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.7-1.5">
-            <p id="appendix-A.7-1.5.1">Firmed up error handling and YANG-library to MUST-requirements<a href="#appendix-A.7-1.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.8-1.5">
+            <p id="appendix-B.8-1.5.1">Firmed up error handling and YANG-library to MUST-requirements<a href="#appendix-B.8-1.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-03-to-draft-ietf-netconf-trace-ctx-extension-00">
-<section id="appendix-A.8">
+<section id="appendix-B.9">
         <h3 id="name-from-version-03-to-draft-ie">
-<a href="#appendix-A.8" class="section-number selfRef">A.8. </a><a href="#name-from-version-03-to-draft-ie" class="section-name selfRef">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a>
+<a href="#appendix-B.9" class="section-number selfRef">B.9. </a><a href="#name-from-version-03-to-draft-ie" class="section-name selfRef">From version 03 to draft-ietf-netconf-trace-ctx-extension-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.8-1.1">
-            <p id="appendix-A.8-1.1.1">Adopted by NETCONF WG<a href="#appendix-A.8-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.9-1.1">
+            <p id="appendix-B.9-1.1.1">Adopted by NETCONF WG<a href="#appendix-B.9-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.8-1.2">
-            <p id="appendix-A.8-1.2.1">Moved repository to NETCONF WG<a href="#appendix-A.8-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.9-1.2">
+            <p id="appendix-B.9-1.2.1">Moved repository to NETCONF WG<a href="#appendix-B.9-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.8-1.3">
-            <p id="appendix-A.8-1.3.1">Changed build system to use martinthomson's excellent framework<a href="#appendix-A.8-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.9-1.3">
+            <p id="appendix-B.9-1.3.1">Changed build system to use martinthomson's excellent framework<a href="#appendix-B.9-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.8-1.4">
-            <p id="appendix-A.8-1.4.1">Ran make fix-lint to remove white space at EOL etc.<a href="#appendix-A.8-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.9-1.4">
+            <p id="appendix-B.9-1.4.1">Ran make fix-lint to remove white space at EOL etc.<a href="#appendix-B.9-1.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.8-1.5">
-            <p id="appendix-A.8-1.5.1">Added this change note. No other content changes.<a href="#appendix-A.8-1.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.9-1.5">
+            <p id="appendix-B.9-1.5.1">Added this change note. No other content changes.<a href="#appendix-B.9-1.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-02-to-03-1">
-<section id="appendix-A.9">
+<section id="appendix-B.10">
         <h3 id="name-from-version-02-to-03-2">
-<a href="#appendix-A.9" class="section-number selfRef">A.9. </a><a href="#name-from-version-02-to-03-2" class="section-name selfRef">From version 02 to 03</a>
+<a href="#appendix-B.10" class="section-number selfRef">B.10. </a><a href="#name-from-version-02-to-03-2" class="section-name selfRef">From version 02 to 03</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.9-1.1">
-            <p id="appendix-A.9-1.1.1">Changed IANA section to IESG per IANA email<a href="#appendix-A.9-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.10-1.1">
+            <p id="appendix-B.10-1.1.1">Changed IANA section to IESG per IANA email<a href="#appendix-B.10-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.9-1.2">
-            <p id="appendix-A.9-1.2.1">Created sx:structure and improved error example<a href="#appendix-A.9-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.10-1.2">
+            <p id="appendix-B.10-1.2.1">Created sx:structure and improved error example<a href="#appendix-B.10-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.9-1.3">
-            <p id="appendix-A.9-1.3.1">Added ietf-netconf-otlp-context.yang for the sx:structure<a href="#appendix-A.9-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.10-1.3">
+            <p id="appendix-B.10-1.3.1">Added ietf-netconf-otlp-context.yang for the sx:structure<a href="#appendix-B.10-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.9-1.4">
-            <p id="appendix-A.9-1.4.1">Created a dedicated section for the YANG modules<a href="#appendix-A.9-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.10-1.4">
+            <p id="appendix-B.10-1.4.1">Created a dedicated section for the YANG modules<a href="#appendix-B.10-1.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-01-to-02-1">
-<section id="appendix-A.10">
+<section id="appendix-B.11">
         <h3 id="name-from-version-01-to-02-2">
-<a href="#appendix-A.10" class="section-number selfRef">A.10. </a><a href="#name-from-version-01-to-02-2" class="section-name selfRef">From version 01 to 02</a>
+<a href="#appendix-B.11" class="section-number selfRef">B.11. </a><a href="#name-from-version-01-to-02-2" class="section-name selfRef">From version 01 to 02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.10-1.1">
-            <p id="appendix-A.10-1.1.1">Added Error Handling intial section<a href="#appendix-A.10-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.11-1.1">
+            <p id="appendix-B.11-1.1.1">Added Error Handling intial section<a href="#appendix-B.11-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.10-1.2">
-            <p id="appendix-A.10-1.2.1">Added how to manage versioning by defining YANG modules for each traceparent and trastate versions as defined by W3C.<a href="#appendix-A.10-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.11-1.2">
+            <p id="appendix-B.11-1.2.1">Added how to manage versioning by defining YANG modules for each traceparent and trastate versions as defined by W3C.<a href="#appendix-B.11-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.10-1.3">
-            <p id="appendix-A.10-1.3.1">Added 'YANG Module Names'  to IANA Considerations<a href="#appendix-A.10-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.11-1.3">
+            <p id="appendix-B.11-1.3.1">Added 'YANG Module Names'  to IANA Considerations<a href="#appendix-B.11-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="from-version-00-to-01-1">
-<section id="appendix-A.11">
+<section id="appendix-B.12">
         <h3 id="name-from-version-00-to-01-2">
-<a href="#appendix-A.11" class="section-number selfRef">A.11. </a><a href="#name-from-version-00-to-01-2" class="section-name selfRef">From version 00 to 01</a>
+<a href="#appendix-B.12" class="section-number selfRef">B.12. </a><a href="#name-from-version-00-to-01-2" class="section-name selfRef">From version 00 to 01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.11-1.1">
-            <p id="appendix-A.11-1.1.1">Added new section: Implementation example 2: YANG Datastore<a href="#appendix-A.11-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.12-1.1">
+            <p id="appendix-B.12-1.1.1">Added new section: Implementation example 2: YANG Datastore<a href="#appendix-B.12-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.11-1.2">
-            <p id="appendix-A.11-1.2.1">Added new use case: Billing and auditing<a href="#appendix-A.11-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.12-1.2">
+            <p id="appendix-B.12-1.2.1">Added new use case: Billing and auditing<a href="#appendix-B.12-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.11-1.3">
-            <p id="appendix-A.11-1.3.1">Added in introduction and in "Provisioning root cause analysis" the idea that the different transaction-ids defined in <span>[<a href="#I-D.ietf-netconf-transaction-id" class="cite xref">I-D.ietf-netconf-transaction-id</a>]</span> could be added as part of the tracing information to be exported to the collectors, showing how the two documents are complementary.<a href="#appendix-A.11-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.12-1.3">
+            <p id="appendix-B.12-1.3.1">Added in introduction and in "Provisioning root cause analysis" the idea that the different transaction-ids defined in <span>[<a href="#I-D.ietf-netconf-transaction-id" class="cite xref">I-D.ietf-netconf-transaction-id</a>]</span> could be added as part of the tracing information to be exported to the collectors, showing how the two documents are complementary.<a href="#appendix-B.12-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2281,64 +2359,64 @@ and IETF requirements<a href="#appendix-A.6-1.2.1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="xml-attributes-vs-rpcs-input-augmentations-discussion-to-be-deleted-by-rfc-editor">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-xml-attributes-vs-rpcs-inpu">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-xml-attributes-vs-rpcs-inpu" class="section-name selfRef">XML Attributes vs RPCs input augmentations discussion (to be deleted by RFC Editor)</a>
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-xml-attributes-vs-rpcs-inpu" class="section-name selfRef">XML Attributes vs RPCs input augmentations discussion (to be deleted by RFC Editor)</a>
       </h2>
-<p id="appendix-B-1">There are arguments that can be raised regarding using XML Attribute or to augment NETCONF RPCs.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">We studied Pros/Cons of each option and decided to propose XML attributes:<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<p id="appendix-B-3">XML Attributes Pro:<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<p id="appendix-C-1">There are arguments that can be raised regarding using XML Attribute or to augment NETCONF RPCs.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">We studied Pros/Cons of each option and decided to propose XML attributes:<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">XML Attributes Pro:<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B-4.1">
-          <p id="appendix-B-4.1.1">Literal alignment with W3C specification<a href="#appendix-B-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-C-4.1">
+          <p id="appendix-C-4.1.1">Literal alignment with W3C specification<a href="#appendix-C-4.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-4.2">
-          <p id="appendix-B-4.2.1">Same encoding for RESTCONF and NETCONF enabling code reuse<a href="#appendix-B-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="appendix-C-4.2">
+          <p id="appendix-C-4.2.1">Same encoding for RESTCONF and NETCONF enabling code reuse<a href="#appendix-C-4.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-4.3">
-          <p id="appendix-B-4.3.1">One specification for all current and future RPCss<a href="#appendix-B-4.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="appendix-C-4.3">
+          <p id="appendix-C-4.3.1">One specification for all current and future RPCss<a href="#appendix-C-4.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-B-5">XML Attributes Cons:<a href="#appendix-B-5" class="pilcrow">¶</a></p>
+<p id="appendix-C-5">XML Attributes Cons:<a href="#appendix-C-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B-6.1">
-          <p id="appendix-B-6.1.1">No YANG modeling, multiple values represented as a single string<a href="#appendix-B-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-C-6.1">
+          <p id="appendix-C-6.1.1">No YANG modeling, multiple values represented as a single string<a href="#appendix-C-6.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-6.2">
-          <p id="appendix-B-6.2.1">Dependency on W3C for any extension or changes in the future as encoding will be dictated by string encoding<a href="#appendix-B-6.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="appendix-C-6.2">
+          <p id="appendix-C-6.2.1">Dependency on W3C for any extension or changes in the future as encoding will be dictated by string encoding<a href="#appendix-C-6.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-B-7">RPCs Input Augmentations Pro:<a href="#appendix-B-7" class="pilcrow">¶</a></p>
+<p id="appendix-C-7">RPCs Input Augmentations Pro:<a href="#appendix-C-7" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B-8.1">
-          <p id="appendix-B-8.1.1">YANG model of every leaf<a href="#appendix-B-8.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-C-8.1">
+          <p id="appendix-C-8.1.1">YANG model of every leaf<a href="#appendix-C-8.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-8.2">
-          <p id="appendix-B-8.2.1">Re-use of YANG toolkits<a href="#appendix-B-8.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="appendix-C-8.2">
+          <p id="appendix-C-8.2.1">Re-use of YANG toolkits<a href="#appendix-C-8.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-8.3">
-          <p id="appendix-B-8.3.1">Simple updates by augmentations on existing YANG module<a href="#appendix-B-8.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="appendix-C-8.3">
+          <p id="appendix-C-8.3.1">Simple updates by augmentations on existing YANG module<a href="#appendix-C-8.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-8.4">
-          <p id="appendix-B-8.4.1">Possibility to express deviations in case of partial support<a href="#appendix-B-8.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="appendix-C-8.4">
+          <p id="appendix-C-8.4.1">Possibility to express deviations in case of partial support<a href="#appendix-C-8.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-B-9">RPCs Input Augmentations Cons:<a href="#appendix-B-9" class="pilcrow">¶</a></p>
+<p id="appendix-C-9">RPCs Input Augmentations Cons:<a href="#appendix-C-9" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B-10.1">
-          <p id="appendix-B-10.1.1">Need to augment every RPC, including future RPCs would need to consider these augmentations, which is harder to maintain<a href="#appendix-B-10.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-C-10.1">
+          <p id="appendix-C-10.1.1">Need to augment every RPC, including future RPCs would need to consider these augmentations, which is harder to maintain<a href="#appendix-C-10.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-10.2">
-          <p id="appendix-B-10.2.1">There is no literal alignment with W3C standard. However, as mentioned before most of the time there will be modifications to the content<a href="#appendix-B-10.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="appendix-C-10.2">
+          <p id="appendix-C-10.2.1">There is no literal alignment with W3C standard. However, as mentioned before most of the time there will be modifications to the content<a href="#appendix-C-10.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-10.3">
-          <p id="appendix-B-10.3.1">Would need updated RFP for each change at W3C, which will make adoption of new features slower<a href="#appendix-B-10.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="appendix-C-10.3">
+          <p id="appendix-C-10.3.1">Would need updated RFP for each change at W3C, which will make adoption of new features slower<a href="#appendix-C-10.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-C">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
@@ -2352,6 +2430,14 @@ and IETF requirements<a href="#appendix-A.6-1.2.1" class="pilcrow">¶</a></p>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:rogaglia@cisco.com" class="email">rogaglia@cisco.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Christian Rennerskog</span></div>
+<div dir="auto" class="left"><span class="org">Cisco Systems</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:crenners@cisco.com" class="email">crenners@cisco.com</a>
 </div>
 </address>
 <address class="vcard">
