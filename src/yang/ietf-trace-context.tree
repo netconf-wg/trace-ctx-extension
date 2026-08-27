@@ -1,0 +1,6 @@
+module: ietf-trace-context
+
+  structure trace-context-error-info:
+    +-- meta-name     string
+    +-- meta-value    string
+    +-- error-type    meta-error-type

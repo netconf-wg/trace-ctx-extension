@@ -23,6 +23,9 @@ module ietf-trace-ctx-tracestate-1.0 {
      versiom 1.0 in alignment with W3C versions:
      https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
+     This module is used for capability advertisement only, without
+     any YANG data nodes. 
+
      Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 

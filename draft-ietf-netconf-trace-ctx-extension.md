@@ -2,13 +2,13 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2026-07-04
+date: 2026-08-27
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 07
+v: 08
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -38,6 +38,11 @@ author:
     email: rogaglia@cisco.com
 
  -
+    fullname: Christian Rennerskog
+    organization: Cisco Systems
+    email: crenners@cisco.com
+
+ -
     fullname: Kristian Larsson
     organization: Deutsche Telekom AG
     email: kll@dev.terastrm.net
@@ -58,7 +63,7 @@ normative:
   RFC8446:
   RFC8525:
   RFC9000:
-  I-D.draft-ietf-netmod-rfc8407bis-28:
+  RFC9907:
 
   W3C-Trace-Context:
     title: W3C Recommendation on Trace Context
@@ -366,6 +371,12 @@ This document defines three YANG modules:
 {: sourcecode-markers="true"
 sourcecode-name="ietf-trace-context@2024-11-07.yang"}
 
+~~~ text
+{::include src/yang/ietf-trace-context.tree}
+~~~
+{: sourcecode-markers="true"
+sourcecode-name="ietf-trace-context.tree"}
+
 ## YANG module for traceparent header version 1.0
 ~~~~ yang
 {::include src/yang/ietf-trace-ctx-traceparent-1.0.yang}
@@ -381,13 +392,13 @@ sourcecode-name="ietf-trace-ctx-traceparent-1.0@2024-11-07.yang"}
 sourcecode-name="ietf-trace-ctx-tracestate-1.0@2024-11-07.yang"}
 
 # Security Considerations
-This section is modeled after the template described in Section 3.7 of {{I-D.draft-ietf-netmod-rfc8407bis-28}}.
+This section is modeled after the template described in Section 3.7 of [RFC9907].
 
 The ietf-trace-context, ietf-trace-ctx-tracestate-1.0 and ietf-trace-ctx-traceparent-1.0  YANG modules define data models that are designed to be accessed via YANG-based management protocols, such as NETCONF [RFC6241] and RESTCONF [RFC8040]. These YANG-based management protocols (1) have to use a secure transport layer (e.g., SSH [RFC4252], TLS [RFC8446], and QUIC [RFC9000]) and (2) have to use mutual authentication.
 
 The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.
 
-The YANG modules specified in this document are used to flag capabilities define and define an error information structure. As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.
+The YANG modules specified in this document are used to flag capabilities support and to define an error information structure. As such, these YANG modules do not contain any configuration data, state data or RPC definitions, which makes their security implications very limited.  The additional attributes specified in this document (but not in YANG modules, since YANG cannot be used to specify attributes) are worth mentioning, however.
 
 The traceparent and tracestate attributes make it easier to track the flow of requests and their downstream effect on other systems.  This is indeed the whole point with these attributes.  This knowledge could also be of use to bad actors that are working to build a map of the managed network.
 
@@ -451,11 +462,44 @@ and
 
 # Acknowledgments
 
-The authors would like to acknowledge the valuable implementation feedback from Christian Rennerskog and Per Andersson.  Many thanks to Raul Rivas Felix, Alexander Stoklasa, Luca Relandini and Erwin Vrolijk for their help with the demos regarding integrations.  The help and support from Jean Quilbeuf and Benoit Claise has also been invaluable to this work.
+The authors would like to acknowledge the valuable feedback from Per Andersson.  Many thanks to Raul Rivas Felix, Alexander Stoklasa, Luca Relandini and Erwin Vrolijk for their help with the demos regarding integrations.  The help and support from Jean Quilbeuf and Benoit Claise has also been invaluable to this work.
 
 --- back
 
+# Appendix A: Example of yang-library for trace context
+
+This document includes three YANG modules, two of which are used only for
+publishing the traceparent and tracestate header versions. This is an example
+of a YANG library response for the modules in this document.
+
+~~~ xml
+<yang-library xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-library">
+  <module-set>
+    <name>common</name>
+        <module>
+          <name>ietf-netconf-otlp-context</name>
+          <revision>2023-07-01</revision>
+          <namespace>urn:ietf:params:xml:ns:yang:otlp-context</namespace>
+        </module>
+    <module>
+      <name>ietf-netconf-otlp-context-traceparent-version-1.0</name>
+      <revision>2024-11-07</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:traceparent:1.0</namespace>
+    </module>
+    <module>
+      <name>ietf-netconf-otlp-context-tracestate-version-1.0</name>
+      <revision>2024-11-07</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:tracestate:1.0</namespace>
+    </module>
+  </module-set>
+</yang-library>
+~~~
+
 # Changes (to be deleted by RFC Editor)
+
+## From version 07 to version 08
+- Added comments from YANG DOCTOR review, includding adding mandatory leafs, adding a tree file, adding an appendix with the yang-library example
+- Added  Christian Rennerskog as co-author
 
 ## From version 06 to version 07
 - All Shepperd comments.
