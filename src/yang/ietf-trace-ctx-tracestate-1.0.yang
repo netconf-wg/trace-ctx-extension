@@ -12,16 +12,22 @@ module ietf-trace-ctx-tracestate-1.0 {
      Authors:  Roque Gagliano
                <mailto:rogaglia@cisco.com>
 
+               Christian Rennerskog
+               <mailto:crenners@cisco.com>
+
                Jan Lindblad
-               <mailto:jlindbla@cisco.com>
+               <mailto:jan.lindblad+ietf@for.eco>
 
                Kristian Larsson
                <mailto:kll@dev.terastrm.net>
     ";
   description
     "This module documents the support for trace context tracestate
-     versiom 1.0 in alignment with W3C versions:
+     version 1.0 in alignment with W3C versions:
      https://www.w3.org/TR/2021/REC-trace-context-1-20211123
+
+     This module is used for capability advertisement only, without
+     any YANG data nodes. 
 
      Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -35,7 +41,7 @@ module ietf-trace-ctx-tracestate-1.0 {
 
      This version of this YANG module is part of RFC XXXX
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices
+     for full legal notices.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
      NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -44,7 +50,7 @@ module ietf-trace-ctx-tracestate-1.0 {
      they appear in all capitals, as shown here.
     ";
 
-  revision 2024-11-07 {
+  revision 2026-08-28 {
     description
       "Initial revision";
     reference

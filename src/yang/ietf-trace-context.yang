@@ -19,16 +19,19 @@ module ietf-trace-context {
      Authors:  Roque Gagliano
                <mailto:rogaglia@cisco.com>
 
+               Christian Rennerskog
+               <mailto:crenners@cisco.com>
+
                Jan Lindblad
-               <mailto:jlindbla@cisco.com>
+               <mailto:jan.lindblad+ietf@for.eco>
 
                Kristian Larsson
                <mailto:kll@dev.terastrm.net>
     ";
   description
     "When propagating tracing information across applications,
-     client and servers needs to share some specific contextual
-     information. This  extensions aligns the NETCONF and RESTCONF
+     client and servers need to share some specific contextual
+     information. This extension aligns the NETCONF and RESTCONF
      protocols to the W3C trace-context document:
      https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
@@ -46,7 +49,7 @@ module ietf-trace-context {
 
      This version of this YANG module is part of RFC XXXX
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices
+     for full legal notices.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
      NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -55,7 +58,7 @@ module ietf-trace-context {
      they appear in all capitals, as shown here.
     ";
 
-  revision 2024-11-07 {
+  revision 2026-08-28 {
     description
       "Initial revision";
     reference
@@ -106,6 +109,7 @@ module ietf-trace-context {
         related to them.  The server has aborted the RPC.";
     leaf meta-name {
       type string;
+      mandatory true;
       description
         "The name of the problematic or missing meta information.
           In NETCONF, the qualified XML attribute name.
@@ -116,6 +120,7 @@ module ietf-trace-context {
     }
     leaf meta-value {
       type string;
+      mandatory true;
       description
         "The value of the problematic meta information received
           by the server.
@@ -125,6 +130,7 @@ module ietf-trace-context {
     }
     leaf error-type {
       type meta-error-type;
+      mandatory true;
       description
         "Indicates the type of meta information problem
           detected by the server.
