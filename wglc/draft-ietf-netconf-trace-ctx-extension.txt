@@ -18,9 +18,9 @@ Expires: 28 February 2027                                     K. Larsson
 Abstract
 
    This document defines how to propagate trace context information
-   across the Network Configuration Protocol (NETCONF), that enables
+   across the Network Configuration Protocol (NETCONF), enabling
    distributed tracing scenarios.  It is an adaption of the HTTP-based
-   W3C specification.
+   W3C specification and defines three YANG modules.
 
 About This Document
 
@@ -96,19 +96,20 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Appendix A: Example of yang-library for trace context
    Appendix B.  Changes (to be deleted by RFC Editor)
-     B.1.  From version 07 to version 08
-     B.2.  From version 06 to version 07
-     B.3.  From version 05 to version 06
-     B.4.  From version 04 to version 05
-     B.5.  From version 03 to version 04
-     B.6.  From version 02 to 03
-     B.7.  From version 01 to 02
-     B.8.  From version 00 to 01
-     B.9.  From version 03 to
+     B.1.  From version 08 to version 09
+     B.2.  From version 07 to version 08
+     B.3.  From version 06 to version 07
+     B.4.  From version 05 to version 06
+     B.5.  From version 04 to version 05
+     B.6.  From version 03 to version 04
+     B.7.  From version 02 to 03
+     B.8.  From version 01 to 02
+     B.9.  From version 00 to 01
+     B.10. From version 03 to
             draft-ietf-netconf-trace-ctx-extension-00
-     B.10. From version 02 to 03
-     B.11. From version 01 to 02
-     B.12. From version 00 to 01
+     B.11. From version 02 to 03
+     B.12. From version 01 to 02
+     B.13. From version 00 to 01
    Appendix C.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
    Authors' Addresses
@@ -535,7 +536,9 @@ Table of Contents
 
 3.1.  YANG module for ietf-trace-context structure
 
-   <CODE BEGINS> file "ietf-trace-context@2024-11-07.yang"
+   This YANG module has normative references to [RFC8791].
+
+   <CODE BEGINS> file "ietf-trace-context@2026-08-28.yang"
    module ietf-trace-context {
      yang-version 1.1;
      namespace
@@ -557,16 +560,19 @@ Table of Contents
         Authors:  Roque Gagliano
                   <mailto:rogaglia@cisco.com>
 
+                  Christian Rennerskog
+                  <mailto:crenners@cisco.com>
+
                   Jan Lindblad
-                  <mailto:jlindbla@cisco.com>
+                  <mailto:jan.lindblad+ietf@for.eco>
 
                   Kristian Larsson
                   <mailto:kll@dev.terastrm.net>
        ";
      description
        "When propagating tracing information across applications,
-        client and servers needs to share some specific contextual
-        information. This  extensions aligns the NETCONF and RESTCONF
+        client and servers need to share some specific contextual
+        information. This extension aligns the NETCONF and RESTCONF
         protocols to the W3C trace-context document:
         https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
@@ -593,7 +599,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2024-11-07 {
+     revision 2026-08-28 {
        description
          "Initial revision";
        reference
@@ -689,10 +695,10 @@ Table of Contents
 
 3.2.  YANG module for traceparent header version 1.0
 
-   <CODE BEGINS> file "ietf-trace-ctx-traceparent-1.0@2024-11-07.yang"
+   <CODE BEGINS> file "ietf-trace-ctx-traceparent-1.0@2026-08-28.yang"
    module ietf-trace-ctx-traceparent-1.0 {
      namespace
-     "urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0";
+       "urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0";
      prefix ietf-trace-ctx-traceparent-1.0;
 
      organization
@@ -704,15 +710,18 @@ Table of Contents
         Authors:  Roque Gagliano
                   <mailto:rogaglia@cisco.com>
 
+                  Christian Rennerskog
+                  <mailto:crenners@cisco.com>
+
                   Jan Lindblad
-                  <mailto:jlindbla@cisco.com>
+                  <mailto:jan.lindblad+ietf@for.eco>
 
                   Kristian Larsson
                   <mailto:kll@dev.terastrm.net>
        ";
      description
        "This module documents the support for trace context traceparent
-        versiom 1.0 in alignment with W3C versions:
+        version 1.0 in alignment with W3C versions:
         https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
         This module is used for capability advertisement only, without
@@ -739,7 +748,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2024-11-07 {
+     revision 2026-08-28 {
        description
          "Initial revision";
        reference
@@ -751,7 +760,7 @@ Table of Contents
 
 3.3.  YANG module for tracestate header version 1.0
 
-   <CODE BEGINS> file "ietf-trace-ctx-tracestate-1.0@2024-11-07.yang"
+   <CODE BEGINS> file "ietf-trace-ctx-tracestate-1.0@2026-08-28.yang"
    module ietf-trace-ctx-tracestate-1.0 {
      namespace
        "urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0";
@@ -766,15 +775,18 @@ Table of Contents
         Authors:  Roque Gagliano
                   <mailto:rogaglia@cisco.com>
 
+                  Christian Rennerskog
+                  <mailto:crenners@cisco.com>
+
                   Jan Lindblad
-                  <mailto:jlindbla@cisco.com>
+                  <mailto:jan.lindblad+ietf@for.eco>
 
                   Kristian Larsson
                   <mailto:kll@dev.terastrm.net>
        ";
      description
        "This module documents the support for trace context tracestate
-        versiom 1.0 in alignment with W3C versions:
+        version 1.0 in alignment with W3C versions:
         https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
         This module is used for capability advertisement only, without
@@ -801,7 +813,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2024-11-07 {
+     revision 2026-08-28 {
        description
          "Initial revision";
        reference
@@ -1026,7 +1038,13 @@ Appendix A.  Appendix A: Example of yang-library for trace context
 
 Appendix B.  Changes (to be deleted by RFC Editor)
 
-B.1.  From version 07 to version 08
+B.1.  From version 08 to version 09
+
+   *  updated dates on YANG
+
+   *  typos
+
+B.2.  From version 07 to version 08
 
    *  Added comments from YANG DOCTOR review, includding adding
       mandatory leafs, adding a tree file, adding an appendix with the
@@ -1034,7 +1052,7 @@ B.1.  From version 07 to version 08
 
    *  Added Christian Rennerskog as co-author
 
-B.2.  From version 06 to version 07
+B.3.  From version 06 to version 07
 
    *  All Shepperd comments.
 
@@ -1054,35 +1072,35 @@ B.2.  From version 06 to version 07
    *  Added clarification that Clients and servers MUST be prepared to
       handle special characters in tracestate values.
 
-B.3.  From version 05 to version 06
+B.4.  From version 05 to version 06
 
    *  We introduced a bug in the YANG model in version 03 as container
       was not needed per RFC 8791.
 
    *  Serveral edits based on OpsDir comments
 
-B.4.  From version 04 to version 05
+B.5.  From version 04 to version 05
 
    *  More WGLC and sheepard comments
 
-B.5.  From version 03 to version 04
+B.6.  From version 03 to version 04
 
    *  WGLC data change.
 
-B.6.  From version 02 to 03
+B.7.  From version 02 to 03
 
    *  Changed document Abbreviation
 
    *  trace-context-error-info is a container in example
 
-B.7.  From version 01 to 02
+B.8.  From version 01 to 02
 
    *  Enhanced Terminology and moved it up in the document.
 
    *  Changed namespaces and module names to map WGLC comments and IETF
       requirements
 
-B.8.  From version 00 to 01
+B.9.  From version 00 to 01
 
    *  Added Security considerations
 
@@ -1094,7 +1112,7 @@ B.8.  From version 00 to 01
 
    *  Firmed up error handling and YANG-library to MUST-requirements
 
-B.9.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
+B.10.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Adopted by NETCONF WG
 
@@ -1106,7 +1124,7 @@ B.9.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Added this change note.  No other content changes.
 
-B.10.  From version 02 to 03
+B.11.  From version 02 to 03
 
    *  Changed IANA section to IESG per IANA email
 
@@ -1116,7 +1134,7 @@ B.10.  From version 02 to 03
 
    *  Created a dedicated section for the YANG modules
 
-B.11.  From version 01 to 02
+B.12.  From version 01 to 02
 
    *  Added Error Handling intial section
 
@@ -1125,7 +1143,7 @@ B.11.  From version 01 to 02
 
    *  Added 'YANG Module Names' to IANA Considerations
 
-B.12.  From version 00 to 01
+B.13.  From version 00 to 01
 
    *  Added new section: Implementation example 2: YANG Datastore
 
