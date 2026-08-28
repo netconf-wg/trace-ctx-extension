@@ -12,15 +12,18 @@ module ietf-trace-ctx-tracestate-1.0 {
      Authors:  Roque Gagliano
                <mailto:rogaglia@cisco.com>
 
+               Christian Rennerskog
+               <mailto:crenners@cisco.com>
+
                Jan Lindblad
-               <mailto:jlindbla@cisco.com>
+               <mailto:jan.lindblad+ietf@for.eco>
 
                Kristian Larsson
                <mailto:kll@dev.terastrm.net>
     ";
   description
     "This module documents the support for trace context tracestate
-     versiom 1.0 in alignment with W3C versions:
+     version 1.0 in alignment with W3C versions:
      https://www.w3.org/TR/2021/REC-trace-context-1-20211123
 
      This module is used for capability advertisement only, without
@@ -47,7 +50,7 @@ module ietf-trace-ctx-tracestate-1.0 {
      they appear in all capitals, as shown here.
     ";
 
-  revision 2024-11-07 {
+  revision 2026-08-28 {
     description
       "Initial revision";
     reference

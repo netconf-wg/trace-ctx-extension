@@ -8,7 +8,7 @@ docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 08
+v: 09
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -92,7 +92,7 @@ informative:
 
 --- abstract
 
-This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), that enables distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification.
+This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), enabling distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification and defines three YANG modules.
 
 --- middle
 
@@ -365,11 +365,13 @@ This document defines three YANG modules:
 
 ## YANG module for ietf-trace-context structure
 
+This YANG module has normative references to [RFC8791].
+
 ~~~~ yang
 {::include src/yang/ietf-trace-context.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context@2024-11-07.yang"}
+sourcecode-name="ietf-trace-context@2026-08-28.yang"}
 
 ~~~ text
 {::include src/yang/ietf-trace-context.tree}
@@ -382,14 +384,14 @@ sourcecode-name="ietf-trace-context.tree"}
 {::include src/yang/ietf-trace-ctx-traceparent-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-ctx-traceparent-1.0@2024-11-07.yang"}
+sourcecode-name="ietf-trace-ctx-traceparent-1.0@2026-08-28.yang"}
 
 ## YANG module for tracestate header version 1.0
 ~~~~ yang
 {::include src/yang/ietf-trace-ctx-tracestate-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-ctx-tracestate-1.0@2024-11-07.yang"}
+sourcecode-name="ietf-trace-ctx-tracestate-1.0@2026-08-28.yang"}
 
 # Security Considerations
 This section is modeled after the template described in Section 3.7 of [RFC9907].
@@ -496,6 +498,10 @@ of a YANG library response for the modules in this document.
 ~~~
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 08 to version 09
+- updated dates on YANG
+- typos
 
 ## From version 07 to version 08
 - Added comments from YANG DOCTOR review, includding adding mandatory leafs, adding a tree file, adding an appendix with the yang-library example
