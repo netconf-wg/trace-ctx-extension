@@ -5,11 +5,11 @@
 Network Configuration                                        R. Gagliano
 Internet-Draft                                             C. Rennerskog
 Intended status: Standards Track                           Cisco Systems
-Expires: 28 February 2027                                     K. Larsson
+Expires: 21 March 2027                                        K. Larsson
                                                      Deutsche Telekom AG
                                                              J. Lindblad
                                                              All For Eco
-                                                          27 August 2026
+                                                       17 September 2026
 
 
          NETCONF Extension to support Trace Context propagation
@@ -19,7 +19,7 @@ Abstract
 
    This document defines how to propagate trace context information
    across the Network Configuration Protocol (NETCONF), enabling
-   distributed tracing scenarios.  It is an adaption of the HTTP-based
+   distributed tracing scenarios.  It is an adaptation of the HTTP-based
    W3C specification and defines three YANG modules.
 
 About This Document
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 February 2027.
+   This Internet-Draft will expire on 21 March 2027.
 
 Copyright Notice
 
@@ -96,20 +96,21 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Appendix A: Example of yang-library for trace context
    Appendix B.  Changes (to be deleted by RFC Editor)
-     B.1.  From version 08 to version 09
-     B.2.  From version 07 to version 08
-     B.3.  From version 06 to version 07
-     B.4.  From version 05 to version 06
-     B.5.  From version 04 to version 05
-     B.6.  From version 03 to version 04
-     B.7.  From version 02 to 03
-     B.8.  From version 01 to 02
-     B.9.  From version 00 to 01
-     B.10. From version 03 to
+     B.1.  From version 09 to version 10
+     B.2.  From version 08 to version 09
+     B.3.  From version 07 to version 08
+     B.4.  From version 06 to version 07
+     B.5.  From version 05 to version 06
+     B.6.  From version 04 to version 05
+     B.7.  From version 03 to version 04
+     B.8.  From version 02 to 03
+     B.9.  From version 01 to 02
+     B.10. From version 00 to 01
+     B.11. From version 03 to
             draft-ietf-netconf-trace-ctx-extension-00
-     B.11. From version 02 to 03
-     B.12. From version 01 to 02
-     B.13. From version 00 to 01
+     B.12. From version 02 to 03
+     B.13. From version 01 to 02
+     B.14. From version 00 to 01
    Appendix C.  XML Attributes vs RPCs input augmentations discussion
            (to be deleted by RFC Editor)
    Authors' Addresses
@@ -117,35 +118,35 @@ Table of Contents
 1.  Introduction
 
    Network automation and management systems commonly consist of
-   multiple sub-systems and together with the network devices they
+   multiple subsystems, and together with the network devices they
    manage, they effectively form a distributed system.  Distributed
    tracing is a methodology implemented by tracing tools to follow,
-   analyze and debug operations, such as configuration transactions,
+   analyze, and debug operations such as configuration transactions
    across multiple distributed systems.  An operation is uniquely
-   identified by a trace-id and through a trace context, carries some
+   identified by a trace-id, and through a trace context carries
    metadata about the operation.  Propagating this "trace context"
-   between systems enables forming a coherent view of the entire
-   operation as carried out by all involved systems.
+   between systems enables a coherent view of the entire operation as
+   carried out by all involved systems.
 
    The W3C has defined two HTTP headers for context propagation that are
-   useful in use case scenarios of distributed systems like the ones
-   defined in [RFC8309].  This document defines an extension to the
+   useful in use case scenarios for distributed systems such as those
+   described in [RFC8309].  This document defines an extension to the
    NETCONF protocol to add the same concepts and enable trace context
    propagation over NETCONF.
 
-   It is worth noting that the trace context is not meant to have any
-   relationship with the data that is carried with a given operation
-   (including configurations, service identifiers or state information).
+   It is worth noting that the trace context is not meant to be related
+   to the data carried with a given operation, including configurations,
+   service identifiers, or state information.
 
    A trace context also differs from [I-D.ietf-netconf-transaction-id]
-   in several ways as the trace operation may involve any operation
-   (including for example validate, lock, unlock, etc.)  Additionally, a
-   trace context scope may include the full application stack
-   (orchestrator, controller, devices, etc) rather than a single NETCONF
-   server, which is the scope for the transaction-id.  The trace context
-   is also complementary to [I-D.ietf-netconf-transaction-id] as a given
-   trace-id can be associated with the different transaction-ids as part
-   of the information exported to the collector.
+   in several ways: the trace operation may involve any operation
+   (including, for example, validate, lock, unlock, etc.).
+   Additionally, a trace context scope may include the full application
+   stack (orchestrator, controller, devices, etc.) rather than a single
+   NETCONF server, which is the scope for the transaction-id.  The trace
+   context is also complementary to [I-D.ietf-netconf-transaction-id]
+   because a given trace-id can be associated with different
+   transaction-ids as part of the information exported to the collector.
 
    The following enhancement of the reference SDN Architecture from
    [RFC8309] shows the impact of distributed traces for a network
@@ -194,13 +195,13 @@ Table of Contents
 
 1.1.  Terminology
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
-   NOT","SHOULD","SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY",
-   and "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   Additionally, the document utilizes the following abbreviations:
+   Additionally, this document uses the following abbreviations:
 
    OTLP:  OpenTelemetry protocol as defined by [OpenTelemetry]
 
@@ -219,7 +220,7 @@ Table of Contents
 
 1.2.  Implementation example 1: OpenTelemetry
 
-   We will describe an example to show the value of trace context
+   The following example illustrates the value of trace context
    propagation in the NETCONF protocol.  In the OTLP Sample Architecture
    Figure 2 below, we show a deployment based on the RFC8309 sample
    architecture Figure 1 above, with a single controller and two network
@@ -227,11 +228,11 @@ Table of Contents
    the Orchestrator and the Controller.  NETCONF is also used between
    the Controller and the Network Elements.
 
-   Let's assume an edit-config operation between the orchestrator and
-   the controller that results (either synchronously or asynchronously)
-   in corresponding edit-config operations from the Controller towards
-   the two network elements.  All trace operations are related and will
-   create M.E.L.T data.
+   Assume an edit-config operation between the orchestrator and the
+   controller that results (either synchronously or asynchronously) in
+   corresponding edit-config operations from the Controller toward the
+   two network elements.  All trace operations are related and will
+   create M.E.L.T. data.
 
                +------------------+                        +-----------+
                |   Orchestrator   |    OTLP protocol       |           |
@@ -599,7 +600,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2026-08-28 {
+     revision 2026-09-17 {
        description
          "Initial revision";
        reference
@@ -748,7 +749,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2026-08-28 {
+     revision 2026-09-17 {
        description
          "Initial revision";
        reference
@@ -813,7 +814,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2026-08-28 {
+     revision 2026-09-17 {
        description
          "Initial revision";
        reference
@@ -1038,13 +1039,17 @@ Appendix A.  Appendix A: Example of yang-library for trace context
 
 Appendix B.  Changes (to be deleted by RFC Editor)
 
-B.1.  From version 08 to version 09
+B.1.  From version 09 to version 10
+
+   *  Grammar cleanups
+
+B.2.  From version 08 to version 09
 
    *  updated dates on YANG
 
    *  typos
 
-B.2.  From version 07 to version 08
+B.3.  From version 07 to version 08
 
    *  Added comments from YANG DOCTOR review, includding adding
       mandatory leafs, adding a tree file, adding an appendix with the
@@ -1052,7 +1057,7 @@ B.2.  From version 07 to version 08
 
    *  Added Christian Rennerskog as co-author
 
-B.3.  From version 06 to version 07
+B.4.  From version 06 to version 07
 
    *  All Shepperd comments.
 
@@ -1072,35 +1077,35 @@ B.3.  From version 06 to version 07
    *  Added clarification that Clients and servers MUST be prepared to
       handle special characters in tracestate values.
 
-B.4.  From version 05 to version 06
+B.5.  From version 05 to version 06
 
    *  We introduced a bug in the YANG model in version 03 as container
       was not needed per RFC 8791.
 
    *  Serveral edits based on OpsDir comments
 
-B.5.  From version 04 to version 05
+B.6.  From version 04 to version 05
 
    *  More WGLC and sheepard comments
 
-B.6.  From version 03 to version 04
+B.7.  From version 03 to version 04
 
    *  WGLC data change.
 
-B.7.  From version 02 to 03
+B.8.  From version 02 to 03
 
    *  Changed document Abbreviation
 
    *  trace-context-error-info is a container in example
 
-B.8.  From version 01 to 02
+B.9.  From version 01 to 02
 
    *  Enhanced Terminology and moved it up in the document.
 
    *  Changed namespaces and module names to map WGLC comments and IETF
       requirements
 
-B.9.  From version 00 to 01
+B.10.  From version 00 to 01
 
    *  Added Security considerations
 
@@ -1112,7 +1117,7 @@ B.9.  From version 00 to 01
 
    *  Firmed up error handling and YANG-library to MUST-requirements
 
-B.10.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
+B.11.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Adopted by NETCONF WG
 
@@ -1124,7 +1129,7 @@ B.10.  From version 03 to draft-ietf-netconf-trace-ctx-extension-00
 
    *  Added this change note.  No other content changes.
 
-B.11.  From version 02 to 03
+B.12.  From version 02 to 03
 
    *  Changed IANA section to IESG per IANA email
 
@@ -1134,7 +1139,7 @@ B.11.  From version 02 to 03
 
    *  Created a dedicated section for the YANG modules
 
-B.12.  From version 01 to 02
+B.13.  From version 01 to 02
 
    *  Added Error Handling intial section
 
@@ -1143,7 +1148,7 @@ B.12.  From version 01 to 02
 
    *  Added 'YANG Module Names' to IANA Considerations
 
-B.13.  From version 00 to 01
+B.14.  From version 00 to 01
 
    *  Added new section: Implementation example 2: YANG Datastore
 
