@@ -8,7 +8,7 @@ docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 10
+v: 09
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -498,12 +498,10 @@ of a YANG library response for the modules in this document.
 
 # Changes (to be deleted by RFC Editor)
 
-## From version 09 to version 10
-- Grammar cleanups
-
 ## From version 08 to version 09
 - updated dates on YANG
 - typos
+- Grammar cleanups
 
 ## From version 07 to version 08
 - Added comments from YANG DOCTOR review, includding adding mandatory leafs, adding a tree file, adding an appendix with the yang-library example
