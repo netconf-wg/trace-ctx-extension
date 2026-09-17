@@ -58,7 +58,7 @@ module ietf-trace-context {
      they appear in all capitals, as shown here.
     ";
 
-  revision 2026-08-28 {
+  revision 2026-09-17 {
     description
       "Initial revision";
     reference

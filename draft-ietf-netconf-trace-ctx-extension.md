@@ -2,13 +2,13 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2026-08-27
+date: 2026-09-17
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 09
+v: 10
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -92,20 +92,19 @@ informative:
 
 --- abstract
 
-This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), enabling distributed tracing scenarios.  It is an adaption of the HTTP-based W3C specification and defines three YANG modules.
+This document defines how to propagate trace context information across the Network Configuration Protocol (NETCONF), enabling distributed tracing scenarios. It is an adaptation of the HTTP-based W3C specification and defines three YANG modules.
 
 --- middle
 
 # Introduction
 
-Network automation and management systems commonly consist of multiple
-sub-systems and together with the network devices they manage, they effectively form a distributed system.  Distributed tracing is a methodology implemented by tracing tools to follow, analyze and debug operations, such as configuration transactions, across multiple distributed systems.  An operation is uniquely identified by a trace-id and through a trace context, carries some metadata about the operation.  Propagating this "trace context" between systems enables forming a coherent view of the entire operation as carried out by all involved systems.
+Network automation and management systems commonly consist of multiple subsystems, and together with the network devices they manage, they effectively form a distributed system. Distributed tracing is a methodology implemented by tracing tools to follow, analyze, and debug operations such as configuration transactions across multiple distributed systems. An operation is uniquely identified by a trace-id, and through a trace context carries metadata about the operation. Propagating this "trace context" between systems enables a coherent view of the entire operation as carried out by all involved systems.
 
-The W3C has defined two HTTP headers for context propagation that are useful in use case scenarios of distributed systems like the ones defined in {{?RFC8309}}.  This document defines an extension to the NETCONF protocol to add the same concepts and enable trace context propagation over NETCONF.
+The W3C has defined two HTTP headers for context propagation that are useful in use case scenarios for distributed systems such as those described in {{?RFC8309}}. This document defines an extension to the NETCONF protocol to add the same concepts and enable trace context propagation over NETCONF.
 
-It is worth noting that the trace context is not meant to have any relationship with the data that is carried with a given operation (including configurations, service identifiers or state information).
+It is worth noting that the trace context is not meant to be related to the data carried with a given operation, including configurations, service identifiers, or state information.
 
-A trace context also differs from {{I-D.ietf-netconf-transaction-id}} in several ways as the trace operation may involve any operation (including for example validate, lock, unlock, etc.) Additionally, a trace context scope may include the full application stack (orchestrator, controller, devices, etc) rather than a single NETCONF server, which is the scope for the transaction-id. The trace context is also complementary to {{I-D.ietf-netconf-transaction-id}} as a given trace-id can be associated with the different transaction-ids as part of the information exported to the collector.
+A trace context also differs from {{I-D.ietf-netconf-transaction-id}} in several ways: the trace operation may involve any operation (including, for example, validate, lock, unlock, etc.). Additionally, a trace context scope may include the full application stack (orchestrator, controller, devices, etc.) rather than a single NETCONF server, which is the scope for the transaction-id. The trace context is also complementary to {{I-D.ietf-netconf-transaction-id}} because a given trace-id can be associated with different transaction-ids as part of the information exported to the collector.
 
 The following enhancement of the reference SDN Architecture from {{?RFC8309}} shows the impact of distributed traces for a network operator.
 
@@ -139,9 +138,9 @@ This document does not cover the somewhat related functionality specified in {{W
 
 ## Terminology
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT","SHOULD","SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
 
-Additionally, the document utilizes the following abbreviations:
+Additionally, this document uses the following abbreviations:
 
 OTLP:
 : OpenTelemetry protocol as defined by {{OpenTelemetry}}
@@ -161,9 +160,9 @@ The XML prefixes used in this document are mapped as follows:
 
 ## Implementation example 1: OpenTelemetry
 
-We will describe an example to show the value of trace context propagation in the NETCONF protocol.  In the OTLP Sample Architecture [](#otlp-sample-arch)  below, we show a deployment based on the RFC8309 sample architecture [](#rfc8309-sample-arch) above, with a single controller and two network elements.  In this example, the NETCONF protocol is running between the Orchestrator and the Controller.  NETCONF is also used between the Controller and the Network Elements.
+The following example illustrates the value of trace context propagation in the NETCONF protocol. In the OTLP Sample Architecture [](#otlp-sample-arch) below, we show a deployment based on the RFC8309 sample architecture [](#rfc8309-sample-arch) above, with a single controller and two network elements. In this example, the NETCONF protocol is running between the Orchestrator and the Controller. NETCONF is also used between the Controller and the Network Elements.
 
-Let's assume an edit-config operation between the orchestrator and the controller that results (either synchronously or asynchronously) in corresponding edit-config operations from the Controller towards the two network elements.  All trace operations are related and will create M.E.L.T data.
+Assume an edit-config operation between the orchestrator and the controller that results (either synchronously or asynchronously) in corresponding edit-config operations from the Controller toward the two network elements. All trace operations are related and will create M.E.L.T. data.
 
 ~~~ art
             +------------------+                        +-----------+
@@ -498,6 +497,9 @@ of a YANG library response for the modules in this document.
 ~~~
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 09 to version 10
+- Grammar cleanups
 
 ## From version 08 to version 09
 - updated dates on YANG
