@@ -499,7 +499,7 @@ of a YANG library response for the modules in this document.
 # Changes (to be deleted by RFC Editor)
 
 ## From version 09 to version 10
-- Grammar cleanups 
+- Grammar cleanups
 
 ## From version 08 to version 09
 - updated dates on YANG
