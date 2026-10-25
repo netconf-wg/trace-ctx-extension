@@ -2,13 +2,13 @@
 title:  NETCONF Extension to support Trace Context propagation
 abbrev: NETCONF Trace Context Extension
 category: std
-date: 2026-09-17
+date: 2026-10-25
 
 docname: draft-ietf-netconf-trace-ctx-extension-latest
 ipr: trust200902
 submissiontype: IETF
 consensus: true
-v: 09
+v: 10
 area: "Operations and Management"
 workgroup: "Network Configuration"
 keyword:
@@ -370,7 +370,7 @@ This YANG module has normative references to [RFC8791].
 {::include src/yang/ietf-trace-context.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-context@2026-08-28.yang"}
+sourcecode-name="ietf-trace-context@2026-10-25.yang"}
 
 ~~~ text
 {::include src/yang/ietf-trace-context.tree}
@@ -383,14 +383,14 @@ sourcecode-name="ietf-trace-context.tree"}
 {::include src/yang/ietf-trace-ctx-traceparent-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-ctx-traceparent-1.0@2026-08-28.yang"}
+sourcecode-name="ietf-trace-ctx-traceparent-1.0@2026-10-25.yang"}
 
 ## YANG module for tracestate header version 1.0
 ~~~~ yang
 {::include src/yang/ietf-trace-ctx-tracestate-1.0.yang}
 ~~~~
 {: sourcecode-markers="true"
-sourcecode-name="ietf-trace-ctx-tracestate-1.0@2026-08-28.yang"}
+sourcecode-name="ietf-trace-ctx-tracestate-1.0@2026-10-25.yang"}
 
 # Security Considerations
 This section is modeled after the template described in Section 3.7 of [RFC9907].
@@ -497,6 +497,10 @@ of a YANG library response for the modules in this document.
 ~~~
 
 # Changes (to be deleted by RFC Editor)
+
+## From version 09 to version 10
+- Aligned YANG module filenames with revision dates and updated both to 2026-10-25
+- Fixed typo in Section 3.1 (additonal -> additional)
 
 ## From version 08 to version 09
 - updated dates on YANG
