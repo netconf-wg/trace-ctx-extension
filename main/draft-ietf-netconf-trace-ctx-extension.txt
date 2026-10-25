@@ -5,11 +5,11 @@
 Network Configuration                                        R. Gagliano
 Internet-Draft                                             C. Rennerskog
 Intended status: Standards Track                           Cisco Systems
-Expires: 21 March 2027                                        K. Larsson
+Expires: 28 April 2027                                        K. Larsson
                                                      Deutsche Telekom AG
                                                              J. Lindblad
                                                              All For Eco
-                                                       17 September 2026
+                                                         25 October 2026
 
 
          NETCONF Extension to support Trace Context propagation
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 March 2027.
+   This Internet-Draft will expire on 28 April 2027.
 
 Copyright Notice
 
@@ -539,7 +539,7 @@ Table of Contents
 
    This YANG module has normative references to [RFC8791].
 
-   <CODE BEGINS> file "ietf-trace-context@2026-08-28.yang"
+   <CODE BEGINS> file "ietf-trace-context@2026-10-25.yang"
    module ietf-trace-context {
      yang-version 1.1;
      namespace
@@ -600,7 +600,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2026-09-17 {
+     revision 2026-10-25 {
        description
          "Initial revision";
        reference
@@ -645,7 +645,7 @@ Table of Contents
      sx:structure trace-context-error-info {
        description
          "This error is returned by a NETCONF or RESTCONF server
-           when a client sends a NETCONF RPC with additonal
+           when a client sends a NETCONF RPC with additional
            attributes or RESTCONF RPC with additional headers
            for trace context processing, and there is an error
            related to them.  The server has aborted the RPC.";
@@ -696,7 +696,7 @@ Table of Contents
 
 3.2.  YANG module for traceparent header version 1.0
 
-   <CODE BEGINS> file "ietf-trace-ctx-traceparent-1.0@2026-08-28.yang"
+   <CODE BEGINS> file "ietf-trace-ctx-traceparent-1.0@2026-10-25.yang"
    module ietf-trace-ctx-traceparent-1.0 {
      namespace
        "urn:ietf:params:xml:ns:yang:ietf-trace-ctx-traceparent-1.0";
@@ -749,7 +749,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2026-09-17 {
+     revision 2026-10-25 {
        description
          "Initial revision";
        reference
@@ -761,7 +761,7 @@ Table of Contents
 
 3.3.  YANG module for tracestate header version 1.0
 
-   <CODE BEGINS> file "ietf-trace-ctx-tracestate-1.0@2026-08-28.yang"
+   <CODE BEGINS> file "ietf-trace-ctx-tracestate-1.0@2026-10-25.yang"
    module ietf-trace-ctx-tracestate-1.0 {
      namespace
        "urn:ietf:params:xml:ns:yang:ietf-trace-ctx-tracestate-1.0";
@@ -814,7 +814,7 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
-     revision 2026-09-17 {
+     revision 2026-10-25 {
        description
          "Initial revision";
        reference
@@ -1041,13 +1041,18 @@ Appendix B.  Changes (to be deleted by RFC Editor)
 
 B.1.  From version 09 to version 10
 
-   *  Grammar cleanups
+   *  Aligned YANG module filenames with revision dates and updated both
+      to 2026-10-25
+
+   *  Fixed typo in Section 3.1 (additonal -> additional)
 
 B.2.  From version 08 to version 09
 
    *  updated dates on YANG
 
    *  typos
+
+   *  Grammar cleanups
 
 B.3.  From version 07 to version 08
 
